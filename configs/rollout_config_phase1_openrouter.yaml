@@ -31,7 +31,7 @@ policy:
 teacher_api:
   enabled: true
   base_url: "https://openrouter.ai/api/v1"
-  model: "qwen/qwen3-32b:free"
+  model: "z-ai/glm-4.5-air:free"
   api_key_env_var: "OPENROUTER_API_KEY"
   api_key: "__OPENROUTER_API_KEY__"
   request_timeout_s: 60
@@ -41,9 +41,6 @@ teacher_api:
   max_observation_chars: 120000
   max_history_turns: 10
   fallback_action: "noop()"
-  extra_body:
-    reasoning:
-      enabled: true
   system_prompt: |
     You control a web browser through BrowserGym actions.
     You must complete the given web task by interacting with the page.
