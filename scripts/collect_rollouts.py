@@ -153,6 +153,44 @@ def _get_policy_mode(config: Dict[str, Any]) -> str:
     return mode
 
 
+def _normalize_browsergym_action(action: str) -> str:
+    """Normalize teacher-emitted BrowserGym actions to the server's expected form.
+
+    Some local models emit numeric bids without quotes, e.g. focus(12) or
+    fill(15, '8'). BrowserGym expects bid-like identifiers as strings.
+    """
+    action = action.strip()
+    if not action:
+        return action
+
+    bid_like_actions = {
+        "click",
+        "dblclick",
+        "hover",
+        "focus",
+        "fill",
+        "clear",
+        "select_option",
+    }
+
+    m = re.match(r"^(?P<name>[A-Za-z_][A-Za-z0-9_]*)\((?P<args>[\s\S]*)\)$", action)
+    if not m:
+        return action
+
+    name = m.group("name")
+    args = m.group("args")
+    if name not in bid_like_actions:
+        return action
+
+    first_arg_match = re.match(r"\s*(?P<bid>\d+)\b(?P<rest>[\s\S]*)$", args)
+    if not first_arg_match:
+        return action
+
+    bid = first_arg_match.group("bid")
+    rest = first_arg_match.group("rest")
+    return f"{name}('{bid}'{rest})"
+
+
 def _extract_action_from_teacher_text(text: str) -> Optional[str]:
     """Extract one BrowserGym action string from teacher output."""
     if not text:
@@ -273,7 +311,7 @@ def _extract_action_from_teacher_text(text: str) -> Optional[str]:
 
     # Highest score wins; tie-break by last appended.
     scored.sort(key=lambda x: (x[0], x[1]))
-    return scored[-1][2]
+    return _normalize_browsergym_action(scored[-1][2])
 
 
 def _collect_text_fragments(value: Any, out: list[str]) -> None:
