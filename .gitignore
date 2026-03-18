@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+.env
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Local planning / notebooks
+.ipynb_checkpoints/
+
+# Generated data corpora
+/data/rollouts/
+/data/parallel_runs/
+/data/raw_rollouts/
+/data/processed/
+
+# Keep task lists and small tracked helpers under data/
+!/data/
+!/data/task_lists/
+!/data/task_lists/**
+
+# Generated reports
+/reports/generated/
+
+# Misc runtime files
+*.log
+
+# Local planning metadata
+/.hermes/
+
+# Local planning metadata
+/.hermes/

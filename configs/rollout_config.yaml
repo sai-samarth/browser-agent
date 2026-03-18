@@ -1,0 +1,91 @@
+run:
+  run_name: "miniwob_smoke_run"
+  output_root: "data/rollouts"
+
+server:
+  base_url: "http://localhost:8000"
+  request_timeout_s: 60
+  max_message_size_mb: 100
+
+collection:
+  benchmark: "miniwob"
+  tasks:
+    - "click-test"
+    - "click-button-sequence"
+    - "click-scroll-list"
+  episodes_per_task: 3
+  episode_start_index: 0      # use >0 when sharding work across parallel collectors
+  max_steps_per_episode: 10
+  seed_mode: "episode_index"   # one of: episode_index, fixed, none
+  seed_offset: 0               # added to seed for episode_index/fixed (useful for sharding)
+  fixed_seed: 42
+  pass_task_name_in_reset: true
+  enforce_task_match: true      # miniwob safety check: fail if loaded page task != requested task
+
+policy:
+  mode: "teacher"  # one of: scripted, teacher
+  scripted_actions:
+    # Per-task overrides are supported; "default" is fallback
+    click-test:
+      # In this setup, click-test succeeds with bid selector "13".
+      - "click('13')"
+    default:
+      - "noop()"
+
+teacher_api:
+  # Used only when policy.mode == "teacher"
+  enabled: true
+  base_url: "http://localhost:7999/v1"
+  model: "GUI_8B"
+  api_key: "dummy"
+  request_timeout_s: 60
+  temperature: 0.6
+  top_p: 0.95
+  max_tokens: 8192
+  max_observation_chars: 32768
+  max_history_turns: 6
+  fallback_action: "noop()"
+  system_prompt: |
+    You control a web browser through BrowserGym actions.
+    You must complete the given web task by interacting with the page.
+
+    Available actions (this server accepts these forms):
+    - noop() - Do nothing
+    - click(bid, button='left', modifiers=None) - Click by BrowserGym ID. Example modifier click: click('18', modifiers=['Control'])
+    - dblclick(bid) - Double-click an element
+    - hover(bid) - Move mouse over an element
+    - focus(bid) - Focus an element
+    - fill(bid, text) - Fill a text field
+    - clear(bid) - Clear a text field
+    - select_option(bid, option_text_or_list) - Select option(s) by visible text (not by bid)
+    - drag_and_drop(source_bid, target_bid) - Drag source element to target element
+    - scroll(delta_x, delta_y) - Scroll by pixel delta. Example: scroll(0, 300) for down, scroll(0, -300) for up
+    - goto(url) - Navigate to a URL
+
+    The page structure shows elements as: [bid] element_type 'element_text'
+    For example: [13] button 'Click Me!' means bid='13'
+
+    Reply using EXACTLY this format:
+    <think>
+    your step by step reasoning here
+    </think>
+    one BrowserGym action on a single line
+
+    Example:
+    <think>
+    The task is multi-select. Ertha is already selected, so I must keep it selected and add Aurel next.
+    </think>
+    click('18', modifiers=['Control'])
+
+    Final constraints:
+    - In <think>, step by step state: goal, evidence from the current observation (bids/text), and why this is the best immediate next step.
+    - Include exactly one <think>...</think> block.
+    - Include exactly one BrowserGym action line after </think>.
+    - Take only one action per step. Never output multiple actions.
+    - Do not include any additional text.
+
+logging:
+  save_observation_text: true
+  save_axtree_txt: false
+  save_pruned_html: true
+  save_teacher_debug: true

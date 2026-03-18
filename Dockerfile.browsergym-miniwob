@@ -1,0 +1,43 @@
+FROM ghcr.io/meta-pytorch/openenv-browsergym-env:latest
+
+# Prevent Playwright from trying (and failing) to download its own browsers
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+
+# Install benchmark
+RUN pip install --no-cache-dir -U browsergym browsergym-miniwob
+
+# Install git (for cloning MiniWoB assets) + system chromium + deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    chromium \
+    chromium-driver \
+    fonts-liberation \
+    fonts-noto-color-emoji \
+    fonts-dejavu-core \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libasound2 \
+    libpangocairo-1.0-0 \
+    libpango-1.0-0 \
+    libgtk-3-0 \
+    libx11-xcb1 \
+    libxcb1 \
+    libx11-6 \
+ && rm -rf /var/lib/apt/lists/*
+
+# Clone MiniWoB++ at pinned commit
+RUN git clone https://github.com/Farama-Foundation/miniwob-plusplus.git /miniwob-plusplus \
+ && cd /miniwob-plusplus \
+ && git reset --hard 7fd85d71a4b60325c6585396ec4f48377d049838
+
+# Tell BrowserGym where MiniWoB HTML lives
+ENV MINIWOB_URL="file:///miniwob-plusplus/miniwob/html/miniwob/"
