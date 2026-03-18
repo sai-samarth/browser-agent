@@ -32,7 +32,7 @@ teacher_api:
   enabled: true
   base_url: "https://api.z.ai/api/coding/paas/v4"
   model: "glm-4.7"
-  api_key_env_var: "ZAI_API_KEY"
+  api_key_env_var: "GLM_API_KEY"
   request_timeout_s: 60
   temperature: 1.0
   top_p: 0.95
