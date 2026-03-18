@@ -1,0 +1,6481 @@
+{
+  "corpus": {
+    "total_rollout_runs": 45,
+    "runs_with_episode_summaries": 31,
+    "runs_with_trajectory_steps": 37,
+    "total_episodes": 1027,
+    "total_steps": 5505,
+    "total_successes": 436,
+    "overall_success_rate": 0.42453748782862705
+  },
+  "best_accuracy_run": {
+    "run_name": "miniwob_train_zai_20260221_180613",
+    "run_root": "data/parallel_runs/miniwob_train_zai_20260221_180613",
+    "classification": {
+      "label": "analysis_candidate",
+      "episode_coverage": 0.8613333333333333,
+      "task_coverage": 0.864,
+      "missing_task_count": 17
+    },
+    "teacher": {
+      "policy_mode": "teacher",
+      "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+      "teacher_model": "glm-4.7"
+    },
+    "micro_accuracy": 0.48606811145510836,
+    "macro_task_accuracy": 0.48456790123456794,
+    "avg_action_error_count": 1.2600619195046439,
+    "avg_num_steps": 5.157894736842105,
+    "avg_cum_reward": 0.48606811145510836,
+    "final_done_rate": 0.6780185758513931,
+    "total_episodes_observed": 323,
+    "total_episodes_expected": 375,
+    "observed_task_count": 108,
+    "expected_task_count": 125,
+    "missing_tasks": [
+      "guess-number",
+      "highlight-text",
+      "login-user",
+      "login-user-popup",
+      "number-checkboxes",
+      "odd-or-even",
+      "read-table-2",
+      "resize-textarea",
+      "search-engine",
+      "sign-agreement",
+      "social-media-all",
+      "social-media-some",
+      "text-transform",
+      "tic-tac-toe",
+      "use-colorwheel",
+      "use-colorwheel-2",
+      "visual-addition"
+    ],
+    "teacher_fallback_episode_rate": 0.05263157894736842,
+    "avg_teacher_fallback_count": 0.07430340557275542,
+    "started_at": "2026-02-21T18:06:43.814173+00:00",
+    "ended_at": "2026-02-21T19:18:38.081458+00:00",
+    "duration_seconds": 4314.267285,
+    "workers": [
+      {
+        "worker_id": "00",
+        "run_dir": "data/rollouts/miniwob_train_zai_w00_20260221_180638",
+        "tasks_configured": 25,
+        "episodes_expected": 75,
+        "episodes_observed": 51,
+        "successes": 26,
+        "success_rate": 0.5098039215686274,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "01",
+        "run_dir": "data/rollouts/miniwob_train_zai_w01_20260221_180638",
+        "tasks_configured": 25,
+        "episodes_expected": 75,
+        "episodes_observed": 75,
+        "successes": 29,
+        "success_rate": 0.38666666666666666,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "02",
+        "run_dir": "data/rollouts/miniwob_train_zai_w02_20260221_180638",
+        "tasks_configured": 25,
+        "episodes_expected": 75,
+        "episodes_observed": 75,
+        "successes": 40,
+        "success_rate": 0.5333333333333333,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "03",
+        "run_dir": "data/rollouts/miniwob_train_zai_w03_20260221_180638",
+        "tasks_configured": 25,
+        "episodes_expected": 75,
+        "episodes_observed": 75,
+        "successes": 42,
+        "success_rate": 0.56,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "04",
+        "run_dir": "data/rollouts/miniwob_train_zai_w04_20260221_180638",
+        "tasks_configured": 25,
+        "episodes_expected": 75,
+        "episodes_observed": 47,
+        "successes": 20,
+        "success_rate": 0.425531914893617,
+        "missing_episode_file": false
+      }
+    ],
+    "per_task": [
+      {
+        "task_name": "ascending-numbers",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "bisect-angle",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "choose-date",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "choose-date-easy",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "choose-date-medium",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "choose-date-nodelay",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "circle-center",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "click-collapsible-2",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "click-collapsible-2-nodelay",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.333333333333333
+      },
+      {
+        "task_name": "click-color",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "click-link",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "click-pie",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-pie-nodelay",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-shades",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.333333333333333
+      },
+      {
+        "task_name": "click-shape",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "click-tab-2",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "click-tab-2-easy",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-tab-2-hard",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-tab-2-medium",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "daily-calendar",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "drag-box",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 4.333333333333333
+      },
+      {
+        "task_name": "drag-circle",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 9.0
+      },
+      {
+        "task_name": "drag-items-grid",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "drag-shapes",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 4.0
+      },
+      {
+        "task_name": "drag-shapes-2",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "drag-single-shape",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.333333333333333
+      },
+      {
+        "task_name": "draw-circle",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.333333333333333
+      },
+      {
+        "task_name": "email-inbox-forward",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-forward-nl",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-forward-nl-turk",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-reply",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "find-greatest",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 3.6666666666666665
+      },
+      {
+        "task_name": "form-sequence",
+        "episodes": 2,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.0
+      },
+      {
+        "task_name": "grid-coordinate",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "highlight-text-2",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.333333333333333
+      },
+      {
+        "task_name": "hot-cold",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "order-food",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.333333333333334
+      },
+      {
+        "task_name": "right-angle",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 9.0
+      },
+      {
+        "task_name": "stock-market",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 1.3333333333333333
+      },
+      {
+        "task_name": "terminal",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "text-editor",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "use-slider-2",
+        "episodes": 3,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 2.6666666666666665
+      },
+      {
+        "task_name": "book-flight",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 9.666666666666666
+      },
+      {
+        "task_name": "book-flight-nodelay",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 9.666666666666666
+      },
+      {
+        "task_name": "choose-list",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 9.0
+      },
+      {
+        "task_name": "click-menu",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "copy-paste",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 8.333333333333334
+      },
+      {
+        "task_name": "drag-cube",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "drag-items",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "email-inbox-noscroll",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "enter-date",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 9.0
+      },
+      {
+        "task_name": "form-sequence-2",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 7.666666666666667
+      },
+      {
+        "task_name": "form-sequence-3",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 9.333333333333334
+      },
+      {
+        "task_name": "multi-orderings",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 8.0
+      },
+      {
+        "task_name": "scroll-text-2",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 4.0
+      },
+      {
+        "task_name": "use-slider",
+        "episodes": 3,
+        "successes": 1,
+        "success_rate": 0.3333333333333333,
+        "avg_cum_reward": 0.3333333333333333,
+        "avg_steps": 5.666666666666667
+      },
+      {
+        "task_name": "click-checkboxes-large",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 9.0
+      },
+      {
+        "task_name": "click-test-2",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 4.0
+      },
+      {
+        "task_name": "count-sides",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "draw-line",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 8.333333333333334
+      },
+      {
+        "task_name": "email-inbox-important",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 5.333333333333333
+      },
+      {
+        "task_name": "email-inbox-nl-turk",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 4.666666666666667
+      },
+      {
+        "task_name": "email-inbox-star-reply",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "enter-time",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 3.3333333333333335
+      },
+      {
+        "task_name": "find-midpoint",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 8.666666666666666
+      },
+      {
+        "task_name": "navigate-tree",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "read-table",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 5.0
+      },
+      {
+        "task_name": "social-media",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 2.6666666666666665
+      },
+      {
+        "task_name": "use-autocomplete-nodelay",
+        "episodes": 3,
+        "successes": 2,
+        "success_rate": 0.6666666666666666,
+        "avg_cum_reward": 0.6666666666666666,
+        "avg_steps": 4.0
+      },
+      {
+        "task_name": "buy-ticket",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-button",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-button-sequence",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-checkboxes",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "click-checkboxes-soft",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.6666666666666665
+      },
+      {
+        "task_name": "click-checkboxes-transfer",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "click-collapsible",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-collapsible-nodelay",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-dialog",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-dialog-2",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-menu-2",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.6666666666666665
+      },
+      {
+        "task_name": "click-option",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-scroll-list",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "click-tab",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-test",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-test-transfer",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-widget",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "copy-paste-2",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.3333333333333335
+      },
+      {
+        "task_name": "count-shape",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "drag-sort-numbers",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "email-inbox",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 4.666666666666667
+      },
+      {
+        "task_name": "email-inbox-delete",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "enter-password",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "enter-text",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "enter-text-2",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "enter-text-dynamic",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "find-word",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "focus-text",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "focus-text-2",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "generate-number",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "identify-shape",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "multi-layouts",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 4.0
+      },
+      {
+        "task_name": "phone-book",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "scroll-text",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      },
+      {
+        "task_name": "simple-algebra",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "simple-arithmetic",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "unicode-test",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "use-autocomplete",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.6666666666666665
+      },
+      {
+        "task_name": "use-spinner",
+        "episodes": 3,
+        "successes": 3,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.3333333333333335
+      }
+    ]
+  },
+  "best_coverage_run": {
+    "run_name": "miniwob_train_20260221_164638",
+    "run_root": "data/parallel_runs/miniwob_train_20260221_164638",
+    "classification": {
+      "label": "sft_candidate",
+      "episode_coverage": 1.0,
+      "task_coverage": 1.0,
+      "missing_task_count": 0
+    },
+    "teacher": {
+      "policy_mode": "teacher",
+      "teacher_base_url": "http://localhost:7999/v1",
+      "teacher_model": "GUI_8B"
+    },
+    "micro_accuracy": 0.3664,
+    "macro_task_accuracy": 0.36640000000000006,
+    "avg_action_error_count": 1.84,
+    "avg_num_steps": 5.4464,
+    "avg_cum_reward": 0.3664,
+    "final_done_rate": 0.648,
+    "total_episodes_observed": 625,
+    "total_episodes_expected": 625,
+    "observed_task_count": 125,
+    "expected_task_count": 125,
+    "missing_tasks": [],
+    "teacher_fallback_episode_rate": 0.0,
+    "avg_teacher_fallback_count": 0.0,
+    "started_at": "2026-02-21T16:47:43.565648+00:00",
+    "ended_at": "2026-02-21T17:01:34.444504+00:00",
+    "duration_seconds": 830.878856,
+    "workers": [
+      {
+        "worker_id": "00",
+        "run_dir": "data/rollouts/miniwob_train_w00_20260221_164739",
+        "tasks_configured": 11,
+        "episodes_expected": 55,
+        "episodes_observed": 55,
+        "successes": 14,
+        "success_rate": 0.2545454545454545,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "01",
+        "run_dir": "data/rollouts/miniwob_train_w01_20260221_164739",
+        "tasks_configured": 11,
+        "episodes_expected": 55,
+        "episodes_observed": 55,
+        "successes": 15,
+        "success_rate": 0.2727272727272727,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "02",
+        "run_dir": "data/rollouts/miniwob_train_w02_20260221_164739",
+        "tasks_configured": 11,
+        "episodes_expected": 55,
+        "episodes_observed": 55,
+        "successes": 19,
+        "success_rate": 0.34545454545454546,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "03",
+        "run_dir": "data/rollouts/miniwob_train_w03_20260221_164739",
+        "tasks_configured": 11,
+        "episodes_expected": 55,
+        "episodes_observed": 55,
+        "successes": 25,
+        "success_rate": 0.45454545454545453,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "04",
+        "run_dir": "data/rollouts/miniwob_train_w04_20260221_164739",
+        "tasks_configured": 11,
+        "episodes_expected": 55,
+        "episodes_observed": 55,
+        "successes": 23,
+        "success_rate": 0.41818181818181815,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "05",
+        "run_dir": "data/rollouts/miniwob_train_w05_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 21,
+        "success_rate": 0.42,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "06",
+        "run_dir": "data/rollouts/miniwob_train_w06_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 15,
+        "success_rate": 0.3,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "07",
+        "run_dir": "data/rollouts/miniwob_train_w07_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 9,
+        "success_rate": 0.18,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "08",
+        "run_dir": "data/rollouts/miniwob_train_w08_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 13,
+        "success_rate": 0.26,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "09",
+        "run_dir": "data/rollouts/miniwob_train_w09_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 26,
+        "success_rate": 0.52,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "10",
+        "run_dir": "data/rollouts/miniwob_train_w10_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 25,
+        "success_rate": 0.5,
+        "missing_episode_file": false
+      },
+      {
+        "worker_id": "11",
+        "run_dir": "data/rollouts/miniwob_train_w11_20260221_164739",
+        "tasks_configured": 10,
+        "episodes_expected": 50,
+        "episodes_observed": 50,
+        "successes": 24,
+        "success_rate": 0.48,
+        "missing_episode_file": false
+      }
+    ],
+    "per_task": [
+      {
+        "task_name": "ascending-numbers",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "book-flight",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "book-flight-nodelay",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "choose-date",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "choose-date-easy",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.8
+      },
+      {
+        "task_name": "choose-date-medium",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "choose-date-nodelay",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "choose-list",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-collapsible-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.4
+      },
+      {
+        "task_name": "click-collapsible-2-nodelay",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.8
+      },
+      {
+        "task_name": "click-color",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-link",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-pie",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-pie-nodelay",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-shades",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 4.4
+      },
+      {
+        "task_name": "click-shape",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-tab-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "click-tab-2-easy",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.4
+      },
+      {
+        "task_name": "click-tab-2-hard",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.8
+      },
+      {
+        "task_name": "copy-paste",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.8
+      },
+      {
+        "task_name": "copy-paste-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.8
+      },
+      {
+        "task_name": "count-sides",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "daily-calendar",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "drag-box",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.4
+      },
+      {
+        "task_name": "drag-circle",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 2.4
+      },
+      {
+        "task_name": "drag-shapes-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.4
+      },
+      {
+        "task_name": "drag-single-shape",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 1.8
+      },
+      {
+        "task_name": "draw-circle",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.6
+      },
+      {
+        "task_name": "email-inbox-forward",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-forward-nl",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-forward-nl-turk",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-nl-turk",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.4
+      },
+      {
+        "task_name": "email-inbox-reply",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "email-inbox-star-reply",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.2
+      },
+      {
+        "task_name": "enter-date",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "enter-time",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 9.4
+      },
+      {
+        "task_name": "find-greatest",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 2.2
+      },
+      {
+        "task_name": "grid-coordinate",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "highlight-text",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.2
+      },
+      {
+        "task_name": "highlight-text-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.4
+      },
+      {
+        "task_name": "hot-cold",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "multi-orderings",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "number-checkboxes",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.8
+      },
+      {
+        "task_name": "order-food",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 6.4
+      },
+      {
+        "task_name": "resize-textarea",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.8
+      },
+      {
+        "task_name": "right-angle",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 3.4
+      },
+      {
+        "task_name": "scroll-text-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.2
+      },
+      {
+        "task_name": "search-engine",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.4
+      },
+      {
+        "task_name": "social-media",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 8.4
+      },
+      {
+        "task_name": "social-media-all",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.6
+      },
+      {
+        "task_name": "social-media-some",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 7.8
+      },
+      {
+        "task_name": "terminal",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "text-editor",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "tic-tac-toe",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "use-colorwheel",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 10.0
+      },
+      {
+        "task_name": "use-slider-2",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 5.4
+      },
+      {
+        "task_name": "visual-addition",
+        "episodes": 5,
+        "successes": 0,
+        "success_rate": 0.0,
+        "avg_cum_reward": 0.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-tab-2-medium",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 2.4
+      },
+      {
+        "task_name": "count-shape",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 1.2
+      },
+      {
+        "task_name": "drag-cube",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 5.4
+      },
+      {
+        "task_name": "drag-items-grid",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 4.8
+      },
+      {
+        "task_name": "drag-shapes",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 6.8
+      },
+      {
+        "task_name": "email-inbox",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 8.2
+      },
+      {
+        "task_name": "email-inbox-delete",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 6.6
+      },
+      {
+        "task_name": "email-inbox-noscroll",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 6.4
+      },
+      {
+        "task_name": "form-sequence",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 6.0
+      },
+      {
+        "task_name": "login-user-popup",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 5.0
+      },
+      {
+        "task_name": "text-transform",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 1.8
+      },
+      {
+        "task_name": "use-slider",
+        "episodes": 5,
+        "successes": 1,
+        "success_rate": 0.2,
+        "avg_cum_reward": 0.2,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "bisect-angle",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 2.8
+      },
+      {
+        "task_name": "circle-center",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 4.8
+      },
+      {
+        "task_name": "click-button-sequence",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-menu",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "drag-items",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "email-inbox-important",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "find-midpoint",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 4.4
+      },
+      {
+        "task_name": "form-sequence-2",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 8.0
+      },
+      {
+        "task_name": "read-table-2",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 4.6
+      },
+      {
+        "task_name": "sign-agreement",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 6.4
+      },
+      {
+        "task_name": "stock-market",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 1.8
+      },
+      {
+        "task_name": "use-colorwheel-2",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 7.2
+      },
+      {
+        "task_name": "use-spinner",
+        "episodes": 5,
+        "successes": 2,
+        "success_rate": 0.4,
+        "avg_cum_reward": 0.4,
+        "avg_steps": 6.0
+      },
+      {
+        "task_name": "click-menu-2",
+        "episodes": 5,
+        "successes": 3,
+        "success_rate": 0.6,
+        "avg_cum_reward": 0.6,
+        "avg_steps": 6.0
+      },
+      {
+        "task_name": "click-test-transfer",
+        "episodes": 5,
+        "successes": 3,
+        "success_rate": 0.6,
+        "avg_cum_reward": 0.6,
+        "avg_steps": 4.6
+      },
+      {
+        "task_name": "drag-sort-numbers",
+        "episodes": 5,
+        "successes": 3,
+        "success_rate": 0.6,
+        "avg_cum_reward": 0.6,
+        "avg_steps": 7.0
+      },
+      {
+        "task_name": "form-sequence-3",
+        "episodes": 5,
+        "successes": 3,
+        "success_rate": 0.6,
+        "avg_cum_reward": 0.6,
+        "avg_steps": 6.2
+      },
+      {
+        "task_name": "use-autocomplete",
+        "episodes": 5,
+        "successes": 3,
+        "success_rate": 0.6,
+        "avg_cum_reward": 0.6,
+        "avg_steps": 6.6
+      },
+      {
+        "task_name": "use-autocomplete-nodelay",
+        "episodes": 5,
+        "successes": 3,
+        "success_rate": 0.6,
+        "avg_cum_reward": 0.6,
+        "avg_steps": 6.8
+      },
+      {
+        "task_name": "click-checkboxes",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "click-checkboxes-large",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 7.4
+      },
+      {
+        "task_name": "click-checkboxes-soft",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 4.4
+      },
+      {
+        "task_name": "click-scroll-list",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 2.2
+      },
+      {
+        "task_name": "draw-line",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 6.4
+      },
+      {
+        "task_name": "enter-text-2",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "identify-shape",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "navigate-tree",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "odd-or-even",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 4.4
+      },
+      {
+        "task_name": "phone-book",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 4.4
+      },
+      {
+        "task_name": "scroll-text",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "simple-algebra",
+        "episodes": 5,
+        "successes": 4,
+        "success_rate": 0.8,
+        "avg_cum_reward": 0.8,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "buy-ticket",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-button",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-checkboxes-transfer",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.4
+      },
+      {
+        "task_name": "click-collapsible",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-collapsible-nodelay",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-dialog",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-dialog-2",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-option",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "click-tab",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-test",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-test-2",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "click-widget",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "enter-password",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "enter-text",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "enter-text-dynamic",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "find-word",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "focus-text",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "focus-text-2",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      },
+      {
+        "task_name": "generate-number",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 5.6
+      },
+      {
+        "task_name": "guess-number",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 8.0
+      },
+      {
+        "task_name": "login-user",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 3.0
+      },
+      {
+        "task_name": "multi-layouts",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 4.0
+      },
+      {
+        "task_name": "read-table",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "simple-arithmetic",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 2.0
+      },
+      {
+        "task_name": "unicode-test",
+        "episodes": 5,
+        "successes": 5,
+        "success_rate": 1.0,
+        "avg_cum_reward": 1.0,
+        "avg_steps": 1.0
+      }
+    ]
+  },
+  "runs": [
+    {
+      "run_name": "miniwob_parallel_smoke2_20260221_161254",
+      "run_root": "data/parallel_runs/miniwob_parallel_smoke2_20260221_161254",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 2
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 2,
+      "observed_task_count": 0,
+      "expected_task_count": 2,
+      "missing_tasks": [
+        "choose-list",
+        "click-test"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_parallel_smoke2_w00_20260221_161304",
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_parallel_smoke2_w01_20260221_161304",
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_parallel_smoke_20260221_161222",
+      "run_root": "data/parallel_runs/miniwob_parallel_smoke_20260221_161222",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 2
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 2,
+      "observed_task_count": 0,
+      "expected_task_count": 2,
+      "missing_tasks": [
+        "choose-list",
+        "click-test"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_portscan_test2_20260221_161902",
+      "run_root": "data/parallel_runs/miniwob_portscan_test2_20260221_161902",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 2
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 2,
+      "observed_task_count": 0,
+      "expected_task_count": 2,
+      "missing_tasks": [
+        "choose-list",
+        "click-test"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_portscan_test_20260221_161702",
+      "run_root": "data/parallel_runs/miniwob_portscan_test_20260221_161702",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 2
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 2,
+      "observed_task_count": 0,
+      "expected_task_count": 2,
+      "missing_tasks": [
+        "choose-list",
+        "click-test"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 1,
+          "episodes_expected": 1,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_throughput_20260221_161201",
+      "run_root": "data/parallel_runs/miniwob_throughput_20260221_161201",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 130
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 130,
+      "observed_task_count": 0,
+      "expected_task_count": 130,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "button-delay",
+        "buy-ticket",
+        "chase-circle",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "hover-shape",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "moving-items",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simon-says",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 44,
+          "episodes_expected": 44,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 43,
+          "episodes_expected": 43,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": null,
+          "tasks_configured": 43,
+          "episodes_expected": 43,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_20260221_161520",
+      "run_root": "data/parallel_runs/miniwob_train_20260221_161520",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 130
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 650,
+      "observed_task_count": 0,
+      "expected_task_count": 130,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "button-delay",
+        "buy-ticket",
+        "chase-circle",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "hover-shape",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "moving-items",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simon-says",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 17,
+          "episodes_expected": 85,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 17,
+          "episodes_expected": 85,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "03",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "04",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "05",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "06",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "07",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_20260221_162050",
+      "run_root": "data/parallel_runs/miniwob_train_20260221_162050",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 130
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 650,
+      "observed_task_count": 0,
+      "expected_task_count": 130,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "button-delay",
+        "buy-ticket",
+        "chase-circle",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "hover-shape",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "moving-items",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simon-says",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_w00_20260221_162132",
+          "tasks_configured": 17,
+          "episodes_expected": 85,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_train_w01_20260221_162132",
+          "tasks_configured": 17,
+          "episodes_expected": 85,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_w02_20260221_162132",
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "03",
+          "run_dir": "data/rollouts/miniwob_train_w03_20260221_162132",
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "04",
+          "run_dir": "data/rollouts/miniwob_train_w04_20260221_162132",
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "05",
+          "run_dir": "data/rollouts/miniwob_train_w05_20260221_162132",
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "06",
+          "run_dir": "data/rollouts/miniwob_train_w06_20260221_162132",
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "07",
+          "run_dir": "data/rollouts/miniwob_train_w07_20260221_162132",
+          "tasks_configured": 16,
+          "episodes_expected": 80,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_20260221_164638",
+      "run_root": "data/parallel_runs/miniwob_train_20260221_164638",
+      "classification": {
+        "label": "sft_candidate",
+        "episode_coverage": 1.0,
+        "task_coverage": 1.0,
+        "missing_task_count": 0
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.3664,
+      "macro_task_accuracy": 0.36640000000000006,
+      "avg_action_error_count": 1.84,
+      "avg_num_steps": 5.4464,
+      "avg_cum_reward": 0.3664,
+      "final_done_rate": 0.648,
+      "total_episodes_observed": 625,
+      "total_episodes_expected": 625,
+      "observed_task_count": 125,
+      "expected_task_count": 125,
+      "missing_tasks": [],
+      "teacher_fallback_episode_rate": 0.0,
+      "avg_teacher_fallback_count": 0.0,
+      "started_at": "2026-02-21T16:47:43.565648+00:00",
+      "ended_at": "2026-02-21T17:01:34.444504+00:00",
+      "duration_seconds": 830.878856,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_w00_20260221_164739",
+          "tasks_configured": 11,
+          "episodes_expected": 55,
+          "episodes_observed": 55,
+          "successes": 14,
+          "success_rate": 0.2545454545454545,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_train_w01_20260221_164739",
+          "tasks_configured": 11,
+          "episodes_expected": 55,
+          "episodes_observed": 55,
+          "successes": 15,
+          "success_rate": 0.2727272727272727,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_w02_20260221_164739",
+          "tasks_configured": 11,
+          "episodes_expected": 55,
+          "episodes_observed": 55,
+          "successes": 19,
+          "success_rate": 0.34545454545454546,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "03",
+          "run_dir": "data/rollouts/miniwob_train_w03_20260221_164739",
+          "tasks_configured": 11,
+          "episodes_expected": 55,
+          "episodes_observed": 55,
+          "successes": 25,
+          "success_rate": 0.45454545454545453,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "04",
+          "run_dir": "data/rollouts/miniwob_train_w04_20260221_164739",
+          "tasks_configured": 11,
+          "episodes_expected": 55,
+          "episodes_observed": 55,
+          "successes": 23,
+          "success_rate": 0.41818181818181815,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "05",
+          "run_dir": "data/rollouts/miniwob_train_w05_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 21,
+          "success_rate": 0.42,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "06",
+          "run_dir": "data/rollouts/miniwob_train_w06_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 15,
+          "success_rate": 0.3,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "07",
+          "run_dir": "data/rollouts/miniwob_train_w07_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 9,
+          "success_rate": 0.18,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "08",
+          "run_dir": "data/rollouts/miniwob_train_w08_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 13,
+          "success_rate": 0.26,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "09",
+          "run_dir": "data/rollouts/miniwob_train_w09_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 26,
+          "success_rate": 0.52,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "10",
+          "run_dir": "data/rollouts/miniwob_train_w10_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 25,
+          "success_rate": 0.5,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "11",
+          "run_dir": "data/rollouts/miniwob_train_w11_20260221_164739",
+          "tasks_configured": 10,
+          "episodes_expected": 50,
+          "episodes_observed": 50,
+          "successes": 24,
+          "success_rate": 0.48,
+          "missing_episode_file": false
+        }
+      ],
+      "per_task": [
+        {
+          "task_name": "ascending-numbers",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "book-flight",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "book-flight-nodelay",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "choose-date-easy",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.8
+        },
+        {
+          "task_name": "choose-date-medium",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date-nodelay",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-list",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-collapsible-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.4
+        },
+        {
+          "task_name": "click-collapsible-2-nodelay",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.8
+        },
+        {
+          "task_name": "click-color",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-link",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-pie",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-pie-nodelay",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-shades",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 4.4
+        },
+        {
+          "task_name": "click-shape",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-tab-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-tab-2-easy",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.4
+        },
+        {
+          "task_name": "click-tab-2-hard",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.8
+        },
+        {
+          "task_name": "copy-paste",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.8
+        },
+        {
+          "task_name": "copy-paste-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.8
+        },
+        {
+          "task_name": "count-sides",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "daily-calendar",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "drag-box",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.4
+        },
+        {
+          "task_name": "drag-circle",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 2.4
+        },
+        {
+          "task_name": "drag-shapes-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.4
+        },
+        {
+          "task_name": "drag-single-shape",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 1.8
+        },
+        {
+          "task_name": "draw-circle",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.6
+        },
+        {
+          "task_name": "email-inbox-forward",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-forward-nl",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-forward-nl-turk",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-nl-turk",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.4
+        },
+        {
+          "task_name": "email-inbox-reply",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-star-reply",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.2
+        },
+        {
+          "task_name": "enter-date",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "enter-time",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 9.4
+        },
+        {
+          "task_name": "find-greatest",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 2.2
+        },
+        {
+          "task_name": "grid-coordinate",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "highlight-text",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.2
+        },
+        {
+          "task_name": "highlight-text-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.4
+        },
+        {
+          "task_name": "hot-cold",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "multi-orderings",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "number-checkboxes",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.8
+        },
+        {
+          "task_name": "order-food",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.4
+        },
+        {
+          "task_name": "resize-textarea",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.8
+        },
+        {
+          "task_name": "right-angle",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 3.4
+        },
+        {
+          "task_name": "scroll-text-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.2
+        },
+        {
+          "task_name": "search-engine",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.4
+        },
+        {
+          "task_name": "social-media",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.4
+        },
+        {
+          "task_name": "social-media-all",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.6
+        },
+        {
+          "task_name": "social-media-some",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.8
+        },
+        {
+          "task_name": "terminal",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "text-editor",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "tic-tac-toe",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "use-colorwheel",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "use-slider-2",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.4
+        },
+        {
+          "task_name": "visual-addition",
+          "episodes": 5,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-tab-2-medium",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 2.4
+        },
+        {
+          "task_name": "count-shape",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 1.2
+        },
+        {
+          "task_name": "drag-cube",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 5.4
+        },
+        {
+          "task_name": "drag-items-grid",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 4.8
+        },
+        {
+          "task_name": "drag-shapes",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 6.8
+        },
+        {
+          "task_name": "email-inbox",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 8.2
+        },
+        {
+          "task_name": "email-inbox-delete",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 6.6
+        },
+        {
+          "task_name": "email-inbox-noscroll",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 6.4
+        },
+        {
+          "task_name": "form-sequence",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 6.0
+        },
+        {
+          "task_name": "login-user-popup",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 5.0
+        },
+        {
+          "task_name": "text-transform",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 1.8
+        },
+        {
+          "task_name": "use-slider",
+          "episodes": 5,
+          "successes": 1,
+          "success_rate": 0.2,
+          "avg_cum_reward": 0.2,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "bisect-angle",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 2.8
+        },
+        {
+          "task_name": "circle-center",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 4.8
+        },
+        {
+          "task_name": "click-button-sequence",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-menu",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "drag-items",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "email-inbox-important",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "find-midpoint",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 4.4
+        },
+        {
+          "task_name": "form-sequence-2",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 8.0
+        },
+        {
+          "task_name": "read-table-2",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 4.6
+        },
+        {
+          "task_name": "sign-agreement",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 6.4
+        },
+        {
+          "task_name": "stock-market",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 1.8
+        },
+        {
+          "task_name": "use-colorwheel-2",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 7.2
+        },
+        {
+          "task_name": "use-spinner",
+          "episodes": 5,
+          "successes": 2,
+          "success_rate": 0.4,
+          "avg_cum_reward": 0.4,
+          "avg_steps": 6.0
+        },
+        {
+          "task_name": "click-menu-2",
+          "episodes": 5,
+          "successes": 3,
+          "success_rate": 0.6,
+          "avg_cum_reward": 0.6,
+          "avg_steps": 6.0
+        },
+        {
+          "task_name": "click-test-transfer",
+          "episodes": 5,
+          "successes": 3,
+          "success_rate": 0.6,
+          "avg_cum_reward": 0.6,
+          "avg_steps": 4.6
+        },
+        {
+          "task_name": "drag-sort-numbers",
+          "episodes": 5,
+          "successes": 3,
+          "success_rate": 0.6,
+          "avg_cum_reward": 0.6,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "form-sequence-3",
+          "episodes": 5,
+          "successes": 3,
+          "success_rate": 0.6,
+          "avg_cum_reward": 0.6,
+          "avg_steps": 6.2
+        },
+        {
+          "task_name": "use-autocomplete",
+          "episodes": 5,
+          "successes": 3,
+          "success_rate": 0.6,
+          "avg_cum_reward": 0.6,
+          "avg_steps": 6.6
+        },
+        {
+          "task_name": "use-autocomplete-nodelay",
+          "episodes": 5,
+          "successes": 3,
+          "success_rate": 0.6,
+          "avg_cum_reward": 0.6,
+          "avg_steps": 6.8
+        },
+        {
+          "task_name": "click-checkboxes",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "click-checkboxes-large",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 7.4
+        },
+        {
+          "task_name": "click-checkboxes-soft",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 4.4
+        },
+        {
+          "task_name": "click-scroll-list",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 2.2
+        },
+        {
+          "task_name": "draw-line",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 6.4
+        },
+        {
+          "task_name": "enter-text-2",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "identify-shape",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "navigate-tree",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "odd-or-even",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 4.4
+        },
+        {
+          "task_name": "phone-book",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 4.4
+        },
+        {
+          "task_name": "scroll-text",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "simple-algebra",
+          "episodes": 5,
+          "successes": 4,
+          "success_rate": 0.8,
+          "avg_cum_reward": 0.8,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "buy-ticket",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-button",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-checkboxes-transfer",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.4
+        },
+        {
+          "task_name": "click-collapsible",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-collapsible-nodelay",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-dialog",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-dialog-2",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-option",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-tab",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-test",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-test-2",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-widget",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "enter-password",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "enter-text",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "enter-text-dynamic",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "find-word",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "focus-text",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "focus-text-2",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "generate-number",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 5.6
+        },
+        {
+          "task_name": "guess-number",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 8.0
+        },
+        {
+          "task_name": "login-user",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "multi-layouts",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 4.0
+        },
+        {
+          "task_name": "read-table",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "simple-arithmetic",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "unicode-test",
+          "episodes": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        }
+      ]
+    },
+    {
+      "run_name": "miniwob_train_fixcheck_20260221_164438",
+      "run_root": "data/parallel_runs/miniwob_train_fixcheck_20260221_164438",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 125
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "http://localhost:7999/v1",
+        "teacher_model": "GUI_8B"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 125,
+      "observed_task_count": 0,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "buy-ticket",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 16,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 16,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 16,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "03",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 16,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "04",
+          "run_dir": null,
+          "tasks_configured": 16,
+          "episodes_expected": 16,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "05",
+          "run_dir": null,
+          "tasks_configured": 15,
+          "episodes_expected": 15,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "06",
+          "run_dir": null,
+          "tasks_configured": 15,
+          "episodes_expected": 15,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "07",
+          "run_dir": null,
+          "tasks_configured": 15,
+          "episodes_expected": 15,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_zai_20260221_172642",
+      "run_root": "data/parallel_runs/miniwob_train_zai_20260221_172642",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 125
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+        "teacher_model": "glm-5"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 375,
+      "observed_task_count": 0,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "buy-ticket",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": null,
+          "tasks_configured": 42,
+          "episodes_expected": 126,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 42,
+          "episodes_expected": 126,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": null,
+          "tasks_configured": 41,
+          "episodes_expected": 123,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_zai_20260221_175937",
+      "run_root": "data/parallel_runs/miniwob_train_zai_20260221_175937",
+      "classification": {
+        "label": "partial",
+        "episode_coverage": 0.042666666666666665,
+        "task_coverage": 0.048,
+        "missing_task_count": 119
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+        "teacher_model": "glm-4.7"
+      },
+      "micro_accuracy": 0.5,
+      "macro_task_accuracy": 0.4444444444444444,
+      "avg_action_error_count": 3.75,
+      "avg_num_steps": 6.875,
+      "avg_cum_reward": 0.5,
+      "final_done_rate": 0.5,
+      "total_episodes_observed": 16,
+      "total_episodes_expected": 375,
+      "observed_task_count": 6,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "choose-date",
+        "choose-date-medium",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-soft",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": 0.0,
+      "avg_teacher_fallback_count": 0.0,
+      "started_at": "2026-02-21T18:00:37.024430+00:00",
+      "ended_at": "2026-02-21T18:03:26.283549+00:00",
+      "duration_seconds": 169.259119,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_zai_w00_20260221_180029",
+          "tasks_configured": 13,
+          "episodes_expected": 39,
+          "episodes_observed": 1,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "01",
+          "run_dir": null,
+          "tasks_configured": 13,
+          "episodes_expected": 39,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_zai_w02_20260221_180029",
+          "tasks_configured": 13,
+          "episodes_expected": 39,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "03",
+          "run_dir": null,
+          "tasks_configured": 13,
+          "episodes_expected": 39,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "04",
+          "run_dir": "data/rollouts/miniwob_train_zai_w04_20260221_180029",
+          "tasks_configured": 13,
+          "episodes_expected": 39,
+          "episodes_observed": 6,
+          "successes": 5,
+          "success_rate": 0.8333333333333334,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "05",
+          "run_dir": "data/rollouts/miniwob_train_zai_w05_20260221_180029",
+          "tasks_configured": 12,
+          "episodes_expected": 36,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "06",
+          "run_dir": "data/rollouts/miniwob_train_zai_w06_20260221_180029",
+          "tasks_configured": 12,
+          "episodes_expected": 36,
+          "episodes_observed": 6,
+          "successes": 3,
+          "success_rate": 0.5,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "07",
+          "run_dir": "data/rollouts/miniwob_train_zai_w07_20260221_180029",
+          "tasks_configured": 12,
+          "episodes_expected": 36,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "08",
+          "run_dir": "data/rollouts/miniwob_train_zai_w08_20260221_180029",
+          "tasks_configured": 12,
+          "episodes_expected": 36,
+          "episodes_observed": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "09",
+          "run_dir": null,
+          "tasks_configured": 12,
+          "episodes_expected": 36,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": [
+        {
+          "task_name": "ascending-numbers",
+          "episodes": 1,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date-easy",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date-nodelay",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-checkboxes-large",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 9.0
+        },
+        {
+          "task_name": "buy-ticket",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-checkboxes-transfer",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.3333333333333335
+        }
+      ]
+    },
+    {
+      "run_name": "miniwob_train_zai_20260221_180613",
+      "run_root": "data/parallel_runs/miniwob_train_zai_20260221_180613",
+      "classification": {
+        "label": "analysis_candidate",
+        "episode_coverage": 0.8613333333333333,
+        "task_coverage": 0.864,
+        "missing_task_count": 17
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+        "teacher_model": "glm-4.7"
+      },
+      "micro_accuracy": 0.48606811145510836,
+      "macro_task_accuracy": 0.48456790123456794,
+      "avg_action_error_count": 1.2600619195046439,
+      "avg_num_steps": 5.157894736842105,
+      "avg_cum_reward": 0.48606811145510836,
+      "final_done_rate": 0.6780185758513931,
+      "total_episodes_observed": 323,
+      "total_episodes_expected": 375,
+      "observed_task_count": 108,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "guess-number",
+        "highlight-text",
+        "login-user",
+        "login-user-popup",
+        "number-checkboxes",
+        "odd-or-even",
+        "read-table-2",
+        "resize-textarea",
+        "search-engine",
+        "sign-agreement",
+        "social-media-all",
+        "social-media-some",
+        "text-transform",
+        "tic-tac-toe",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": 0.05263157894736842,
+      "avg_teacher_fallback_count": 0.07430340557275542,
+      "started_at": "2026-02-21T18:06:43.814173+00:00",
+      "ended_at": "2026-02-21T19:18:38.081458+00:00",
+      "duration_seconds": 4314.267285,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_zai_w00_20260221_180638",
+          "tasks_configured": 25,
+          "episodes_expected": 75,
+          "episodes_observed": 51,
+          "successes": 26,
+          "success_rate": 0.5098039215686274,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_train_zai_w01_20260221_180638",
+          "tasks_configured": 25,
+          "episodes_expected": 75,
+          "episodes_observed": 75,
+          "successes": 29,
+          "success_rate": 0.38666666666666666,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_zai_w02_20260221_180638",
+          "tasks_configured": 25,
+          "episodes_expected": 75,
+          "episodes_observed": 75,
+          "successes": 40,
+          "success_rate": 0.5333333333333333,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "03",
+          "run_dir": "data/rollouts/miniwob_train_zai_w03_20260221_180638",
+          "tasks_configured": 25,
+          "episodes_expected": 75,
+          "episodes_observed": 75,
+          "successes": 42,
+          "success_rate": 0.56,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "04",
+          "run_dir": "data/rollouts/miniwob_train_zai_w04_20260221_180638",
+          "tasks_configured": 25,
+          "episodes_expected": 75,
+          "episodes_observed": 47,
+          "successes": 20,
+          "success_rate": 0.425531914893617,
+          "missing_episode_file": false
+        }
+      ],
+      "per_task": [
+        {
+          "task_name": "ascending-numbers",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "bisect-angle",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "choose-date",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date-easy",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date-medium",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "choose-date-nodelay",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "circle-center",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "click-collapsible-2",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "click-collapsible-2-nodelay",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.333333333333333
+        },
+        {
+          "task_name": "click-color",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "click-link",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "click-pie",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-pie-nodelay",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-shades",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.333333333333333
+        },
+        {
+          "task_name": "click-shape",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "click-tab-2",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "click-tab-2-easy",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-tab-2-hard",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "click-tab-2-medium",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "daily-calendar",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "drag-box",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 4.333333333333333
+        },
+        {
+          "task_name": "drag-circle",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 9.0
+        },
+        {
+          "task_name": "drag-items-grid",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "drag-shapes",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 4.0
+        },
+        {
+          "task_name": "drag-shapes-2",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "drag-single-shape",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 6.333333333333333
+        },
+        {
+          "task_name": "draw-circle",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 7.333333333333333
+        },
+        {
+          "task_name": "email-inbox-forward",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-forward-nl",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-forward-nl-turk",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "email-inbox-reply",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "find-greatest",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 3.6666666666666665
+        },
+        {
+          "task_name": "form-sequence",
+          "episodes": 2,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.0
+        },
+        {
+          "task_name": "grid-coordinate",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "highlight-text-2",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 5.333333333333333
+        },
+        {
+          "task_name": "hot-cold",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "order-food",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 8.333333333333334
+        },
+        {
+          "task_name": "right-angle",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 9.0
+        },
+        {
+          "task_name": "stock-market",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 1.3333333333333333
+        },
+        {
+          "task_name": "terminal",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "text-editor",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 10.0
+        },
+        {
+          "task_name": "use-slider-2",
+          "episodes": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 2.6666666666666665
+        },
+        {
+          "task_name": "book-flight",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 9.666666666666666
+        },
+        {
+          "task_name": "book-flight-nodelay",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 9.666666666666666
+        },
+        {
+          "task_name": "choose-list",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 9.0
+        },
+        {
+          "task_name": "click-menu",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "copy-paste",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 8.333333333333334
+        },
+        {
+          "task_name": "drag-cube",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "drag-items",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "email-inbox-noscroll",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "enter-date",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 9.0
+        },
+        {
+          "task_name": "form-sequence-2",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 7.666666666666667
+        },
+        {
+          "task_name": "form-sequence-3",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 9.333333333333334
+        },
+        {
+          "task_name": "multi-orderings",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 8.0
+        },
+        {
+          "task_name": "scroll-text-2",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 4.0
+        },
+        {
+          "task_name": "use-slider",
+          "episodes": 3,
+          "successes": 1,
+          "success_rate": 0.3333333333333333,
+          "avg_cum_reward": 0.3333333333333333,
+          "avg_steps": 5.666666666666667
+        },
+        {
+          "task_name": "click-checkboxes-large",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 9.0
+        },
+        {
+          "task_name": "click-test-2",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 4.0
+        },
+        {
+          "task_name": "count-sides",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "draw-line",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 8.333333333333334
+        },
+        {
+          "task_name": "email-inbox-important",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 5.333333333333333
+        },
+        {
+          "task_name": "email-inbox-nl-turk",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 4.666666666666667
+        },
+        {
+          "task_name": "email-inbox-star-reply",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 7.0
+        },
+        {
+          "task_name": "enter-time",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 3.3333333333333335
+        },
+        {
+          "task_name": "find-midpoint",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 8.666666666666666
+        },
+        {
+          "task_name": "navigate-tree",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "read-table",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 5.0
+        },
+        {
+          "task_name": "social-media",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 2.6666666666666665
+        },
+        {
+          "task_name": "use-autocomplete-nodelay",
+          "episodes": 3,
+          "successes": 2,
+          "success_rate": 0.6666666666666666,
+          "avg_cum_reward": 0.6666666666666666,
+          "avg_steps": 4.0
+        },
+        {
+          "task_name": "buy-ticket",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-button",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-button-sequence",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-checkboxes",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "click-checkboxes-soft",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.6666666666666665
+        },
+        {
+          "task_name": "click-checkboxes-transfer",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "click-collapsible",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-collapsible-nodelay",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-dialog",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-dialog-2",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-menu-2",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.6666666666666665
+        },
+        {
+          "task_name": "click-option",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "click-scroll-list",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "click-tab",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-test",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-test-transfer",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "click-widget",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "copy-paste-2",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.3333333333333335
+        },
+        {
+          "task_name": "count-shape",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "drag-sort-numbers",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "email-inbox",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 4.666666666666667
+        },
+        {
+          "task_name": "email-inbox-delete",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "enter-password",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "enter-text",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "enter-text-2",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "enter-text-dynamic",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "find-word",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "focus-text",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "focus-text-2",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "generate-number",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "identify-shape",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "multi-layouts",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 4.0
+        },
+        {
+          "task_name": "phone-book",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 3.0
+        },
+        {
+          "task_name": "scroll-text",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        },
+        {
+          "task_name": "simple-algebra",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "simple-arithmetic",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.0
+        },
+        {
+          "task_name": "unicode-test",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 1.0
+        },
+        {
+          "task_name": "use-autocomplete",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.6666666666666665
+        },
+        {
+          "task_name": "use-spinner",
+          "episodes": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "avg_cum_reward": 1.0,
+          "avg_steps": 2.3333333333333335
+        }
+      ]
+    },
+    {
+      "run_name": "miniwob_train_zai_20260224_181259",
+      "run_root": "data/parallel_runs/miniwob_train_zai_20260224_181259",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 125
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+        "teacher_model": "glm-4.7"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 1250,
+      "observed_task_count": 0,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "buy-ticket",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_zai_w00_20260224_181316",
+          "tasks_configured": 42,
+          "episodes_expected": 420,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_train_zai_w01_20260224_181316",
+          "tasks_configured": 42,
+          "episodes_expected": 420,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_zai_w02_20260224_181316",
+          "tasks_configured": 41,
+          "episodes_expected": 410,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_zai_20260224_181708",
+      "run_root": "data/parallel_runs/miniwob_train_zai_20260224_181708",
+      "classification": {
+        "label": "broken",
+        "episode_coverage": 0.0,
+        "task_coverage": 0.0,
+        "missing_task_count": 125
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+        "teacher_model": "glm-4.7"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 0.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 0.0,
+      "total_episodes_observed": 0,
+      "total_episodes_expected": 1250,
+      "observed_task_count": 0,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "ascending-numbers",
+        "bisect-angle",
+        "book-flight",
+        "book-flight-nodelay",
+        "buy-ticket",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": null,
+      "avg_teacher_fallback_count": null,
+      "started_at": null,
+      "ended_at": null,
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_zai_w00_20260224_181726",
+          "tasks_configured": 42,
+          "episodes_expected": 420,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_train_zai_w01_20260224_181726",
+          "tasks_configured": 42,
+          "episodes_expected": 420,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_zai_w02_20260224_181726",
+          "tasks_configured": 41,
+          "episodes_expected": 410,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": []
+    },
+    {
+      "run_name": "miniwob_train_zai_20260224_182424",
+      "run_root": "data/parallel_runs/miniwob_train_zai_20260224_182424",
+      "classification": {
+        "label": "partial",
+        "episode_coverage": 0.0008,
+        "task_coverage": 0.008,
+        "missing_task_count": 124
+      },
+      "teacher": {
+        "policy_mode": "teacher",
+        "teacher_base_url": "https://api.z.ai/api/coding/paas/v4",
+        "teacher_model": "glm-4.7"
+      },
+      "micro_accuracy": 0.0,
+      "macro_task_accuracy": 0.0,
+      "avg_action_error_count": 0.0,
+      "avg_num_steps": 9.0,
+      "avg_cum_reward": 0.0,
+      "final_done_rate": 1.0,
+      "total_episodes_observed": 1,
+      "total_episodes_expected": 1250,
+      "observed_task_count": 1,
+      "expected_task_count": 125,
+      "missing_tasks": [
+        "ascending-numbers",
+        "book-flight",
+        "book-flight-nodelay",
+        "buy-ticket",
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "choose-list",
+        "circle-center",
+        "click-button",
+        "click-button-sequence",
+        "click-checkboxes",
+        "click-checkboxes-large",
+        "click-checkboxes-soft",
+        "click-checkboxes-transfer",
+        "click-collapsible",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-collapsible-nodelay",
+        "click-color",
+        "click-dialog",
+        "click-dialog-2",
+        "click-link",
+        "click-menu",
+        "click-menu-2",
+        "click-option",
+        "click-pie",
+        "click-pie-nodelay",
+        "click-scroll-list",
+        "click-shades",
+        "click-shape",
+        "click-tab",
+        "click-tab-2",
+        "click-tab-2-easy",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "click-test",
+        "click-test-2",
+        "click-test-transfer",
+        "click-widget",
+        "copy-paste",
+        "copy-paste-2",
+        "count-shape",
+        "count-sides",
+        "daily-calendar",
+        "drag-box",
+        "drag-circle",
+        "drag-cube",
+        "drag-items",
+        "drag-items-grid",
+        "drag-shapes",
+        "drag-shapes-2",
+        "drag-single-shape",
+        "drag-sort-numbers",
+        "draw-circle",
+        "draw-line",
+        "email-inbox",
+        "email-inbox-delete",
+        "email-inbox-forward",
+        "email-inbox-forward-nl",
+        "email-inbox-forward-nl-turk",
+        "email-inbox-important",
+        "email-inbox-nl-turk",
+        "email-inbox-noscroll",
+        "email-inbox-reply",
+        "email-inbox-star-reply",
+        "enter-date",
+        "enter-password",
+        "enter-text",
+        "enter-text-2",
+        "enter-text-dynamic",
+        "enter-time",
+        "find-greatest",
+        "find-midpoint",
+        "find-word",
+        "focus-text",
+        "focus-text-2",
+        "form-sequence",
+        "form-sequence-2",
+        "form-sequence-3",
+        "generate-number",
+        "grid-coordinate",
+        "guess-number",
+        "highlight-text",
+        "highlight-text-2",
+        "hot-cold",
+        "identify-shape",
+        "login-user",
+        "login-user-popup",
+        "multi-layouts",
+        "multi-orderings",
+        "navigate-tree",
+        "number-checkboxes",
+        "odd-or-even",
+        "order-food",
+        "phone-book",
+        "read-table",
+        "read-table-2",
+        "resize-textarea",
+        "right-angle",
+        "scroll-text",
+        "scroll-text-2",
+        "search-engine",
+        "sign-agreement",
+        "simple-algebra",
+        "simple-arithmetic",
+        "social-media",
+        "social-media-all",
+        "social-media-some",
+        "stock-market",
+        "terminal",
+        "text-editor",
+        "text-transform",
+        "tic-tac-toe",
+        "unicode-test",
+        "use-autocomplete",
+        "use-autocomplete-nodelay",
+        "use-colorwheel",
+        "use-colorwheel-2",
+        "use-slider",
+        "use-slider-2",
+        "use-spinner",
+        "visual-addition"
+      ],
+      "teacher_fallback_episode_rate": 0.0,
+      "avg_teacher_fallback_count": 0.0,
+      "started_at": "2026-02-24T18:28:59.545830+00:00",
+      "ended_at": "2026-02-24T18:28:59.545830+00:00",
+      "duration_seconds": null,
+      "workers": [
+        {
+          "worker_id": "00",
+          "run_dir": "data/rollouts/miniwob_train_zai_w00_20260224_182439",
+          "tasks_configured": 42,
+          "episodes_expected": 420,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        },
+        {
+          "worker_id": "01",
+          "run_dir": "data/rollouts/miniwob_train_zai_w01_20260224_182439",
+          "tasks_configured": 42,
+          "episodes_expected": 420,
+          "episodes_observed": 1,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": false
+        },
+        {
+          "worker_id": "02",
+          "run_dir": "data/rollouts/miniwob_train_zai_w02_20260224_182439",
+          "tasks_configured": 41,
+          "episodes_expected": 410,
+          "episodes_observed": 0,
+          "successes": 0,
+          "success_rate": 0.0,
+          "missing_episode_file": true
+        }
+      ],
+      "per_task": [
+        {
+          "task_name": "bisect-angle",
+          "episodes": 1,
+          "successes": 0,
+          "success_rate": 0.0,
+          "avg_cum_reward": 0.0,
+          "avg_steps": 9.0
+        }
+      ]
+    }
+  ]
+}
