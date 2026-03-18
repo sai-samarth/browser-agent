@@ -734,7 +734,47 @@ def _teacher_action_sync(
     }
 
 
+def _observation_diagnostics(obs: Dict[str, Any]) -> Dict[str, Any]:
+    text = str(obs.get("text") or "")
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    actionable_node_count = len(re.findall(r"\[[^\]]+\]", text))
+    non_root_lines = [line for line in lines if not line.startswith("RootWebArea")]
+    is_root_only = bool(lines) and not non_root_lines
+    is_sparse = actionable_node_count <= 1 and len(non_root_lines) <= 1
+    return {
+        "text_line_count": len(lines),
+        "actionable_node_count": actionable_node_count,
+        "is_root_only": is_root_only,
+        "is_sparse": is_sparse,
+    }
+
+
+def _step_diagnostics(
+    *,
+    action_str: str,
+    previous_action_str: Optional[str],
+    previous_consecutive_same_action_count: int,
+    previous_no_progress_streak: int,
+    step_reward: float,
+    done: bool,
+) -> Dict[str, Any]:
+    same_action_as_previous = previous_action_str == action_str if previous_action_str is not None else False
+    consecutive_same_action_count = (
+        previous_consecutive_same_action_count + 1 if same_action_as_previous else 1
+    )
+    made_progress = bool(done or step_reward > 0)
+    no_progress_streak = 0 if made_progress else (previous_no_progress_streak + 1)
+    repeated_action_loop = bool(same_action_as_previous and not made_progress)
+    return {
+        "same_action_as_previous": same_action_as_previous,
+        "consecutive_same_action_count": consecutive_same_action_count,
+        "no_progress_streak": no_progress_streak,
+        "repeated_action_loop": repeated_action_loop,
+    }
+
+
 def _extract_obs_text(obs: Dict[str, Any], logging_cfg: Dict[str, Any]) -> Dict[str, Any]:
+    diagnostics = _observation_diagnostics(obs)
     out: Dict[str, Any] = {
         "goal": obs.get("goal", ""),
         "url": obs.get("url", ""),
@@ -742,6 +782,7 @@ def _extract_obs_text(obs: Dict[str, Any], logging_cfg: Dict[str, Any]) -> Dict[
         "last_action_error": bool(obs.get("last_action_error", False)),
         "done": bool(obs.get("done", False)),
         "reward": obs.get("reward"),
+        "diagnostics": diagnostics,
     }
     if bool(logging_cfg.get("save_observation_text", True)):
         out["text"] = obs.get("text", "")
@@ -866,6 +907,14 @@ async def _collect_async(config: Dict[str, Any], paths: RunPaths) -> None:
                 action_errors = 0
                 steps_taken = 0
                 teacher_fallback_count = 0
+                root_only_observation_count = 0
+                sparse_observation_count = 0
+                repeated_action_loop_count = 0
+                max_consecutive_same_action_count = 0
+                max_no_progress_streak = 0
+                previous_action_str: Optional[str] = None
+                consecutive_same_action_count = 0
+                no_progress_streak = 0
                 teacher_conversation: list[Dict[str, str]] = []
                 episode_id = f"{run_id}:{task_name}:ep{episode_idx}"
 
@@ -898,6 +947,11 @@ async def _collect_async(config: Dict[str, Any], paths: RunPaths) -> None:
                             teacher_fallback_count += 1
 
                     pre_obs = _extract_obs_text(current_obs, logging_cfg)
+                    pre_obs_diag = dict(pre_obs.get("diagnostics", {}))
+                    if bool(pre_obs_diag.get("is_root_only", False)):
+                        root_only_observation_count += 1
+                    if bool(pre_obs_diag.get("is_sparse", False)):
+                        sparse_observation_count += 1
                     env_step_started = time.perf_counter()
                     step_msg = await _ws_send_recv(
                         ws,
@@ -924,6 +978,25 @@ async def _collect_async(config: Dict[str, Any], paths: RunPaths) -> None:
                     cum_reward += step_reward
                     steps_taken += 1
 
+                    step_diag = _step_diagnostics(
+                        action_str=action_str,
+                        previous_action_str=previous_action_str,
+                        previous_consecutive_same_action_count=consecutive_same_action_count,
+                        previous_no_progress_streak=no_progress_streak,
+                        step_reward=step_reward,
+                        done=done,
+                    )
+                    consecutive_same_action_count = int(step_diag["consecutive_same_action_count"])
+                    no_progress_streak = int(step_diag["no_progress_streak"])
+                    previous_action_str = action_str
+                    if bool(step_diag["repeated_action_loop"]):
+                        repeated_action_loop_count += 1
+                    max_consecutive_same_action_count = max(
+                        max_consecutive_same_action_count,
+                        consecutive_same_action_count,
+                    )
+                    max_no_progress_streak = max(max_no_progress_streak, no_progress_streak)
+
                     row = {
                         "run_id": run_id,
                         "timestamp": _utc_now_iso(),
@@ -941,6 +1014,14 @@ async def _collect_async(config: Dict[str, Any], paths: RunPaths) -> None:
                         "done": done,
                         "last_action_error": last_action_error,
                         "latency_ms": (step_ended - env_step_started) * 1000.0,
+                        "observation_actionable_node_count": int(pre_obs_diag.get("actionable_node_count", 0)),
+                        "observation_text_line_count": int(pre_obs_diag.get("text_line_count", 0)),
+                        "observation_is_root_only": bool(pre_obs_diag.get("is_root_only", False)),
+                        "observation_is_sparse": bool(pre_obs_diag.get("is_sparse", False)),
+                        "same_action_as_previous": bool(step_diag["same_action_as_previous"]),
+                        "consecutive_same_action_count": int(step_diag["consecutive_same_action_count"]),
+                        "no_progress_streak": int(step_diag["no_progress_streak"]),
+                        "repeated_action_loop": bool(step_diag["repeated_action_loop"]),
                     }
                     if teacher_meta is not None:
                         row["teacher_model"] = teacher_meta.get("model")
@@ -989,6 +1070,11 @@ async def _collect_async(config: Dict[str, Any], paths: RunPaths) -> None:
                     "success": bool(done and cum_reward > 0),
                     "final_done": done,
                     "action_error_count": action_errors,
+                    "root_only_observation_count": root_only_observation_count,
+                    "sparse_observation_count": sparse_observation_count,
+                    "repeated_action_loop_count": repeated_action_loop_count,
+                    "max_consecutive_same_action_count": max_consecutive_same_action_count,
+                    "max_no_progress_streak": max_no_progress_streak,
                 }
                 if policy_mode == "teacher":
                     summary["teacher_fallback_count"] = teacher_fallback_count

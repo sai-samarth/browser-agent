@@ -40,6 +40,14 @@ Observed fields include:
 - `teacher_latency_ms`
 - `teacher_usage`
 - `teacher_used_fallback`
+- `observation_actionable_node_count`
+- `observation_text_line_count`
+- `observation_is_root_only`
+- `observation_is_sparse`
+- `same_action_as_previous`
+- `consecutive_same_action_count`
+- `no_progress_streak`
+- `repeated_action_loop`
 
 The exact set can vary across older runs.
 
@@ -58,6 +66,11 @@ Observed summary-level fields include:
 - `final_done`
 - `action_error_count`
 - optional `teacher_fallback_count`
+- `root_only_observation_count`
+- `sparse_observation_count`
+- `repeated_action_loop_count`
+- `max_consecutive_same_action_count`
+- `max_no_progress_streak`
 
 ## Intended downstream exports
 
