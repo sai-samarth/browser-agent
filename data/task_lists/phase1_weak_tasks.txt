@@ -1,0 +1,5 @@
+identify-shape
+click-dialog-2
+click-widget
+navigate-tree
+read-table
