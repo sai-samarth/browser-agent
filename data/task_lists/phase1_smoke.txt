@@ -1,0 +1,8 @@
+click-test
+click-checkboxes
+enter-text
+focus-text
+phone-book
+read-table
+simple-arithmetic
+unicode-test

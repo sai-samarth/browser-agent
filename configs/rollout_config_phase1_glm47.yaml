@@ -1,0 +1,85 @@
+run:
+  run_name: "miniwob_phase1_glm47"
+  output_root: "data/rollouts"
+
+server:
+  base_url: "http://localhost:8000"
+  request_timeout_s: 60
+  max_message_size_mb: 100
+
+collection:
+  benchmark: "miniwob"
+  tasks:
+    - "click-test"
+  episodes_per_task: 5
+  episode_start_index: 0
+  max_steps_per_episode: 10
+  seed_mode: "episode_index"
+  seed_offset: 0
+  fixed_seed: 42
+  pass_task_name_in_reset: true
+  enforce_task_match: true
+
+policy:
+  mode: "teacher"
+  scripted_actions:
+    click-test:
+      - "click('13')"
+    default:
+      - "noop()"
+
+teacher_api:
+  enabled: true
+  base_url: "https://api.z.ai/api/coding/paas/v4"
+  model: "glm-4.7"
+  api_key_env_var: "ZAI_API_KEY"
+  request_timeout_s: 60
+  temperature: 1.0
+  top_p: 0.95
+  max_tokens: 4096
+  max_observation_chars: 120000
+  max_history_turns: 10
+  fallback_action: "noop()"
+  extra_body:
+    thinking:
+      type: "enabled"
+  system_prompt: |
+    You control a web browser through BrowserGym actions.
+    You must complete the given web task by interacting with the page.
+
+    Available actions (this server accepts these forms):
+    - noop() - Do nothing
+    - click(bid, button='left', modifiers=None) - Click by BrowserGym ID. Example modifier click: click('18', modifiers=['Control'])
+    - dblclick(bid) - Double-click an element
+    - hover(bid) - Move mouse over an element
+    - focus(bid) - Focus an element
+    - fill(bid, text) - Fill a text field
+    - clear(bid) - Clear a text field
+    - select_option(bid, option_text_or_list) - Select option(s) by visible text (not by bid)
+    - drag_and_drop(source_bid, target_bid) - Drag source element to target element
+    - scroll(delta_x, delta_y) - Scroll by pixel delta. Example: scroll(0, 300) for down, scroll(0, -300) for up
+    - goto(url) - Navigate to a URL
+
+    The page structure shows elements as: [bid] element_type 'element_text'
+    For example: [13] button 'Click Me!' means bid='13'
+
+    Reply using EXACTLY this format:
+    <think>
+    your step by step reasoning here
+    </think>
+    one BrowserGym action on a single line
+
+    Final constraints:
+    - In <think>, state the goal, evidence from the observation, and why this is the best next action.
+    - Include exactly one <think>...</think> block.
+    - Include exactly one BrowserGym action line after </think>.
+    - Take only one action per step. Never output multiple actions.
+    - Avoid repeating the same action if it previously made no progress.
+    - If the observation only shows a root page area and no actionable elements, prefer one minimal exploratory action over looping blindly.
+    - Do not include any additional text.
+
+logging:
+  save_observation_text: true
+  save_axtree_txt: false
+  save_pruned_html: true
+  save_teacher_debug: true
