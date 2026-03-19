@@ -6,7 +6,6 @@ Outputs:
 - reasoning+action chat JSONL (train/val)
 - manifest JSON with counts and filters
 - optional Hugging Face datasets save_to_disk directories
-- optional push_to_hub if repo IDs are supplied and auth is available
 """
 
 from __future__ import annotations
@@ -17,10 +16,26 @@ import json
 from pathlib import Path
 from typing import Any
 
-SYSTEM_PROMPT = """You are a browser agent operating through BrowserGym actions.
-Choose exactly one valid next action for the current state.
-Valid action families include noop, click, dblclick, hover, focus, fill, clear, select_option, drag_and_drop, scroll, and goto.
-Do not output explanations unless the format explicitly asks for a <think> block.
+import yaml
+
+FALLBACK_SYSTEM_PROMPT = """You control a web browser through BrowserGym actions.
+You must complete the given web task by interacting with the page.
+
+Available actions (this server accepts these forms):
+- noop() - Do nothing
+- click(bid, button='left', modifiers=None) - Click by BrowserGym ID. Example modifier click: click('18', modifiers=['Control'])
+- dblclick(bid) - Double-click an element
+- hover(bid) - Move mouse over an element
+- focus(bid) - Focus an element
+- fill(bid, text) - Fill a text field
+- clear(bid) - Clear a text field
+- select_option(bid, option_text_or_list) - Select option(s) by visible text (not by bid)
+- drag_and_drop(source_bid, target_bid) - Drag source element to target element
+- scroll(delta_x, delta_y) - Scroll by pixel delta. Example: scroll(0, 300) for down, scroll(0, -300) for up
+- goto(url) - Navigate to a URL
+
+The page structure shows elements as: [bid] element_type 'element_text'
+For example: [13] button 'Click Me!' means bid='13'
 """.strip()
 
 
@@ -41,6 +56,30 @@ def _load_jsonl(path: Path) -> list[dict[str, Any]]:
         if isinstance(obj, dict):
             rows.append(obj)
     return rows
+
+
+def _load_generation_system_prompt(rollout_dir: Path) -> str:
+    cfg_path = rollout_dir / "resolved_config.yaml"
+    if cfg_path.exists():
+        try:
+            cfg = yaml.safe_load(cfg_path.read_text())
+            if isinstance(cfg, dict):
+                teacher = cfg.get("teacher_api") or {}
+                if isinstance(teacher, dict):
+                    prompt = teacher.get("system_prompt")
+                    if isinstance(prompt, str) and prompt.strip():
+                        return prompt.strip()
+        except Exception:
+            pass
+    return FALLBACK_SYSTEM_PROMPT
+
+
+def _action_only_system_prompt(base_prompt: str) -> str:
+    return base_prompt.rstrip() + "\n\nFinal instruction for training target: output only the single next BrowserGym action on one line."
+
+
+def _reasoning_action_system_prompt(base_prompt: str) -> str:
+    return base_prompt.rstrip() + "\n\nReason step by step before outputting the single next BrowserGym action. Put reasoning inside exactly one <think>...</think> block, then output only the action on the next line."
 
 
 def _render_history(history_rows: list[dict[str, Any]], max_chars: int = 1200) -> str:
@@ -80,10 +119,10 @@ def _render_user_message(step: dict[str, Any], history_rows: list[dict[str, Any]
     )
 
 
-def _make_action_only_sample(step: dict[str, Any], history_rows: list[dict[str, Any]]) -> dict[str, Any]:
+def _make_action_only_sample(step: dict[str, Any], history_rows: list[dict[str, Any]], base_system_prompt: str) -> dict[str, Any]:
     return {
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": _action_only_system_prompt(base_system_prompt)},
             {"role": "user", "content": _render_user_message(step, history_rows)},
             {"role": "assistant", "content": str(step.get("action_str", "")).strip()},
         ],
@@ -100,7 +139,7 @@ def _make_action_only_sample(step: dict[str, Any], history_rows: list[dict[str, 
     }
 
 
-def _make_reasoning_action_sample(step: dict[str, Any], history_rows: list[dict[str, Any]]) -> dict[str, Any] | None:
+def _make_reasoning_action_sample(step: dict[str, Any], history_rows: list[dict[str, Any]], base_system_prompt: str) -> dict[str, Any] | None:
     reasoning = str(step.get("teacher_response_reasoning", "")).strip()
     action = str(step.get("action_str", "")).strip()
     if not reasoning:
@@ -108,7 +147,7 @@ def _make_reasoning_action_sample(step: dict[str, Any], history_rows: list[dict[
     assistant = f"<think>\n{reasoning}\n</think>\n{action}"
     return {
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT + "\nIf you reason, place it inside exactly one <think>...</think> block before the final action."},
+            {"role": "system", "content": _reasoning_action_system_prompt(base_system_prompt)},
             {"role": "user", "content": _render_user_message(step, history_rows)},
             {"role": "assistant", "content": assistant},
         ],
@@ -158,10 +197,7 @@ def _maybe_build_hf_dataset(out_dir: Path, variant: str, rows_by_split: dict[str
         from datasets import Dataset, DatasetDict
     except Exception:
         return None
-
-    ds_dict = {}
-    for split, rows in rows_by_split.items():
-        ds_dict[split] = Dataset.from_list(rows)
+    ds_dict = {split: Dataset.from_list(rows) for split, rows in rows_by_split.items()}
     dset = DatasetDict(ds_dict)
     target = out_dir / variant / "hf_dataset"
     dset.save_to_disk(str(target))
@@ -172,7 +208,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Export browser-agent rollouts into SFT-ready datasets.")
     parser.add_argument("--rollout-glob", default="miniwob_phase1_prod_local_qwen35_batch*_r*_*")
     parser.add_argument("--rollouts-root", type=Path, default=Path("data/rollouts"))
-    parser.add_argument("--output-dir", type=Path, default=Path("data/exports/phase1_sft_v1"))
+    parser.add_argument("--output-dir", type=Path, default=Path("data/exports/phase1_sft_v2"))
     parser.add_argument("--history-steps", type=int, default=2)
     parser.add_argument("--val-ratio", type=float, default=0.1)
     parser.add_argument("--split-by", choices=["run", "episode"], default="run")
@@ -182,8 +218,6 @@ def main() -> int:
     parser.add_argument("--max-sparse-observations", type=int, default=2)
     parser.add_argument("--max-root-only-observations", type=int, default=0)
     parser.add_argument("--max-fallback-count", type=int, default=0)
-    parser.add_argument("--hf-repo-id-action", default=None)
-    parser.add_argument("--hf-repo-id-reasoning", default=None)
     args = parser.parse_args()
 
     rollout_dirs = sorted(args.rollouts_root.glob(args.rollout_glob))
@@ -214,6 +248,7 @@ def main() -> int:
     }
 
     for rollout_dir in rollout_dirs:
+        base_system_prompt = _load_generation_system_prompt(rollout_dir)
         ep_rows = _load_jsonl(rollout_dir / "episode_summaries.jsonl")
         step_rows = _load_jsonl(rollout_dir / "trajectory_steps.jsonl")
         by_episode: dict[str, list[dict[str, Any]]] = {}
@@ -236,10 +271,10 @@ def main() -> int:
             for idx, step in enumerate(steps):
                 history = steps[max(0, idx - args.history_steps):idx]
                 split = _split_name(step, args)
-                action_sample = _make_action_only_sample(step, history)
+                action_sample = _make_action_only_sample(step, history, base_system_prompt)
                 action_rows[split].append(action_sample)
                 manifest["action_only"][split] += 1
-                reasoning_sample = _make_reasoning_action_sample(step, history)
+                reasoning_sample = _make_reasoning_action_sample(step, history, base_system_prompt)
                 if reasoning_sample is not None:
                     reasoning_rows[split].append(reasoning_sample)
                     manifest["reasoning_action"][split] += 1
@@ -262,7 +297,7 @@ def main() -> int:
 
     push_script = args.output_dir / "push_to_hub.py"
     push_script.write_text(
-        """from datasets import load_from_disk\nfrom pathlib import Path\nimport argparse\n\nparser = argparse.ArgumentParser()\nparser.add_argument('--dataset-dir', required=True)\nparser.add_argument('--repo-id', required=True)\nparser.add_argument('--private', action='store_true')\nargs = parser.parse_args()\n\nds = load_from_disk(args.dataset_dir)\nds.push_to_hub(args.repo_id, private=args.private)\nprint(f'pushed {args.dataset_dir} -> {args.repo_id}')\n""",
+        "from datasets import load_from_disk\nfrom pathlib import Path\nimport argparse\n\nparser = argparse.ArgumentParser()\nparser.add_argument('--dataset-dir', required=True)\nparser.add_argument('--repo-id', required=True)\nparser.add_argument('--private', action='store_true')\nargs = parser.parse_args()\n\nds = load_from_disk(args.dataset_dir)\nds.push_to_hub(args.repo_id, private=args.private)\nprint(f'pushed {args.dataset_dir} -> {args.repo_id}')\n",
         encoding="utf-8",
     )
 
