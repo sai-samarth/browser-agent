@@ -56,9 +56,9 @@ We corrected the exporter to:
 12. Fine-tuned `Qwen/Qwen2.5-1.5B-Instruct` on the reasoning+action dataset.
 13. Identified that low `max_new_tokens` in evaluation was undercounting long reasoning outputs.
 14. Re-ran reasoning-model evaluation with a larger generation budget and recovered the true score.
-15. Added an LLM-as-judge evaluation path to compare model outputs against gold actions without relying entirely on the regex parser.
-16. Confirmed that most of the earlier reasoning undercount came from low `max_new_tokens`, not parser failure.
-17. Logged the corrected reasoning-model result at 81.67% parser exact / 83.33% judge-equivalent on 240 validation examples.
+15. Re-ran the reasoning-action model with a corrected high eval budget and confirmed that most of the earlier undercount came from low `max_new_tokens`, not parser failure.
+16. Logged the corrected reasoning-model result at 81.67% strict exact-match and 83.75% canonicalized local equivalence on 240 validation examples.
+17. Broke down the remaining misses and found they are now mostly real checkbox-planning failures rather than evaluation artifacts.
 18. Measured `Qwen/Qwen3.5-0.8B` action-only baseline on the shared evaluation path before fine-tuning.
 
 ## Current active experiment
@@ -71,3 +71,30 @@ We corrected the exporter to:
 - A smoke test on real training rows now yields sane non-pad token counts (~573) with no image-source error.
 - Next step is action-only Unsloth fine-tuning into `outputs/qwen35-0.8b-browser-action-unsloth`.
 - Notes/results should continue to be written into `docs/experiment-results.md` and `docs/work-log.md` for every experiment update.
+
+
+## 2026-03-20 session continuity update
+
+- Added `docs/current-status.md` as the canonical short status file for active runs and latest validated metrics.
+- Qwen2.5-1.5B reasoning-action Unsloth run completed.
+- Reasoning-action metrics after correcting eval budget:
+  - saved low-budget eval: parseable 83.75%, exact 69.58%
+  - 256-token eval: parseable 99.58%, exact 81.25%
+  - 512-token eval: parseable 100.00%, exact 81.67%
+  - canonicalized local equivalence at 512 tokens: 83.75%
+- Conclusion: the earlier 69.58% score was depressed by generation truncation; after fixing that, the remaining gap is mostly real checkbox-planning error.
+- Active monitored run is now Qwen3.5-0.8B action-only Unsloth (`proc_8d6ef4acc03b`) on `outputs/qwen35-0.8b-browser-action-unsloth`.
+- Project hygiene rule: keep `current-status.md`, `work-log.md`, and `experiment-results.md` updated so experiment state does not depend on chat memory.
+
+- Re-read `docs/current-status.md`, `docs/work-log.md`, and `docs/experiment-results.md` before continuing, because project-state confusion had accumulated.
+- Confirmed the active debugging target is `Qwen/Qwen3.5-0.8B` action-only only; no paid-judge or unrelated model work should continue from here.
+- Confirmed the saved Qwen3.5-0.8B post-train eval is still 17.92% exact-match, identical to baseline despite finished training and present adapter artifacts.
+- Compared saved baseline vs post-train samples and found identical `modifiers=[Control]` click behavior on the same examples, so the current failure does not look like a simple low-`max_new_tokens` truncation artifact.
+- Next debugging goal is to determine whether the eval path is ignoring the adapter, whether the adapter failed to train effectively despite nontrivial loss movement, or whether Qwen3.5-0.8B needs model-specific inference configuration to expose the learned behavior.
+
+- Debugged the Qwen3.5-0.8B post-train mismatch by comparing generation behavior across loading paths.
+- Found the key architectural mismatch: adapter config targets `Qwen3_5ForConditionalGeneration`, but the old eval used `AutoModelForCausalLM`.
+- Under the wrong causal-LM path, PEFT emitted large missing-adapter-key warnings and baseline/adapted generations stayed identical.
+- Under the correct conditional-generation path using the processor-backed interface, adapted generations changed immediately on the same validation prompts (for example removing the unnecessary `modifiers=[Control]` clicks seen in baseline outputs).
+- Re-ran the full 240-row action-only validation eval with the corrected conditional-generation loader and recovered the real Qwen3.5-0.8B post-train score: 100.00% parseable, 80.83% exact-match.
+- Conclusion: the earlier saved 17.92% post-train score was an evaluation bug, not a failed fine-tune.

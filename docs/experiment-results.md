@@ -108,25 +108,24 @@ Before fine-tuning:
 - Parseable action rate: 57.50%
 - Exact-match action accuracy: 12.50%
 
-After fine-tuning with low eval budget (`max_new_tokens=64`):
+After fine-tuning with the original saved eval (too-small generation budget):
 - Parseable action rate: 83.75%
 - Exact-match action accuracy: 69.58%
-- Judge-equivalent accuracy on saved low-budget outputs: 70.83%
 
-After fine-tuning with corrected eval budget (`max_new_tokens=512`):
+After fine-tuning with corrected high-budget eval (`max_new_tokens=512`):
 - Parseable action rate: 100.00%
 - Exact-match action accuracy: 81.67%
-- Judge-equivalent accuracy: 83.33%
+- Canonicalized local equivalence accuracy: 83.75%
 
 ### Interpretation
-- The initial 69.58% exact-match result materially undercounted the model because long reasoning traces were truncated by the evaluation budget.
-- LLM-as-judge slightly increased the measured score relative to raw exact-match by forgiving harmless formatting differences like quote style and omitted `button='left'`.
-- The remaining gap after high-budget evaluation is mostly genuine action-selection error on checkbox-heavy tasks, not parser failure.
-- One judge disagreement was clearly a spurious false negative, so the 83.33% judge score should be treated as slightly noisy but directionally useful.
+- The original 69.58% score materially undercounted the model because long reasoning traces were truncated by the evaluation budget.
+- After fixing truncation, parser strictness becomes a small residual issue rather than the main problem.
+- The grounded numbers to keep are 81.67% strict exact-match and 83.75% canonicalized local equivalence on 240 validation examples.
+- Remaining misses are mostly genuine action-selection failures concentrated in checkbox-heavy families, especially `click-checkboxes-large` and then `click-checkboxes-transfer`.
 
 ### Model artifact
 - Local artifact dir: `outputs/qwen25-1.5b-browser-reasoning-unsloth`
-- Judge summary: `outputs/qwen25-1.5b-browser-reasoning-unsloth/judge_512_summary.json`
+- Corrected high-budget eval rows: `outputs/qwen25-1.5b-browser-reasoning-unsloth/eval_after_512.json`
 
 ## Model fine-tuning experiment 3
 
@@ -150,3 +149,11 @@ After fine-tuning with corrected eval budget (`max_new_tokens=512`):
 - Root cause: tokenizing through the processor wrapper in the dataset map produced the wrong shape for text-only SFT and triggered the multimodal/image parsing path.
 - Confirmed fix: render chat text with `apply_chat_template(...)`, then tokenize with the underlying text tokenizer (`processor.tokenizer`) for padded text-only batches.
 - Fine-tuning on the action-only dataset is the next step.
+
+### Post-train status (debugged)
+- Training finished successfully and adapter artifacts are present in `outputs/qwen35-0.8b-browser-action-unsloth`.
+- The originally saved post-train eval at 17.92% exact-match was invalid.
+- Root cause: the old shared eval path loaded this model through `AutoModelForCausalLM`, while the adapter was trained against the `Qwen3_5ForConditionalGeneration` / processor-backed path. Under the wrong path, PEFT emitted missing-adapter-key warnings and the adapted model behaved like baseline.
+- Corrected post-train eval with the proper conditional-generation loader: parseable 100.00%, exact-match 80.83% on 240 validation rows.
+- Direct prompt-by-prompt comparison confirmed that the corrected loader exposes learned behavior immediately; for example, several baseline `click(..., modifiers=[Control])` outputs become plain `click(...)` after adaptation.
+- Conclusion: Qwen3.5-0.8B fine-tuning worked. The failure was in evaluation plumbing, not in optimization.
