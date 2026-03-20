@@ -1,0 +1,24 @@
+{
+  "summary": {
+    "256": {
+      "parseable_rate": 0.9958333333333333,
+      "exact_match": 0.8125
+    },
+    "512": {
+      "parseable_rate": 1.0,
+      "exact_match": 0.8166666666666667
+    }
+  },
+  "num_changed_examples": 1,
+  "changed_examples": [
+    {
+      "idx": 136,
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "pred_256": null,
+      "pred_512": "click('21')",
+      "raw_256": "<think>\nI need to select all checkboxes that are not already selected: hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU. Looking at the current state:\n- 6oEM is checked \u2713\n- GjRKLXx is unchecked\n- YbRrgU is unchecked\n- ED is unchecked\n- fq8Euo is unchecked\n- AJKuIu is unchecked\n- Ds2bqV is unchecked\n- asBfZo is unchecked\n- eOObP is unchecked\n- FWYekc is unchecked\n- hahPx is unchecked\n\nSo I need to click on GjRKLXx first (bid 21), then check 6oEM (bid 18), then check YbRrgU (bid 24), then check eOObP (",
+      "raw_512": "<think>\nI need to select all checkboxes that are not already selected: hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU. Looking at the current state:\n- 6oEM is checked \u2713\n- GjRKLXx is unchecked\n- YbRrgU is unchecked\n- ED is unchecked\n- fq8Euo is unchecked\n- AJKuIu is unchecked\n- Ds2bqV is unchecked\n- asBfZo is unchecked\n- eOObP is unchecked\n- FWYekc is unchecked\n- hahPx is unchecked\n\nSo I need to click on GjRKLXx first (bid 21), then check 6oEM (bid 18), then check YbRrgU (bid 24), then check eOObP ("
+    }
+  ]
+}

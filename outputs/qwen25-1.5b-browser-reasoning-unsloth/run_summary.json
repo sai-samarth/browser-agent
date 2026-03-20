@@ -1,0 +1,12 @@
+{
+  "framework": "unsloth",
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dataset_dir": "data/exports/phase1_sft_v2/reasoning_action/hf_dataset",
+  "output_dir": "outputs/qwen25-1.5b-browser-reasoning-unsloth",
+  "train_rows": 6508,
+  "val_rows": 240,
+  "max_length": 3072,
+  "epochs": 1.0,
+  "load_in_4bit": true,
+  "quantization": "bitsandbytes 4bit NF4 + bf16 compute"
+}

@@ -49,3 +49,12 @@ We corrected the exporter to:
 - Canonicalized evaluation would likely improve apparent exact-match scores by treating formatting-equivalent actions as equal.
 - Weak task families worth separate tracking include `identify-shape`, `click-dialog-2`, and `navigate-tree`.
 - A proper Unsloth environment is the next infra task for follow-up SFT comparisons.
+
+
+## Follow-up fine-tuning work
+
+11. Established an Unsloth fine-tuning environment for small-model BrowserGym SFT comparisons.
+12. Fine-tuned `Qwen/Qwen2.5-1.5B-Instruct` on the reasoning+action dataset.
+13. Identified that low `max_new_tokens` in evaluation was undercounting long reasoning outputs.
+14. Re-ran reasoning-model evaluation with a larger generation budget and recovered the true score.
+15. Added an LLM-as-judge evaluation path to compare model outputs against gold actions without relying entirely on the regex parser.

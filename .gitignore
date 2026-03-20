@@ -43,3 +43,8 @@ dist/
 
 # Local planning metadata
 /.hermes/
+.tmp_*.py
+unsloth_compiled_cache/
+tmp_sync_placeholder/
+.hf_upload/
+outputs/*/checkpoint-*/

@@ -82,3 +82,45 @@ After fine-tuning:
 
 ### Model artifact
 - Local artifact dir: `outputs/qwen25-1.5b-browser-action-lora`
+
+
+## Model fine-tuning experiment 2
+
+### Setup
+- Base model: `Qwen/Qwen2.5-1.5B-Instruct`
+- Method: Unsloth LoRA
+- Dataset: `data/exports/phase1_sft_v2/reasoning_action/hf_dataset`
+- Epochs: 1
+- Max length: 3072
+- Batch size: 4
+- Grad accumulation: 4
+- Learning rate: 2e-4
+- Output dir: `outputs/qwen25-1.5b-browser-reasoning-unsloth`
+
+### Training result
+- Train runtime: ~2717s (~45.3 min)
+- Final train loss: 27.31
+- Final eval loss: 8.766
+
+### Before/after evaluation
+Validation set size: 240
+
+Before fine-tuning:
+- Parseable action rate: 57.50%
+- Exact-match action accuracy: 12.50%
+
+After fine-tuning with low eval budget (`max_new_tokens=64`):
+- Parseable action rate: 83.75%
+- Exact-match action accuracy: 69.58%
+
+After fine-tuning with corrected eval budget (`max_new_tokens=512`):
+- Parseable action rate: 100.00%
+- Exact-match action accuracy: 81.67%
+
+### Interpretation
+- The initial 69.58% exact-match result materially undercounted the model because long reasoning traces were truncated by the evaluation budget.
+- Once evaluation was rerun with a larger generation budget, the reasoning-action model slightly outperformed the previous action-only Unsloth baseline on raw exact-match.
+- Remaining errors after the high-budget rerun are mostly genuine action-choice failures on checkbox-heavy tasks, plus a small amount of canonicalization noise.
+
+### Model artifact
+- Local artifact dir: `outputs/qwen25-1.5b-browser-reasoning-unsloth`
