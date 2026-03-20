@@ -83,7 +83,6 @@ After fine-tuning:
 ### Model artifact
 - Local artifact dir: `outputs/qwen25-1.5b-browser-action-lora`
 
-
 ## Model fine-tuning experiment 2
 
 ### Setup
@@ -112,15 +111,42 @@ Before fine-tuning:
 After fine-tuning with low eval budget (`max_new_tokens=64`):
 - Parseable action rate: 83.75%
 - Exact-match action accuracy: 69.58%
+- Judge-equivalent accuracy on saved low-budget outputs: 70.83%
 
 After fine-tuning with corrected eval budget (`max_new_tokens=512`):
 - Parseable action rate: 100.00%
 - Exact-match action accuracy: 81.67%
+- Judge-equivalent accuracy: 83.33%
 
 ### Interpretation
 - The initial 69.58% exact-match result materially undercounted the model because long reasoning traces were truncated by the evaluation budget.
-- Once evaluation was rerun with a larger generation budget, the reasoning-action model slightly outperformed the previous action-only Unsloth baseline on raw exact-match.
-- Remaining errors after the high-budget rerun are mostly genuine action-choice failures on checkbox-heavy tasks, plus a small amount of canonicalization noise.
+- LLM-as-judge slightly increased the measured score relative to raw exact-match by forgiving harmless formatting differences like quote style and omitted `button='left'`.
+- The remaining gap after high-budget evaluation is mostly genuine action-selection error on checkbox-heavy tasks, not parser failure.
+- One judge disagreement was clearly a spurious false negative, so the 83.33% judge score should be treated as slightly noisy but directionally useful.
 
 ### Model artifact
 - Local artifact dir: `outputs/qwen25-1.5b-browser-reasoning-unsloth`
+- Judge summary: `outputs/qwen25-1.5b-browser-reasoning-unsloth/judge_512_summary.json`
+
+## Model fine-tuning experiment 3
+
+### Setup
+- Base model: `Qwen/Qwen3.5-0.8B`
+- Method: baseline eval only so far
+- Dataset: `data/exports/phase1_sft_v2/action_only/hf_dataset`
+- Validation rows: 240
+- Eval budget: `max_new_tokens=256`
+- Output dir: `outputs/qwen35-0.8b-browser-action-unsloth`
+
+### Baseline evaluation
+- Parseable action rate: 100.00%
+- Exact-match action accuracy: 17.92%
+
+### Initial interpretation
+- The model loads cleanly in the same 4-bit eval path used for the other comparisons.
+- Baseline exact-match is close to the Qwen2.5-1.5B action-only baseline despite the much smaller parameter count, making it a good next SFT candidate.
+- Failure analysis shows a strong bias toward unnecessary `modifiers=[Control]` clicks plus some real checkbox-target mistakes, which is a plausible SFT-fixable pattern.
+- The first Unsloth training attempt failed before training because `Qwen/Qwen3.5-0.8B` loads through a `Qwen3VLProcessor` path under Unsloth rather than a plain text tokenizer.
+- Root cause: tokenizing through the processor wrapper in the dataset map produced the wrong shape for text-only SFT and triggered the multimodal/image parsing path.
+- Confirmed fix: render chat text with `apply_chat_template(...)`, then tokenize with the underlying text tokenizer (`processor.tokenizer`) for padded text-only batches.
+- Fine-tuning on the action-only dataset is the next step.

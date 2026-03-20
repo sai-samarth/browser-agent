@@ -50,7 +50,6 @@ We corrected the exporter to:
 - Weak task families worth separate tracking include `identify-shape`, `click-dialog-2`, and `navigate-tree`.
 - A proper Unsloth environment is the next infra task for follow-up SFT comparisons.
 
-
 ## Follow-up fine-tuning work
 
 11. Established an Unsloth fine-tuning environment for small-model BrowserGym SFT comparisons.
@@ -58,3 +57,17 @@ We corrected the exporter to:
 13. Identified that low `max_new_tokens` in evaluation was undercounting long reasoning outputs.
 14. Re-ran reasoning-model evaluation with a larger generation budget and recovered the true score.
 15. Added an LLM-as-judge evaluation path to compare model outputs against gold actions without relying entirely on the regex parser.
+16. Confirmed that most of the earlier reasoning undercount came from low `max_new_tokens`, not parser failure.
+17. Logged the corrected reasoning-model result at 81.67% parser exact / 83.33% judge-equivalent on 240 validation examples.
+18. Measured `Qwen/Qwen3.5-0.8B` action-only baseline on the shared evaluation path before fine-tuning.
+
+## Current active experiment
+
+- `Qwen/Qwen3.5-0.8B` action-only baseline is complete at 17.92% exact-match on 240 validation examples with 100% parseable outputs.
+- Baseline failures are mostly structurally consistent: many unnecessary `modifiers=[Control]` clicks, some checkbox-task target mistakes, and a few harmless `button=left` omissions.
+- The first Qwen3.5 Unsloth training attempt failed before optimization because the `Qwen3VLProcessor` path interpreted the prompt string incorrectly during tokenization.
+- Root cause: using the processor call directly in the dataset map produced an incompatible batched/multimodal-shaped token structure for single-example text-only SFT.
+- Confirmed fix: render prompts with `apply_chat_template(...)`, then tokenize with the underlying text tokenizer (`processor.tokenizer`) rather than the VL processor wrapper.
+- A smoke test on real training rows now yields sane non-pad token counts (~573) with no image-source error.
+- Next step is action-only Unsloth fine-tuning into `outputs/qwen35-0.8b-browser-action-unsloth`.
+- Notes/results should continue to be written into `docs/experiment-results.md` and `docs/work-log.md` for every experiment update.
