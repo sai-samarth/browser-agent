@@ -151,3 +151,11 @@ We corrected the exporter to:
 - Process: `proc_f88e7d47f6b9`
 - Output dir: `outputs/qwen35-2b-browser-action-unsloth`
 - Next planned step after this run is to evaluate before/after and then decide whether to proceed to a 2B reinforced reasoning-action ablation.
+
+## 2026-03-21 Qwen3.5-2B action-only evaluation update
+
+- Confirmed the Qwen3.5-2B action-only Unsloth run (`proc_f88e7d47f6b9`) finished successfully.
+- Baseline before fine-tuning on 240 validation rows: parseable 100.00%, exact 58.33%.
+- Post-train eval with the corrected conditional-generation loader on the same split: parseable 100.00%, exact 87.50%.
+- This is a strong result and materially better than the Qwen3.5-0.8B action-only baseline and its post-train score.
+- Qwen3.5-2B appears to be the better next foundation for follow-up reasoning-action experiments.

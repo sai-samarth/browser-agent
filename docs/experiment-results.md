@@ -261,5 +261,18 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Qwen3.5-2B starts from a far stronger action-only baseline than Qwen3.5-0.8B.
 - This makes it the right next capacity ablation before deciding whether reasoning-action failure at 0.8B was mostly a size issue or mostly a format issue.
 
-### Status
-- Training launched and is currently running.
+### Training result
+- Training finished successfully.
+- Final train loss: 0.2382
+- Final eval loss: 0.04981
+
+### Before/after evaluation
+- Baseline: parseable 100.00%, exact-match 58.33% on 240 validation rows.
+- Post-train: parseable 100.00%, exact-match 87.50% on 240 validation rows.
+- Loader: `conditional_generation`
+- Eval budget: 256 generation tokens
+
+### Interpretation
+- Qwen3.5-2B starts from a much stronger base than 0.8B and fine-tunes cleanly on action-only.
+- This is now the strongest small-model action-only result in the current line of work.
+- Qwen3.5-2B looks like the right next base for a reinforced reasoning-action follow-up.
