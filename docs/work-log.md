@@ -170,3 +170,14 @@ We corrected the exporter to:
 - Dataset: `data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset`
 - Output dir: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
 - Post-train plan remains the same: evaluate under both the default reasoning prompt and the reinforced prompt to determine robustness versus prompt-conditionality.
+
+## 2026-03-21 Qwen3.5-2B reinforced reasoning-action relaunch
+
+- Investigated the failed first 2B reinforced reasoning run (`proc_26665d1b1e2d`).
+- Root event occurred at step 100/407 during the first eval/save boundary: CUDA driver error during evaluation, followed by open-file exhaustion (`Errno 24`) during cleanup.
+- Confirmed the shell soft open-file limit was only 1024.
+- Patched `scripts/train_unsloth_sft_generic.py` so training can disable mid-training eval and mid-training checkpoint saves.
+- Relaunched the 2B reinforced reasoning run with `ulimit -n 65535`, `--disable-eval`, and `--disable-mid-save`.
+- New process: `proc_fbc9350ab32c`
+- Output dir remains `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`.
+- Plan: let training finish without intermediate eval/save interruptions, then run the default-prompt and reinforced-prompt evals afterward.

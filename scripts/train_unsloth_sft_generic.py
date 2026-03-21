@@ -25,6 +25,8 @@ def main() -> int:
     parser.add_argument('--eval-steps', type=int, default=100)
     parser.add_argument('--save-steps', type=int, default=100)
     parser.add_argument('--logging-steps', type=int, default=10)
+    parser.add_argument('--disable-eval', action='store_true')
+    parser.add_argument('--disable-mid-save', action='store_true')
     parser.add_argument('--lora-r', type=int, default=16)
     parser.add_argument('--lora-alpha', type=int, default=32)
     parser.add_argument('--lora-dropout', type=float, default=0.05)
@@ -84,6 +86,9 @@ def main() -> int:
             'labels': torch.stack([x['labels'] for x in batch]),
         }
 
+    eval_strategy = 'no' if args.disable_eval or args.eval_steps <= 0 else 'steps'
+    save_strategy = 'no' if args.disable_mid_save or args.save_steps <= 0 else 'steps'
+
     training_args = TrainingArguments(
         output_dir=args.output_dir,
         per_device_train_batch_size=args.per_device_train_batch_size,
@@ -93,14 +98,14 @@ def main() -> int:
         num_train_epochs=args.num_train_epochs,
         bf16=True,
         logging_steps=args.logging_steps,
-        eval_strategy='steps',
-        eval_steps=args.eval_steps,
-        save_strategy='steps',
-        save_steps=args.save_steps,
-        save_total_limit=2,
-        load_best_model_at_end=True,
-        metric_for_best_model='eval_loss',
-        greater_is_better=False,
+        eval_strategy=eval_strategy,
+        eval_steps=args.eval_steps if eval_strategy == 'steps' else None,
+        save_strategy=save_strategy,
+        save_steps=args.save_steps if save_strategy == 'steps' else None,
+        save_total_limit=2 if save_strategy == 'steps' else None,
+        load_best_model_at_end=(eval_strategy == 'steps' and save_strategy == 'steps'),
+        metric_for_best_model='eval_loss' if eval_strategy == 'steps' else None,
+        greater_is_better=False if eval_strategy == 'steps' else None,
         report_to='none',
         gradient_checkpointing=True,
         seed=args.seed,

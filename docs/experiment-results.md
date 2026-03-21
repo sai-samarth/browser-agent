@@ -297,4 +297,6 @@ After fine-tuning with strict parser scoring and corrected loader:
 - This makes it a much better test of whether the reinforced prompt format can be internalized without extreme prompt fragility.
 
 ### Status
-- Training launched and is currently running.
+- The first training attempt failed at the first eval/checkpoint boundary around step 100 with a CUDA driver error followed by open-file exhaustion during cleanup.
+- To remove that failure path, the trainer was patched to allow disabling mid-training eval and save.
+- The run has been relaunched with raised open-file limit, no mid-training eval, and no mid-training checkpoint saves.
