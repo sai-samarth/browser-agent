@@ -131,3 +131,23 @@ We corrected the exporter to:
 - Process: `proc_b4a7b2545e93`
 - Output dir: `outputs/qwen35-0.8b-browser-reasoning-reinforced-unsloth`
 - Goal: test whether the model can internalize the final-action contract during training rather than depending on inference-time prompt scaffolding alone.
+
+## 2026-03-21 reinforced reasoning-action evaluation update
+
+- Evaluated the finished reinforced reasoning-action adapter on the original reasoning-action validation split using the corrected conditional-generation loader and a 1536-token generation budget.
+- Under the default reasoning prompt, the reinforced model was still poor: parseable 10.00%, exact 3.75% on 240 validation rows.
+- Under the reinforced evaluation prompt mirroring the training ablation structure (strict format rule, one-shot example, user reminder), the same adapter improved to parseable 92.92%, exact 66.67% on the same 240 rows.
+- This means the reinforced training run helped, but did not make the model robust to the plain default reasoning prompt.
+- The learned behavior is still strongly prompt-conditional: the model can emit useful executable actions when the prompt enforces the contract, but falls back to prose-style outputs under the default prompt.
+- A few reinforced-prompt outputs still skip the opening `<think>` while producing the right final action, so structure compliance improved a lot without becoming perfect.
+
+## 2026-03-21 Qwen3.5-2B action-only ablation launch
+
+- Verified the correct 2B identifier on HF / config load is `Qwen/Qwen3.5-2B`; it resolves to the same `Qwen3_5ForConditionalGeneration` family and uses the corrected conditional-generation eval path.
+- Measured a fresh action-only baseline for Qwen3.5-2B on 240 validation rows.
+- Baseline result: parseable 100.00%, exact 58.33%.
+- This is a large jump over the Qwen3.5-0.8B action-only baseline and makes 2B the right next capacity test.
+- Launched a fresh action-only Unsloth fine-tune for Qwen3.5-2B.
+- Process: `proc_f88e7d47f6b9`
+- Output dir: `outputs/qwen35-2b-browser-action-unsloth`
+- Next planned step after this run is to evaluate before/after and then decide whether to proceed to a 2B reinforced reasoning-action ablation.

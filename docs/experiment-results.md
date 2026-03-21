@@ -229,6 +229,37 @@ After fine-tuning with strict parser scoring and corrected loader:
 - A 40-row inference-only prompt-enforcement ablation improved that finished adapter from 7.50% parseable / 7.50% exact-match to 100.00% parseable / 67.50% exact-match under a reinforced prompt.
 - This suggests the model retains useful task knowledge but is highly sensitive to prompt format.
 
+### Post-train evaluation
+- Default reasoning prompt, corrected conditional-generation loader, 1536-token budget: parseable 10.00%, exact-match 3.75% on 240 validation rows.
+- Reinforced evaluation prompt with strict format rule + one-shot example + user reminder, same loader and same 1536-token budget: parseable 92.92%, exact-match 66.67% on 240 validation rows.
+
+### Interpretation
+- The reinforced training run did not make the model robust under the default reasoning prompt.
+- It did, however, preserve a large amount of useful behavior when the inference prompt reinforces the final-action contract.
+- Compared with the prior reasoning-action run, this ablation demonstrates that prompt-format alignment matters at both train time and inference time, but train-time reinforcement alone was not sufficient to remove prompt sensitivity.
+- The model remains strongly conditional on explicit output-shape scaffolding.
+- A few reinforced-prompt outputs still omit the opening `<think>` while emitting the correct final action, so the model is learning the action-line requirement more strongly than the full XML-like wrapper.
+
+## Model fine-tuning experiment 6
+
+### Setup
+- Base model: `Qwen/Qwen3.5-2B`
+- Dataset: `data/exports/phase1_sft_v2/action_only/hf_dataset`
+- Method: Unsloth LoRA
+- Output dir: `outputs/qwen35-2b-browser-action-unsloth`
+- Max length: 2048
+- Process: `proc_f88e7d47f6b9`
+
+### Baseline evaluation
+- Parseable action rate: 100.00%
+- Exact-match action accuracy: 58.33%
+- Loader: `conditional_generation`
+- Validation rows: 240
+- Eval budget: 256 generation tokens
+
+### Interpretation
+- Qwen3.5-2B starts from a far stronger action-only baseline than Qwen3.5-0.8B.
+- This makes it the right next capacity ablation before deciding whether reasoning-action failure at 0.8B was mostly a size issue or mostly a format issue.
+
 ### Status
 - Training launched and is currently running.
-- Post-train evaluation should compare both the default reasoning prompt and the reinforced prompt to see whether the new dataset makes the behavior more robust.
