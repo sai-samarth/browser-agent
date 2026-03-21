@@ -159,3 +159,14 @@ We corrected the exporter to:
 - Post-train eval with the corrected conditional-generation loader on the same split: parseable 100.00%, exact 87.50%.
 - This is a strong result and materially better than the Qwen3.5-0.8B action-only baseline and its post-train score.
 - Qwen3.5-2B appears to be the better next foundation for follow-up reasoning-action experiments.
+
+## 2026-03-21 Qwen3.5-2B reinforced reasoning-action launch
+
+- Measured a fresh Qwen3.5-2B baseline on the original reasoning-action validation split with the default prompt and corrected conditional-generation loader.
+- Baseline result at 1536 generation tokens: parseable 96.67%, exact 53.33% on 240 validation rows.
+- This is a major improvement over the 0.8B reasoning baseline and strongly suggests capacity was a real limiting factor.
+- Launched a fresh reinforced reasoning-action Unsloth fine-tune for Qwen3.5-2B using the v3 reinforced dataset.
+- Process: `proc_26665d1b1e2d`
+- Dataset: `data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset`
+- Output dir: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
+- Post-train plan remains the same: evaluate under both the default reasoning prompt and the reinforced prompt to determine robustness versus prompt-conditionality.

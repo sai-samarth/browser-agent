@@ -276,3 +276,25 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Qwen3.5-2B starts from a much stronger base than 0.8B and fine-tunes cleanly on action-only.
 - This is now the strongest small-model action-only result in the current line of work.
 - Qwen3.5-2B looks like the right next base for a reinforced reasoning-action follow-up.
+
+## Model fine-tuning experiment 7
+
+### Setup
+- Base model: `Qwen/Qwen3.5-2B`
+- Source eval baseline: `data/exports/phase1_sft_v2/reasoning_action/hf_dataset`
+- Training dataset: `data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset`
+- Method: Unsloth LoRA
+- Output dir: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
+- Max length: 4096
+- Process: `proc_26665d1b1e2d`
+
+### Baseline evaluation
+- Default reasoning prompt baseline at 1536 generation tokens: parseable 96.67%, exact-match 53.33% on 240 validation rows.
+- Loader: `conditional_generation`
+
+### Interpretation
+- Qwen3.5-2B starts from a far stronger reasoning baseline than 0.8B, suggesting capacity likely matters materially for reasoning-action behavior.
+- This makes it a much better test of whether the reinforced prompt format can be internalized without extreme prompt fragility.
+
+### Status
+- Training launched and is currently running.
