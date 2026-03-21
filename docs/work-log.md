@@ -98,3 +98,36 @@ We corrected the exporter to:
 - Under the correct conditional-generation path using the processor-backed interface, adapted generations changed immediately on the same validation prompts (for example removing the unnecessary `modifiers=[Control]` clicks seen in baseline outputs).
 - Re-ran the full 240-row action-only validation eval with the corrected conditional-generation loader and recovered the real Qwen3.5-0.8B post-train score: 100.00% parseable, 80.83% exact-match.
 - Conclusion: the earlier saved 17.92% post-train score was an evaluation bug, not a failed fine-tune.
+
+- Fixed the shared `scripts/eval_action_model.py` so it chooses the proper loader path: causal-LM for standard text models and conditional-generation / processor-backed loading for `Qwen/Qwen3.5-0.8B`.
+- Validated the fixed shared eval on smoke runs for both Qwen2.5-1.5B and Qwen3.5-0.8B; the Qwen3.5 path now reports `loader=conditional_generation` and no longer falls back to the broken causal-LM adapter path.
+- Measured `Qwen/Qwen3.5-0.8B` on the reasoning-action validation split with the fixed shared eval: parseable 100.00%, exact 10.83% on 240 rows at `max_new_tokens=512`.
+- Started Qwen3.5-0.8B reasoning-action Unsloth fine-tune on `outputs/qwen35-0.8b-browser-reasoning-unsloth` with process `proc_d740bb1d5398`, `max_length=4096`, 1 epoch, LoRA, and 4-bit NF4.
+
+## 2026-03-21 reasoning-action completion update
+
+- Confirmed the Qwen3.5-0.8B reasoning-action Unsloth run (`proc_d740bb1d5398`) finished successfully; `checkpoint-407` and final adapter artifacts are present under `outputs/qwen35-0.8b-browser-reasoning-unsloth`.
+- Re-ran post-train evaluation with the corrected shared eval path at both 512 and 1536 generation tokens using the same conditional-generation / processor-backed loader as the baseline.
+- Result stayed unchanged on 240 validation rows: parseable 11.25%, exact 8.75%.
+- This rules out low `max_new_tokens` truncation as the main reason for the weak strict parser score.
+- Inspected raw generations and found the dominant failure mode is still prose-only answers such as “I need to click the submit button” without the final BrowserGym action string like `click('18')`.
+- Switched off OpenRouter judging because the key hit spending limits.
+- Ran a full local semantic judge pass with the local `Qwen3.5-9B-judge` server on all 240 rows; estimated action-equivalent rate was 60.00%.
+- Practical conclusion: the reasoning-action run completed, but it currently degrades executable output formatting badly enough that higher generation budget does not recover the strict metric.
+
+- Ran a 40-row prompt-enforcement ablation on the completed Qwen3.5-0.8B reasoning-action adapter.
+- Added a stronger system rule plus a one-shot example showing `<think>...</think>` followed by a final BrowserGym action line.
+- The same adapter improved from parseable/exact 7.50% / 7.50% on that sample to 100.00% parseable and 67.50% exact-match under the reinforced prompt.
+- This is strong evidence that the model still contains usable action knowledge and that the dominant failure is prompt-sensitive output formatting.
+- Saved comparison artifact: `outputs/qwen35-0.8b-browser-reasoning-unsloth/prompt_enforcement_ablation_40.json`
+
+## 2026-03-21 reinforced reasoning-action ablation launch
+
+- Built a fresh dataset variant at `data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset` from the original reasoning-action export.
+- The reinforced variant adds: a stricter system output contract, a one-shot worked example, and a user-side format reminder while preserving the original reasoning+action targets.
+- Inspecting a sample confirms the message layout is now: system, example user, example assistant, real user with reminder, real assistant target.
+- This design was chosen because the inference-only prompt-enforcement ablation on the completed reasoning adapter recovered a large amount of structure-sensitive performance.
+- Launched a fresh Qwen3.5-0.8B Unsloth run on the reinforced dataset.
+- Process: `proc_b4a7b2545e93`
+- Output dir: `outputs/qwen35-0.8b-browser-reasoning-reinforced-unsloth`
+- Goal: test whether the model can internalize the final-action contract during training rather than depending on inference-time prompt scaffolding alone.

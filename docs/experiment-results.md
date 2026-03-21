@@ -157,3 +157,78 @@ After fine-tuning with corrected high-budget eval (`max_new_tokens=512`):
 - Corrected post-train eval with the proper conditional-generation loader: parseable 100.00%, exact-match 80.83% on 240 validation rows.
 - Direct prompt-by-prompt comparison confirmed that the corrected loader exposes learned behavior immediately; for example, several baseline `click(..., modifiers=[Control])` outputs become plain `click(...)` after adaptation.
 - Conclusion: Qwen3.5-0.8B fine-tuning worked. The failure was in evaluation plumbing, not in optimization.
+
+
+## Model fine-tuning experiment 4
+
+### Setup
+- Base model: `Qwen/Qwen3.5-0.8B`
+- Dataset: `data/exports/phase1_sft_v2/reasoning_action/hf_dataset`
+- Method: Unsloth LoRA
+- Output dir: `outputs/qwen35-0.8b-browser-reasoning-unsloth`
+- Max length: 4096
+- Validation rows: 240
+
+### Training result
+- Training finished successfully.
+- Final step: 407 / 407
+- Best checkpoint: `outputs/qwen35-0.8b-browser-reasoning-unsloth/checkpoint-400`
+- Best eval loss: 0.03082
+- Final logged train loss near the end: 0.19615
+
+### Before/after evaluation
+Before fine-tuning:
+- Parseable action rate: 100.00%
+- Exact-match action accuracy: 10.83%
+- Loader: `conditional_generation`
+- Eval budget: 512 generation tokens
+
+After fine-tuning with strict parser scoring and corrected loader:
+- At 512 generation tokens: parseable 11.25%, exact-match 8.75%
+- At 1536 generation tokens: parseable 11.25%, exact-match 8.75%
+- Loader: `conditional_generation`
+
+### Semantic judging
+- OpenRouter judging was stopped because the key hit spending limits.
+- A full local judge pass with the local `Qwen3.5-9B-judge` server on the 1536-token eval file estimated 60.00% action-equivalent outputs.
+- This suggests many outputs are semantically near the right action but are not emitted in valid BrowserGym action syntax.
+
+### Interpretation
+- Increasing `max_new_tokens` from 512 to 1536 did not recover the parser score, so truncation is not the primary cause of failure here.
+- The dominant post-train failure is format collapse: the model often explains the next action in prose but omits the final executable BrowserGym action line.
+- Because baseline and post-train evals both used the corrected conditional-generation loader, this does not look like the old Qwen3.5 action-only eval-path bug.
+- The current reasoning-action adapter therefore appears to have learned partial task semantics more than the output contract, making it weak for one-step action execution.
+- Immediate next work should focus on enforcing final-action emission and inspecting the reasoning-action export/format, not on scaling this run.
+
+### Prompt-enforcement ablation
+- A 40-row inference-only ablation tested whether prompt shaping alone could recover executable outputs from the reasoning-action adapter.
+- Baseline on that 40-row sample: parseable 7.50%, exact-match 7.50%.
+- Reinforced prompt with a strict format rule plus one worked `<think>...</think>` → final action example: parseable 100.00%, exact-match 67.50%.
+- This indicates the adapter's internal task knowledge is much better than the default strict eval score suggests; the main bottleneck is prompt-sensitive action-format emission.
+- Artifact: `outputs/qwen35-0.8b-browser-reasoning-unsloth/prompt_enforcement_ablation_40.json`
+
+## Model fine-tuning experiment 5
+
+### Setup
+- Base model: `Qwen/Qwen3.5-0.8B`
+- Source dataset: `data/exports/phase1_sft_v2/reasoning_action/hf_dataset`
+- New dataset variant: `data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset`
+- Method: Unsloth LoRA
+- Output dir: `outputs/qwen35-0.8b-browser-reasoning-reinforced-unsloth`
+- Max length: 4096
+- Process: `proc_b4a7b2545e93`
+
+### Dataset change
+- Added a stricter reasoning-action system instruction requiring exactly one `<think>...</think>` block and a final non-empty BrowserGym action line.
+- Added one worked in-context example showing the required reasoning-to-action shape.
+- Added a short user-side reminder repeating the exact output format.
+- Preserved the original assistant targets so the ablation isolates prompt-format changes rather than target rewriting.
+
+### Why this ablation exists
+- The prior Qwen3.5-0.8B reasoning-action run finished training but mostly emitted prose-only answers at inference time.
+- A 40-row inference-only prompt-enforcement ablation improved that finished adapter from 7.50% parseable / 7.50% exact-match to 100.00% parseable / 67.50% exact-match under a reinforced prompt.
+- This suggests the model retains useful task knowledge but is highly sensitive to prompt format.
+
+### Status
+- Training launched and is currently running.
+- Post-train evaluation should compare both the default reasoning prompt and the reinforced prompt to see whether the new dataset makes the behavior more robust.
