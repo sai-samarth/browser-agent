@@ -70,6 +70,9 @@ class MultiTurnGRPOConfig:
     use_vllm: bool = False
     rollout_max_steps: int = 10
     rollout_generation_max_new_tokens: int = 48
+    rollout_do_sample: bool = True
+    rollout_temperature: float = 0.8
+    rollout_top_p: float = 0.95
     final_success_reward: float = 2.0
     env_reward_scale: float = 1.0
     parse_valid_reward: float = 0.05
@@ -141,6 +144,9 @@ class BrowserGymWSClient:
                         current_obs=current_obs,
                         history_rows=history_rows,
                         max_new_tokens=config.rollout_generation_max_new_tokens,
+                        do_sample=config.rollout_do_sample,
+                        temperature=config.rollout_temperature,
+                        top_p=config.rollout_top_p,
                     )
                 raw_completions.append(completion_text)
                 parsed_action = parse_action(completion_text)
@@ -337,7 +343,7 @@ def load_model_and_tokenizer(config: MultiTurnGRPOConfig):
     return model, tokenizer
 
 
-def generate_completion_text(*, model, tokenizer, system_prompt: str, task_name: str, current_obs: dict[str, Any], history_rows: list[dict[str, Any]], max_new_tokens: int) -> str:
+def generate_completion_text(*, model, tokenizer, system_prompt: str, task_name: str, current_obs: dict[str, Any], history_rows: list[dict[str, Any]], max_new_tokens: int, do_sample: bool, temperature: float, top_p: float) -> str:
     user_message = render_user_message(task_name, current_obs, history_rows)
     prompt = tokenizer.apply_chat_template(
         [
@@ -354,7 +360,9 @@ def generate_completion_text(*, model, tokenizer, system_prompt: str, task_name:
         output = model.generate(
             **inputs,
             max_new_tokens=max_new_tokens,
-            do_sample=False,
+            do_sample=do_sample,
+            temperature=temperature if do_sample else None,
+            top_p=top_p if do_sample else None,
             eos_token_id=tokenizer.eos_token_id,
             pad_token_id=tokenizer.pad_token_id,
         )

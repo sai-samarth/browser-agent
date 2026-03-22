@@ -100,3 +100,23 @@ Why Phase A exists:
 - the earlier full 30-task one-step GRPO run completed, but too many prompts got only parseability reward and zero reward variance
 - multi-turn RL is intended to credit useful early actions that only pay off several steps later
 - the narrow task subset keeps rollout behavior inspectable before scaling up
+
+
+## Phase A.2 findings
+
+Phase A.2 changed multi-turn rollout generation so later steps sample instead of decoding greedily.
+
+Observed effect:
+- rollout diversity improved immediately
+- the first logged batch showed strong reward variance (`reward_std≈2.49`)
+- later batches still often collapsed to tied rewards, meaning the curriculum is still partially too easy
+
+Task-level replay on the Phase A.2 seed slice:
+- `click-option`: 3/4 successes, avg reward 2.32
+- `enter-text-2`: 3/4 successes, avg reward 2.315
+- `enter-password`: 1/4 successes, avg reward 0.85
+
+Current recommendation:
+- do not scale back to the full 30-task phase-1 set yet
+- use a harder narrow curriculum next
+- prioritize `enter-password`, which is currently the clearest remaining source of useful RL signal

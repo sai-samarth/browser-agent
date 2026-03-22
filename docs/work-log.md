@@ -218,3 +218,17 @@ We corrected the exporter to:
 - Added config `configs/grpo_multiturn_phase_a_qwen25_action_adapter.yaml` for the first multi-turn RL validation run.
 - Confirmed the local multitask BrowserGym server is healthy and the Phase A dry-run prompt construction succeeded on 12 prompt rows.
 - Launched the first multi-turn Phase A run in the background using the Qwen2.5-1.5B action-only SFT adapter.
+
+## 2026-03-22 multi-turn RL Phase A.2 analysis
+
+- Patched `scripts/train_browsergym_grpo_multiturn.py` so follow-up rollout steps sample instead of decoding greedily.
+- Phase A.2 used the Qwen2.5-1.5B action-only SFT adapter with tasks `click-option`, `enter-text-2`, and `enter-password`.
+- This improved rollout diversity immediately: the first logged GRPO batch showed `reward_std≈2.49`, much better than the earlier deterministic follow-up behavior.
+- However, reward variance still collapsed on many later batches, so sampling fixed one bottleneck without fully solving curriculum saturation.
+- Task-level replay analysis over the Phase A.2 seed slice showed:
+  - `click-option`: 3/4 successes, avg reward 2.32, avg steps 1.75
+  - `enter-text-2`: 3/4 successes, avg reward 2.315, avg steps 2.25
+  - `enter-password`: 1/4 successes, avg reward 0.85, avg steps 2.5
+- Interpretation: `click-option` and `enter-text-2` are already close to saturation under the current setup, while `enter-password` remains hard enough to provide meaningful RL headroom.
+- Concrete failure mode for `enter-password`: the model often fills only the second field and clicks submit, or rewrites the second field, instead of reliably filling both password boxes before submit.
+- Current recommendation is not to scale back to all 30 tasks yet. The next RL curriculum should stay narrow and harder, centered on `enter-password` plus one or two medium-difficulty tasks.

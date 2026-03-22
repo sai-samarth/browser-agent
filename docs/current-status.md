@@ -35,8 +35,8 @@ Last updated: 2026-03-22T04:05:30Z
 
 ## RL next phase
 - One-step GRPO was validated as infrastructure but the broad 30-task phase-1 run mostly collapsed to parseability-only reward.
-- The next RL path is now Phase A multi-turn GRPO using the Qwen2.5-1.5B action-only SFT adapter as the warm start.
-- Multi-turn Phase A uses up to 10 browser steps per rollout, stops early on success, and applies rollout-level reward rather than only one-step reward.
-- Initial Phase A task subset is `click-button`, `click-option`, and `enter-text-2` so reward behavior stays interpretable before scaling up.
-- Active script: `scripts/train_browsergym_grpo_multiturn.py`
-- Active config: `configs/grpo_multiturn_phase_a_qwen25_action_adapter.yaml`
+- Multi-turn Phase A proved the rollout-level reward path works, but still collapsed often because the curriculum remained too easy or too deterministic.
+- Multi-turn Phase A.2 added sampled follow-up actions (`temperature=0.8`, `top_p=0.95`) and switched the task mix to `click-option`, `enter-text-2`, and `enter-password`.
+- Phase A.2 produced clearly better early reward variance (`reward_std≈2.49` on the first logged batch), confirming that sampled later steps improve rollout diversity.
+- Task-level inspection shows `click-option` and `enter-text-2` are now mostly solved and are starting to saturate, while `enter-password` remains the hardest and currently provides the cleanest room for improvement.
+- Recommended next RL curriculum: keep a harder narrow subset centered on `enter-password` plus one or two medium tasks, rather than scaling back to all 30 tasks yet.
