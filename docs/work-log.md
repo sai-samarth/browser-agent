@@ -232,3 +232,13 @@ We corrected the exporter to:
 - Interpretation: `click-option` and `enter-text-2` are already close to saturation under the current setup, while `enter-password` remains hard enough to provide meaningful RL headroom.
 - Concrete failure mode for `enter-password`: the model often fills only the second field and clicks submit, or rewrites the second field, instead of reliably filling both password boxes before submit.
 - Current recommendation is not to scale back to all 30 tasks yet. The next RL curriculum should stay narrow and harder, centered on `enter-password` plus one or two medium-difficulty tasks.
+
+## 2026-03-22 multi-turn RL Phase B launch
+
+- After inspecting Phase A.2, kept the recommendation to stay narrow but widened the curriculum moderately instead of jumping back to all 30 tasks.
+- Added a Phase B config with 10 seed rollouts per task so we get more outcome diversity and more chances to observe positive trajectories.
+- Phase B task mix is `enter-password`, `click-option`, `enter-text-2`, `click-test-2`, and `click-checkboxes-transfer`.
+- Rationale: keep `enter-password` as the hardest and most informative task, retain two medium tasks that already showed useful signal, and add two additional tasks to broaden the rollout distribution without going fully broad again.
+- Increased later-step rollout sampling slightly to `temperature=0.9` while keeping `top_p=0.95`.
+- Added config `configs/grpo_multiturn_phase_b_qwen25_action_adapter.yaml` and confirmed the dry-run prompt construction on 50 prompt rows succeeded under the multitask BrowserGym server.
+- Launched the Phase B multi-turn RL run in the background with process `proc_0cec13e7c8f4`.

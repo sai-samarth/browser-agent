@@ -120,3 +120,28 @@ Current recommendation:
 - do not scale back to the full 30-task phase-1 set yet
 - use a harder narrow curriculum next
 - prioritize `enter-password`, which is currently the clearest remaining source of useful RL signal
+
+
+## Phase B
+
+Phase B widens the multi-turn curriculum while staying far narrower than the full 30-task phase-1 set.
+
+Config:
+- `configs/grpo_multiturn_phase_b_qwen25_action_adapter.yaml`
+
+Task mix:
+- `enter-password`
+- `click-option`
+- `enter-text-2`
+- `click-test-2`
+- `click-checkboxes-transfer`
+
+Key changes versus Phase A.2:
+- 10 seed rollouts per task instead of 4
+- 5 tasks instead of 3
+- slightly higher later-step rollout sampling temperature (`0.9`)
+
+Why this exists:
+- Phase A.2 showed that sampled later rollout steps improve reward variance
+- but two of the three tasks were already close to saturation
+- Phase B keeps the curriculum manageable while increasing both task diversity and the chance of positive-but-nontrivial outcomes
