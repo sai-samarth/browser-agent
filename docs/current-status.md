@@ -25,3 +25,10 @@ Last updated: 2026-03-22T04:05:30Z
 ## Operating rule
 - Only use unpaid local models or free models unless explicit approval is given for paid model/API use.
 - Update `docs/current-status.md`, `docs/work-log.md`, and `docs/experiment-results.md` whenever runs finish or metrics materially change.
+
+## RL infrastructure status
+- Added a local GRPO training path at `scripts/train_browsergym_grpo.py` for one-step BrowserGym action models.
+- Added smoke config `configs/grpo_smoke_qwen25_1p5b_click-test.yaml` and runbook `docs/grpo-local.md`.
+- Verified end-to-end on local BrowserGym websocket env using a dedicated RL venv at `/home/saisamarth/venvs/browser-agent-rl`.
+- Smoke run used `Qwen/Qwen2.5-1.5B-Instruct` with LoRA on `click-test` and completed successfully, saving outputs under `outputs/qwen25-1.5b-browser-action-grpo-smoke`.
+- Because `click-test` is trivial, both sampled generations solved the task and reward variance collapsed to zero, so this should be treated as an infrastructure smoke test rather than evidence of useful RL learning.

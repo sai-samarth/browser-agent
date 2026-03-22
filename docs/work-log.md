@@ -194,3 +194,16 @@ We corrected the exporter to:
 - A smaller residual bucket used near-correct but non-canonical syntax such as `click(bid='18')` (14 rows), plus a few genuine action-selection mistakes on checkbox-heavy tasks.
 - Worst default-prompt task families by exact-match included `multi-layouts`, `click-tab`, `click-test-2`, `focus-text-2`, and `read-table`, all of which fell to 0 exact on their sampled validation rows.
 - Current read: at 2B scale, reinforced reasoning training can preserve strong behavior when the inference prompt enforces the contract, but it still does not internalize a stable default-prompt action format.
+
+## 2026-03-22 local BrowserGym GRPO integration
+
+- Inspected the Liquid4All browser-control GRPO example and adapted the core idea into a local-only path that fits this repo's existing one-step BrowserGym workflow.
+- Chose not to depend on Modal or Python-side `openenv` / `browsergym` packages for the first smoke path; instead, the new trainer reuses the existing OpenEnv websocket server protocol already used by `scripts/collect_rollouts.py`.
+- Added `scripts/train_browsergym_grpo.py`, which builds static one-step prompt rows from real BrowserGym reset observations and trains a GRPO policy with environment-backed reward functions.
+- The reward path resets the same task+seed, executes the model's predicted BrowserGym action, and scores parseability plus environment reward / success bonus / action-error penalty.
+- Added `configs/grpo_smoke_qwen25_1p5b_click-test.yaml` for a tiny local smoke run and `docs/grpo-local.md` documenting setup and usage.
+- Updated `pyproject.toml` with optional RL dependency groups so the RL stack can live in a dedicated environment instead of contaminating the lighter default workflow.
+- Created a dedicated RL venv at `/home/saisamarth/venvs/browser-agent-rl` with pinned `trl==0.25.1`, `transformers==4.57.3`, CUDA `torch==2.5.1+cu124`, and the supporting TRL dependencies required for GRPO imports.
+- Started a local `browsergym-env:latest` container pinned to MiniWoB `click-test` on port 8000 and verified reward-function dry-run sanity.
+- Ran the full smoke training command successfully with `Qwen/Qwen2.5-1.5B-Instruct` + LoRA; GRPO completed 2 optimizer steps and saved outputs to `outputs/qwen25-1.5b-browser-action-grpo-smoke`.
+- Observed caveat: `click-test` is too easy for a meaningful RL signal here, so sampled completions all got the same reward and `reward_std` collapsed to 0.0. The pipeline is functioning, but the next real RL run should use a harder task family or broader prompt slice to get non-zero advantage signal.

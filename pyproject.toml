@@ -1,7 +1,7 @@
 [project]
 name = "browser-agent"
 version = "0.1.0"
-description = "BrowserGym MiniWoB trace generation, analysis, and dataset preparation for browser-use model training"
+description = "BrowserGym MiniWoB trace generation, analysis, dataset preparation, and local RL training for browser-use model experiments"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -12,3 +12,21 @@ dependencies = [
     "requests>=2.32.5",
     "websockets>=15.0.1",
 ]
+
+[project.optional-dependencies]
+rl = [
+    "accelerate>=1.6.0",
+    "bitsandbytes>=0.47.0",
+    "llm-blender>=0.0.2",
+    "mergekit>=0.1.4",
+    "peft>=0.17.0",
+    "torch>=2.5.0",
+    "transformers>=4.57.3,<4.58.0",
+    "trl>=0.25.1",
+]
+rl-vllm = [
+    "vllm>=0.10.0",
+]
+
+[tool.setuptools]
+py-modules = []
