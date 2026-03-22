@@ -207,3 +207,14 @@ We corrected the exporter to:
 - Started a local `browsergym-env:latest` container pinned to MiniWoB `click-test` on port 8000 and verified reward-function dry-run sanity.
 - Ran the full smoke training command successfully with `Qwen/Qwen2.5-1.5B-Instruct` + LoRA; GRPO completed 2 optimizer steps and saved outputs to `outputs/qwen25-1.5b-browser-action-grpo-smoke`.
 - Observed caveat: `click-test` is too easy for a meaningful RL signal here, so sampled completions all got the same reward and `reward_std` collapsed to 0.0. The pipeline is functioning, but the next real RL run should use a harder task family or broader prompt slice to get non-zero advantage signal.
+
+## 2026-03-22 multi-turn RL Phase A start
+
+- Reviewed the earlier one-step GRPO results and concluded that the broad 30-task run was not a reliable policy-improvement experiment because too many prompts collapsed to parseability-only reward with zero reward variance.
+- Decided to keep the Qwen2.5-1.5B action-only SFT adapter as the RL warm start, but move RL itself from one-step reward to multi-turn rollout reward.
+- Added `scripts/train_browsergym_grpo_multiturn.py` as a separate trainer so the original one-step GRPO script remains available for comparison.
+- The new trainer performs browser rollouts up to 10 steps, stops early on success, keeps short trajectory history in the prompt, and scores the full rollout with success reward plus small penalties for invalid actions, action errors, and wasted steps.
+- Chose a narrow Phase A curriculum of `click-button`, `click-option`, and `enter-text-2` so reward behavior can be inspected before scaling back to the full phase-1 task set.
+- Added config `configs/grpo_multiturn_phase_a_qwen25_action_adapter.yaml` for the first multi-turn RL validation run.
+- Confirmed the local multitask BrowserGym server is healthy and the Phase A dry-run prompt construction succeeded on 12 prompt rows.
+- Launched the first multi-turn Phase A run in the background using the Qwen2.5-1.5B action-only SFT adapter.

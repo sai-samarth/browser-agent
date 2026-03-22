@@ -32,3 +32,11 @@ Last updated: 2026-03-22T04:05:30Z
 - Verified end-to-end on local BrowserGym websocket env using a dedicated RL venv at `/home/saisamarth/venvs/browser-agent-rl`.
 - Smoke run used `Qwen/Qwen2.5-1.5B-Instruct` with LoRA on `click-test` and completed successfully, saving outputs under `outputs/qwen25-1.5b-browser-action-grpo-smoke`.
 - Because `click-test` is trivial, both sampled generations solved the task and reward variance collapsed to zero, so this should be treated as an infrastructure smoke test rather than evidence of useful RL learning.
+
+## RL next phase
+- One-step GRPO was validated as infrastructure but the broad 30-task phase-1 run mostly collapsed to parseability-only reward.
+- The next RL path is now Phase A multi-turn GRPO using the Qwen2.5-1.5B action-only SFT adapter as the warm start.
+- Multi-turn Phase A uses up to 10 browser steps per rollout, stops early on success, and applies rollout-level reward rather than only one-step reward.
+- Initial Phase A task subset is `click-button`, `click-option`, and `enter-text-2` so reward behavior stays interpretable before scaling up.
+- Active script: `scripts/train_browsergym_grpo_multiturn.py`
+- Active config: `configs/grpo_multiturn_phase_a_qwen25_action_adapter.yaml`

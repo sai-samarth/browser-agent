@@ -74,3 +74,29 @@ The default smoke config is intentionally tiny:
 - For the first integration, causal text models are the safest target.
 - Qwen3.5 conditional-generation models may require extra work for stable GRPO support.
 - Once this local path is validated, the next extension should be multi-step episode rewards over the same websocket server.
+
+
+## Multi-turn Phase A
+
+The next RL step after one-step smoke validation is a narrow multi-turn GRPO curriculum.
+
+Current Phase A design:
+- warm start: `outputs/qwen25-1.5b-browser-action-lora`
+- trainer: `scripts/train_browsergym_grpo_multiturn.py`
+- config: `configs/grpo_multiturn_phase_a_qwen25_action_adapter.yaml`
+- tasks: `click-button`, `click-option`, `enter-text-2`
+- rollout length: up to 10 steps
+- stop early on success
+- reward: rollout-level success reward plus small penalties for invalid actions, action errors, and extra steps
+
+Run it with:
+
+```bash
+source /home/saisamarth/venvs/ft-qwen25/bin/activate
+python scripts/train_browsergym_grpo_multiturn.py   --config configs/grpo_multiturn_phase_a_qwen25_action_adapter.yaml
+```
+
+Why Phase A exists:
+- the earlier full 30-task one-step GRPO run completed, but too many prompts got only parseability reward and zero reward variance
+- multi-turn RL is intended to credit useful early actions that only pay off several steps later
+- the narrow task subset keeps rollout behavior inspectable before scaling up
