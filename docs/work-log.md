@@ -181,3 +181,16 @@ We corrected the exporter to:
 - New process: `proc_fbc9350ab32c`
 - Output dir remains `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`.
 - Plan: let training finish without intermediate eval/save interruptions, then run the default-prompt and reinforced-prompt evals afterward.
+
+## 2026-03-22 Qwen3.5-2B reinforced reasoning-action evaluation update
+
+- Confirmed the relaunched Qwen3.5-2B reinforced reasoning-action run completed successfully and final adapter artifacts are present under `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`.
+- Ran the planned post-train evaluation on both prompt families at max_new_tokens=1536 using the corrected conditional-generation loader.
+- On the plain default reasoning prompt, the finished adapter scored parseable 41.67% and exact 29.17% on 240 validation rows.
+- On the reinforced reasoning prompt that mirrors the train-time format scaffolding, the same adapter scored parseable 95.42% and exact 84.17% on the same 240 rows.
+- Relative to the pre-train default-prompt baseline (96.67% parseable, 53.33% exact), this run substantially improved reinforced-prompt behavior but materially worsened robustness under the plain default reasoning prompt.
+- Inspected the default-prompt failures and found the dominant issue is still output-format collapse rather than obvious loss of task knowledge.
+- Of the 170 non-matching rows, 140 were unparseable; the biggest buckets were prose-only action descriptions (81 rows) and other natural-language completions with no valid final BrowserGym action line (59 rows).
+- A smaller residual bucket used near-correct but non-canonical syntax such as `click(bid='18')` (14 rows), plus a few genuine action-selection mistakes on checkbox-heavy tasks.
+- Worst default-prompt task families by exact-match included `multi-layouts`, `click-tab`, `click-test-2`, `focus-text-2`, and `read-table`, all of which fell to 0 exact on their sampled validation rows.
+- Current read: at 2B scale, reinforced reasoning training can preserve strong behavior when the inference prompt enforces the contract, but it still does not internalize a stable default-prompt action format.

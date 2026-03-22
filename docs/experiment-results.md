@@ -296,7 +296,24 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Qwen3.5-2B starts from a far stronger reasoning baseline than 0.8B, suggesting capacity likely matters materially for reasoning-action behavior.
 - This makes it a much better test of whether the reinforced prompt format can be internalized without extreme prompt fragility.
 
-### Status
+### Training / relaunch status
 - The first training attempt failed at the first eval/checkpoint boundary around step 100 with a CUDA driver error followed by open-file exhaustion during cleanup.
 - To remove that failure path, the trainer was patched to allow disabling mid-training eval and save.
-- The run has been relaunched with raised open-file limit, no mid-training eval, and no mid-training checkpoint saves.
+- The run was relaunched with raised open-file limit, no mid-training eval, and no mid-training checkpoint saves.
+- The relaunched training finished successfully and final adapter artifacts are present in `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`.
+
+### Post-train evaluation
+- Default reasoning prompt, corrected conditional-generation loader, 1536-token budget: parseable 41.67%, exact-match 29.17% on 240 validation rows.
+- Reinforced reasoning prompt with strict format rule + one-shot example + user reminder, same loader and same 1536-token budget: parseable 95.42%, exact-match 84.17% on 240 validation rows.
+
+### Failure inspection
+- On the default prompt, 170 / 240 rows were non-matches and 140 of those were unparseable under the strict BrowserGym parser.
+- The largest failure buckets were prose-only action descriptions (81 rows) and other natural-language completions without a valid final action line (59 rows).
+- A smaller but real residual bucket emitted near-correct non-canonical syntax such as `click(bid='18')` (14 rows).
+- Genuine action-selection mistakes still appear on checkbox-heavy tasks, but they are no longer the dominant error mode under the default prompt.
+
+### Interpretation
+- Relative to the default-prompt baseline (96.67% parseable, 53.33% exact), reinforced reasoning training did not improve plain default-prompt robustness; it made it worse.
+- Relative to the 0.8B reinforced run, however, the 2B model is much stronger when inference uses the reinforced contract, reaching 84.17% exact-match instead of 66.67%.
+- The main conclusion is that scaling to 2B improved recoverable task knowledge, but did not solve prompt-conditional formatting collapse.
+- This remains a format-internalization problem, not a simple lack-of-capacity problem.
