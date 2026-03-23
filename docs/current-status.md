@@ -142,3 +142,8 @@ Last updated: 2026-03-22T04:05:30Z
 - The first weak-task shaped GRPO continuation finished cleanly and improved full-val exact-match from 80.83% to 81.67%.
 - Current read: the path is viable but the gain is still modest, so the next big improvements likely require stronger shaping and/or more targeted SFT/data work on the same weak tasks.
 
+## 0.8B sweep update
+- Last updated: 2026-03-23T11:07:18Z
+- The shaped weak-task gen4 run produced strong reward variance (`reward_std≈2.758` and `≈1.495`).
+- Current read: this parameter setting belongs in the short-list of better GRPO knob combinations for 0.8B.
+

@@ -700,3 +700,37 @@ We corrected the exporter to:
   - improved task-specific SFT/data first,
   - or a longer continuation once reward separation is made denser.
 
+
+## 2026-03-23 0.8B GRPO knob sweep start
+- Planned experiments: gen4, stronger shaping, combined gen4+stronger shaping.
+
+## 2026-03-23 Qwen3.5-0.8B GRPO sweep experiment: shaped weak-task gen4
+
+- Branch: `hermes-08b-grpo-sweep`
+- Config: `configs/grpo_multiturn_qwen35_08b_action_weak3_shaped_gen4.yaml`
+- Model / warm start:
+  - base: `Qwen/Qwen3.5-0.8B`
+  - adapter init: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Task subset:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Key knob change relative to the earlier shaped weak-task validation:
+  - `num_generations: 4`
+  - `generation_batch_size: 4`
+- Runtime: ~180.1s for 24 steps.
+- The run completed cleanly.
+
+### Reward-signal observations
+- Strong non-zero variance batches observed:
+  - `reward≈2.13`, `reward_std≈2.758`
+  - `reward≈1.276`, `reward_std≈1.495`
+- Medium-signal batches also appeared:
+  - `reward≈0.325`, `reward_std≈0.1627`
+  - `reward≈0.2086`, `reward_std≈0.0783`
+- There were still tied high-reward batches around `4.08` and `4.10`, but the run contains clearly useful GRPO batches rather than mostly dead signal.
+
+### Interpretation
+- For the 0.8B weak-task setup, `num_generations=4` is a sensible direction and appears compatible with the shaping layer.
+- This experiment should be included in the sweep table as one of the stronger signal-producing combinations.
+
