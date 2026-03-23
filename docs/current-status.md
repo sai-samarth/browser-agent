@@ -62,3 +62,10 @@ Last updated: 2026-03-22T04:05:30Z
 - Reward stayed around 3.08 to 3.12, but `reward_std` stayed 0.0 throughout.
 - Current read: the fixed 2B action-only path is stable, but this curriculum is too saturated to generate useful GRPO preference signal.
 
+## Qwen3.5-2B action-only hard-run update
+- Last updated: 2026-03-23T05:58:16Z
+- Harder action-only subset run on `click-checkboxes-large`, `click-checkboxes-transfer`, and `find-word` finished cleanly.
+- This run did produce real non-zero GRPO signal, with `reward_std` peaks around `1.994` and `2.135`.
+- Some later batches still collapsed back toward tied rewards, so the signal is intermittent rather than fully stable.
+- Current read: this harder subset is the first action-only Qwen3.5-2B RL setup that looks experimentally worth continuing.
+

@@ -349,3 +349,20 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Interpretation: this small curriculum is still too saturated / tied for the Qwen3.5-2B action-only warm start, so GRPO is not receiving usable preference signal even with higher rollout temperature.
 - Current recommendation: move to a harder action-only curriculum centered more aggressively on unsaturated tasks instead of mixing in already-near-solved tasks like `click-option` and `enter-text-2`.
 
+## 2026-03-23 Qwen3.5-2B action-only hard-task multi-turn RL run
+
+- Ran a harder action-only multi-turn RL check with `configs/grpo_multiturn_qwen35_2b_action_phase_hard.yaml`.
+- Startpoint: `outputs/qwen35-2b-browser-action-unsloth`
+- Task subset: `click-checkboxes-large`, `click-checkboxes-transfer`, `find-word`
+- Sampling settings: `rollout_temperature=0.9`, `rollout_top_p=0.95`
+- Runtime: ~124.7s for 12 steps.
+- The run completed cleanly with no Qwen3.5 rope-delta / rotary crash.
+- This harder subset finally produced non-zero GRPO preference signal on multiple steps.
+- Notable batches:
+  - step 1-equivalent log point: `reward≈1.71`, `reward_std≈1.994`
+  - later strong batch: `reward≈1.81`, `reward_std≈2.135`
+  - late weak batches still collapsed, including `reward≈0.4`, `reward_std=0.0` and `reward≈0.35`, `reward_std≈0.0707`
+- Interpretation: this is meaningfully better than the earlier saturated action-only subset. The Qwen3.5-2B action warm start can produce useful GRPO signal when the curriculum is centered on harder tasks.
+- Current read: the fixed Qwen3.5-2B RL path is now both infrastructurally stable and experimentally promising on the harder action-only subset, though reward variance is still intermittent rather than consistently strong across the entire run.
+- Recommended next move: either scale this same harder action-only curriculum modestly, or run the matched reinforced-reasoning warm start on the same task subset for a clean comparison.
+
