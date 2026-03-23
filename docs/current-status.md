@@ -55,3 +55,10 @@ Last updated: 2026-03-22T04:05:30Z
   - reasoning adapter: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
 - Current read: Qwen3.5-2B is no longer blocked by the rotary/tensor crash, but harder-task multi-turn runs are still needed before judging whether it beats the Qwen2.5 RL path.
 
+## Qwen3.5-2B action-only RL small-run update
+- Last updated: 2026-03-23T05:26:30Z
+- Short multi-turn RL check on `enter-password`, `click-option`, and `enter-text-2` finished cleanly.
+- Sampling was already raised to `temperature=0.9`, `top_p=0.95`.
+- Reward stayed around 3.08 to 3.12, but `reward_std` stayed 0.0 throughout.
+- Current read: the fixed 2B action-only path is stable, but this curriculum is too saturated to generate useful GRPO preference signal.
+

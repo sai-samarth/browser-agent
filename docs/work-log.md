@@ -262,3 +262,16 @@ We corrected the exporter to:
 - Important caveat: the `click-button` smoke is too easy, so both Qwen3.5-2B smoke runs still showed `reward_std = 0` despite completing cleanly. These runs validate stack correctness, not useful RL signal.
 - Recommendation from this point: use the fixed Qwen3.5-2B path on a harder narrow multi-turn curriculum rather than broad full-task RL immediately.
 
+## 2026-03-23 Qwen3.5-2B action-only small multi-turn RL run
+
+- Ran a short action-only multi-turn RL check with the fixed Qwen3.5-2B path using `configs/grpo_multiturn_qwen35_2b_action_phase_small.yaml`.
+- Startpoint: `outputs/qwen35-2b-browser-action-unsloth`
+- Task subset: `enter-password`, `click-option`, `enter-text-2`
+- Sampling settings: `rollout_temperature=0.9`, `rollout_top_p=0.95`
+- Runtime: ~62.7s for 12 steps.
+- The run completed cleanly with no Qwen3.5 rotary / rope-delta crash.
+- Observed reward stayed in a narrow band around 3.08 to 3.12.
+- `reward_std` remained exactly 0.0 throughout the run.
+- Interpretation: this small curriculum is still too saturated / tied for the Qwen3.5-2B action-only warm start, so GRPO is not receiving usable preference signal even with higher rollout temperature.
+- Current recommendation: move to a harder action-only curriculum centered more aggressively on unsaturated tasks instead of mixing in already-near-solved tasks like `click-option` and `enter-text-2`.
+
