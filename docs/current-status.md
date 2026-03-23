@@ -109,3 +109,8 @@ Last updated: 2026-03-22T04:05:30Z
 - But many batches still collapsed to tied rewards.
 - Current read: generation diversity helps, but not enough on its own. Reward design is now the main bottleneck.
 
+## Reward-design analysis update
+- Last updated: 2026-03-23T07:16:49Z
+- Current read: reward shaping is now the main bottleneck, not curriculum-only tuning.
+- Recommended next implementation is task-specific progress shaping for `enter-text-2`, `enter-password`, and `click-checkboxes-large` layered on top of the existing base reward.
+

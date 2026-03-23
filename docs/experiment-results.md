@@ -499,3 +499,83 @@ After fine-tuning with strict parser scoring and corrected loader:
   - treat this as partial evidence that generation diversity matters,
   - but also treat it as the point where reward shaping should become the main next knob if we want stronger and more consistent RL signal.
 
+## 2026-03-23 Reward-design analysis for Qwen3.5-2B BrowserGym RL
+
+- Inspected the current one-step and multi-turn reward implementations directly.
+- Current one-step reward in `scripts/train_browsergym_grpo.py` is effectively:
+  - parseability bonus / penalty
+  - immediate environment reward
+  - done bonus
+  - action-error penalty
+- Current multi-turn reward in `scripts/train_browsergym_grpo_multiturn.py` is effectively:
+  - per-step penalty
+  - parseability bonus / invalid-action penalty
+  - per-step environment reward
+  - action-error penalty
+  - final success bonus
+- Empirical finding from repeated action-only runs:
+  - strong signal appears occasionally, but many batches remain tied with `reward_std = 0`
+  - curriculum changes alone do not reliably fix this
+  - exact seed slicing does not reliably reproduce the strongest batches
+  - increasing `num_generations` to 4 helps somewhat, but not enough to make the signal consistently dense
+
+### External guidance synthesized
+- GRPO/TRL guidance emphasizes composing multiple reward functions, using incremental partial credit, and testing each reward component independently rather than relying on a single coarse scalar.
+- Policy-invariant reward shaping literature argues for shaping via progress-style potentials rather than arbitrary bonuses, to speed learning without changing the true optimum.
+- Recent web-agent training work highlights sparse feedback and delayed rewards as central challenges, and recommends curriculum plus more informative intermediate signals for multi-step web tasks.
+
+### Diagnosis of the current reward
+- The current reward is too coarse and too frequently tied for MiniWoB-style browser tasks.
+- Many tasks only separate trajectories at the end state, so two different rollouts often receive the same scalar reward until success/failure is fully resolved.
+- Parseability bonus is useful as a floor, but once most completions are parseable it no longer creates within-group ordering.
+- Final success bonus is important, but by itself it makes successful short trajectories tie too often.
+- This explains why we observe repeated high-reward tied batches (`reward_std = 0`) even when the agent is doing something sensible.
+
+### Recommended reward redesign direction
+- Keep the current core reward as the outer scaffold.
+- Add task-specific partial-progress shaping so rollouts can diverge before final success.
+- The shaping should be progress-based, not just format-based.
+
+### First shaping candidates
+1. `enter-text-2`
+- Reward progress when the filled textbox moves closer to the target transformed string.
+- Example signals:
+  - exact typed string match bonus
+  - prefix / edit-distance improvement bonus
+  - submit only after correct fill bonus
+
+2. `enter-password`
+- Reward partial completion by counting how many of the two required fields match the target password.
+- Example signals:
+  - first field correct
+  - second field correct
+  - both correct before submit
+  - penalty for submitting with only one correct
+
+3. `click-checkboxes-large` / checkbox tasks
+- Reward overlap between currently selected checkboxes and target set.
+- Example signals:
+  - + for each newly correct checkbox selected
+  - - for each incorrect checkbox selected
+  - + bonus when submit is used with the exact target set
+
+4. `find-word`
+- Reward the typed textbox content if it moves closer to the target extracted word.
+- Example signals:
+  - exact answer in textbox
+  - prefix / normalized string similarity gain
+  - submit with correct textbox bonus
+
+### Design principle for implementation
+- Compute a progress score from observation state after each action.
+- Use reward based on delta-progress between consecutive states, not only absolute final state.
+- This should create more pairwise separation between sampled rollouts inside the same GRPO group.
+
+### Recommended next implementation
+- Implement a minimal modular task-shaping layer in the multi-turn reward path for the three best action-only tasks:
+  - `enter-text-2`
+  - `enter-password`
+  - `click-checkboxes-large`
+- Keep the existing base reward components, then add a bounded task-specific progress delta term.
+- Validate with a short action-only run before any broader scaling.
+
