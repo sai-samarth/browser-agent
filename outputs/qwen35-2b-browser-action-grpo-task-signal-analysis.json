@@ -1,0 +1,464 @@
+{
+  "config": {
+    "adapter_dir": "outputs/qwen35-2b-browser-action-unsloth",
+    "tasks": [
+      "click-checkboxes-large",
+      "click-checkboxes-transfer",
+      "find-word",
+      "enter-password",
+      "enter-text-2",
+      "click-option"
+    ],
+    "samples_per_task": 4,
+    "temperature": 0.9,
+    "top_p": 0.95
+  },
+  "summary": {
+    "click-checkboxes-large": {
+      "num_prompts": 4,
+      "avg_reward": 1.6425,
+      "avg_reward_std": 0.08750000000000002,
+      "max_reward_std": 0.12999999999999995,
+      "nonzero_std_prompts": 4,
+      "nonzero_std_rate": 1.0
+    },
+    "click-checkboxes-transfer": {
+      "num_prompts": 4,
+      "avg_reward": 3.1025,
+      "avg_reward_std": 0.03750000000000003,
+      "max_reward_std": 0.09000000000000008,
+      "nonzero_std_prompts": 2,
+      "nonzero_std_rate": 0.5
+    },
+    "find-word": {
+      "num_prompts": 4,
+      "avg_reward": 0.10249999999999997,
+      "avg_reward_std": 0.19749999999999995,
+      "max_reward_std": 0.2899999999999999,
+      "nonzero_std_prompts": 4,
+      "nonzero_std_rate": 1.0
+    },
+    "enter-password": {
+      "num_prompts": 4,
+      "avg_reward": 0.3925,
+      "avg_reward_std": 0.4475,
+      "max_reward_std": 1.5,
+      "nonzero_std_prompts": 3,
+      "nonzero_std_rate": 0.75
+    },
+    "enter-text-2": {
+      "num_prompts": 4,
+      "avg_reward": 1.59,
+      "avg_reward_std": 0.765,
+      "max_reward_std": 1.53,
+      "nonzero_std_prompts": 3,
+      "nonzero_std_rate": 0.75
+    },
+    "click-option": {
+      "num_prompts": 4,
+      "avg_reward": 3.0975,
+      "avg_reward_std": 0.012500000000000011,
+      "max_reward_std": 0.030000000000000027,
+      "nonzero_std_prompts": 2,
+      "nonzero_std_rate": 0.5
+    }
+  },
+  "details": {
+    "click-checkboxes-large": [
+      {
+        "seed": 938000,
+        "rewards": [
+          2.96,
+          3.16
+        ],
+        "reward_std": 0.10000000000000009,
+        "parsed": [
+          false,
+          true
+        ],
+        "completions": [
+          "select_option('dtm4i', 'EER8', 'ZmCAh', 'lgw', 'Gy', 'BK03j', 'uOc9JS', 'bpIdiR', 'EPJ",
+          "click('17')"
+        ]
+      },
+      {
+        "seed": 938001,
+        "rewards": [
+          0.06,
+          0.16000000000000003
+        ],
+        "reward_std": 0.05000000000000002,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('21', modifiers=['Control'])",
+          "click('40', modifiers=['Control'])"
+        ]
+      },
+      {
+        "seed": 938002,
+        "rewards": [
+          0.14,
+          0.3999999999999999
+        ],
+        "reward_std": 0.12999999999999995,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('18')",
+          "click('18')"
+        ]
+      },
+      {
+        "seed": 938003,
+        "rewards": [
+          3.06,
+          3.2
+        ],
+        "reward_std": 0.07000000000000006,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('18')",
+          "click('18', modifiers=['Control'])\nclick('21', modifiers=['Control'])\nclick('27', modifiers=['Control'])\nclick('40', modifiers=['Control'])\nclick('46', modifiers=['Control"
+        ]
+      }
+    ],
+    "click-checkboxes-transfer": [
+      {
+        "seed": 938004,
+        "rewards": [
+          3.24,
+          3.12
+        ],
+        "reward_std": 0.06000000000000005,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('24')",
+          "click('24', button='left')"
+        ]
+      },
+      {
+        "seed": 938005,
+        "rewards": [
+          3.16,
+          3.16
+        ],
+        "reward_std": 0.0,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('18')",
+          "click('18')"
+        ]
+      },
+      {
+        "seed": 938006,
+        "rewards": [
+          3.04,
+          3.04
+        ],
+        "reward_std": 0.0,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "select_option('mMd', 'HHRz')\nclick('33')",
+          "click('20')\nclick('24')\nclick('30')\nclick('33')"
+        ]
+      },
+      {
+        "seed": 938007,
+        "rewards": [
+          3.12,
+          2.94
+        ],
+        "reward_std": 0.09000000000000008,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('20', modifiers=None)",
+          "click('18', modifiers=['Control'])"
+        ]
+      }
+    ],
+    "find-word": [
+      {
+        "seed": 938008,
+        "rewards": [
+          -0.30000000000000004,
+          0.1
+        ],
+        "reward_std": 0.2,
+        "parsed": [
+          true,
+          false
+        ],
+        "completions": [
+          "fill('14', 'sit')",
+          "text('sit fringilla risus morbi fermentum adipiscing sit sed odio egestas')[:7]"
+        ]
+      },
+      {
+        "seed": 938009,
+        "rewards": [
+          0.29999999999999993,
+          0.0
+        ],
+        "reward_std": 0.14999999999999997,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "scroll(0, 127)",
+          "click('13')"
+        ]
+      },
+      {
+        "seed": 938010,
+        "rewards": [
+          0.1,
+          0.3999999999999999
+        ],
+        "reward_std": 0.14999999999999997,
+        "parsed": [
+          false,
+          true
+        ],
+        "completions": [
+          "find(\"5\")",
+          "scroll(0, -1000)"
+        ]
+      },
+      {
+        "seed": 938011,
+        "rewards": [
+          -0.18,
+          0.3999999999999999
+        ],
+        "reward_std": 0.2899999999999999,
+        "parsed": [
+          false,
+          true
+        ],
+        "completions": [
+          "find the 10th word in the paragraph (the text: \"In nullam cursus ut eget. Pharetra. Aliquam. Consequat praesent quis adipiscing\" has 10 words). Type the word \"",
+          "scroll(0, 50)"
+        ]
+      }
+    ],
+    "enter-password": [
+      {
+        "seed": 938012,
+        "rewards": [
+          0.04,
+          0.04
+        ],
+        "reward_std": 0.0,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('16', 'yMr')\nfill('19', 'yMr')\nclick('20')",
+          "fill('16', 'yMr')\nfill('19', 'yMr')\nclick('20')"
+        ]
+      },
+      {
+        "seed": 938013,
+        "rewards": [
+          -0.5000000000000002,
+          0.04
+        ],
+        "reward_std": 0.27000000000000013,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('16', '13')",
+          "fill('16', '13')\nfill('19', '13')\nclick('20')"
+        ]
+      },
+      {
+        "seed": 938014,
+        "rewards": [
+          0.16000000000000003,
+          0.2
+        ],
+        "reward_std": 0.01999999999999999,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('16', 'Agky')\nfill('19', 'Agky')",
+          "fill('16', 'Agky')"
+        ]
+      },
+      {
+        "seed": 938015,
+        "rewards": [
+          3.08,
+          0.08
+        ],
+        "reward_std": 1.5,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('16', 'HriC')",
+          "fill('16', 'HriC')"
+        ]
+      }
+    ],
+    "enter-text-2": [
+      {
+        "seed": 938016,
+        "rewards": [
+          3.08,
+          0.12000000000000001
+        ],
+        "reward_std": 1.48,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('14', 'THADDEUS')",
+          "focus('14')"
+        ]
+      },
+      {
+        "seed": 938017,
+        "rewards": [
+          3.08,
+          0.019999999999999997
+        ],
+        "reward_std": 1.53,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('14', 'vina')",
+          "fill('14', 'vina')"
+        ]
+      },
+      {
+        "seed": 938018,
+        "rewards": [
+          0.18,
+          0.07999999999999999
+        ],
+        "reward_std": 0.05,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('14', 'riley')",
+          "fill('14', 'riley')"
+        ]
+      },
+      {
+        "seed": 938019,
+        "rewards": [
+          3.08,
+          3.08
+        ],
+        "reward_std": 0.0,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "fill('14', 'beaulah')",
+          "fill('14', 'beaulah')"
+        ]
+      }
+    ],
+    "click-option": [
+      {
+        "seed": 938020,
+        "rewards": [
+          3.08,
+          3.08
+        ],
+        "reward_std": 0.0,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('18', modifiers=['Control'])",
+          "click('18')"
+        ]
+      },
+      {
+        "seed": 938021,
+        "rewards": [
+          3.12,
+          3.08
+        ],
+        "reward_std": 0.020000000000000018,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('24')",
+          "click('24', modifiers=['Control'])"
+        ]
+      },
+      {
+        "seed": 938022,
+        "rewards": [
+          3.08,
+          3.02
+        ],
+        "reward_std": 0.030000000000000027,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('21', button='left')",
+          "select_option([21], ['MuH2E'])"
+        ]
+      },
+      {
+        "seed": 938023,
+        "rewards": [
+          3.16,
+          3.16
+        ],
+        "reward_std": 0.0,
+        "parsed": [
+          true,
+          true
+        ],
+        "completions": [
+          "click('24')",
+          "click('24', button='left')"
+        ]
+      }
+    ]
+  }
+}

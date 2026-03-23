@@ -82,3 +82,12 @@ Last updated: 2026-03-22T04:05:30Z
 - But many batches still collapsed to tied rewards, including both high-reward and low-reward collapsed phases.
 - Current read: action-only on the hard subset is still the best RL path, but the signal remains intermittent rather than consistently dense.
 
+## Qwen3.5-2B task-signal analysis update
+- Last updated: 2026-03-23T06:28:43Z
+- Proper task-level replay analysis now suggests the best current RL signal carriers are `enter-text-2` and `enter-password`.
+- `click-checkboxes-large` looks useful as a third task, but weaker than those two.
+- `click-option` is saturated and should be dropped.
+- `click-checkboxes-transfer` is weaker than `click-checkboxes-large` and should be deprioritized.
+- `find-word` has variance but low average reward, so it is not the best immediate curriculum choice.
+- Recommended next action-only curriculum: `enter-text-2`, `enter-password`, `click-checkboxes-large`.
+

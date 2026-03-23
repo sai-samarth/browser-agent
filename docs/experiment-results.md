@@ -407,3 +407,29 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Interpretation: scaling the action-only hard subset did not destroy the useful RL signal; it preserved intermittent strong GRPO batches. But the reward landscape is still alternating between informative batches and fully tied batches.
 - Current read: the Qwen3.5-2B action-only hard subset remains the best RL continuation path so far, but it still needs curriculum or reward refinement if we want more consistently nonzero `reward_std` across the run.
 
+## 2026-03-23 Qwen3.5-2B action-only task-signal replay analysis
+
+- Ran a focused replay analysis using the current Qwen3.5-2B action-only warm start to estimate task-level reward variance under the same multi-turn action-only policy style.
+- Analysis artifact: `outputs/qwen35-2b-browser-action-grpo-task-signal-analysis.json`
+- Candidate tasks checked:
+  - `click-checkboxes-large`
+  - `click-checkboxes-transfer`
+  - `find-word`
+  - `enter-password`
+  - `enter-text-2`
+  - `click-option`
+- Summary from the replay analysis:
+  - `enter-text-2`: strongest dense signal among the checked tasks, with `avg_reward_std≈0.765`, `max_reward_std≈1.53`, and non-zero variance on 3/4 prompts.
+  - `enter-password`: also strong, with `avg_reward_std≈0.448`, `max_reward_std≈1.5`, and non-zero variance on 3/4 prompts.
+  - `click-checkboxes-large`: moderate signal, `avg_reward_std≈0.088`, non-zero variance on 4/4 prompts, but weaker than the two text-entry tasks.
+  - `find-word`: non-zero variance on 4/4 prompts with `avg_reward_std≈0.197`, but low mean reward (`avg_reward≈0.1025`), suggesting it is hard in a less productive way right now.
+  - `click-checkboxes-transfer`: weak signal, `avg_reward_std≈0.0375`, only 2/4 prompts with non-zero variance, and high average reward (`avg_reward≈3.10`), so it is already close to saturation.
+  - `click-option`: weakest and most saturated, `avg_reward_std≈0.0125`, only 2/4 prompts with non-zero variance, and high average reward (`avg_reward≈3.10`).
+- Interpretation:
+  - The earlier hard-subset run was directionally useful, but the best RL signal is not actually centered on the checkbox-transfer task family alone.
+  - The best next curriculum should be anchored on `enter-text-2` and `enter-password`, with `click-checkboxes-large` as the third task if we want diversity.
+  - `click-option` should be dropped from further RL curricula for now.
+  - `click-checkboxes-transfer` should be deprioritized relative to `click-checkboxes-large`.
+  - `find-word` is worth revisiting later, but right now it looks more like low-reward difficulty than high-leverage signal.
+- Refined recommendation: next action-only RL curriculum should be `enter-text-2`, `enter-password`, and `click-checkboxes-large`.
+
