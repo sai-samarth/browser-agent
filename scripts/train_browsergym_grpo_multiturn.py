@@ -451,6 +451,32 @@ def _enter_password_progress(goal: str, obs_text: str, history_rows: list[dict[s
     return correct / 2.0
 
 
+def _extract_find_word_target(goal: str, obs_text: str) -> str | None:
+    m = re.search(r'Find the (\d+)(?:st|nd|rd|th) word', goal or '', flags=re.I)
+    if not m:
+        return None
+    idx = int(m.group(1)) - 1
+    para_match = re.search(r"StaticText '([^']+)'", obs_text or '')
+    if not para_match:
+        return None
+    words = re.findall(r"[A-Za-z0-9'-]+", para_match.group(1))
+    if idx < 0 or idx >= len(words):
+        return None
+    return words[idx]
+
+
+def _find_word_progress(goal: str, obs_text: str, history_rows: list[dict[str, Any]]) -> float | None:
+    target = _extract_find_word_target(goal, obs_text)
+    if not target:
+        return None
+    textbox_values = _extract_textbox_values(obs_text)
+    current = textbox_values[0][1] if textbox_values else ''
+    if not current and textbox_values:
+        fills = _latest_fill_values(history_rows)
+        current = fills.get(textbox_values[0][0], '')
+    return SequenceMatcher(None, current, target).ratio()
+
+
 def _checkbox_progress(goal: str, obs_text: str) -> float | None:
     target = _checkbox_target_set(goal)
     if target is None:
@@ -470,6 +496,8 @@ def _task_progress(task_name: str, goal: str, obs_text: str, history_rows: list[
         return _enter_text_progress(goal, obs_text, history_rows)
     if task_name == 'enter-password':
         return _enter_password_progress(goal, obs_text, history_rows)
+    if task_name == 'find-word':
+        return _find_word_progress(goal, obs_text, history_rows)
     if task_name.startswith('click-checkboxes'):
         return _checkbox_progress(goal, obs_text)
     return None

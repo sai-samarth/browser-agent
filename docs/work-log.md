@@ -627,3 +627,38 @@ We corrected the exporter to:
   - `click-checkboxes-transfer`
 - Recommendation: improve task-specific SFT/data for these tasks first, then test shaped rewards on them before broader GRPO.
 
+## 2026-03-23 Qwen3.5-0.8B weak-task shaped validation
+
+- Extended the current multi-turn BrowserGym shaping layer to cover `find-word` in addition to the existing support for `enter-text-2` and checkbox tasks.
+- Validation config: `configs/grpo_multiturn_qwen35_08b_action_weak3_shaped.yaml`
+- Model / adapter:
+  - base: `Qwen/Qwen3.5-0.8B`
+  - warm start: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Task subset:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Runtime: ~225s for 24 steps.
+- The run completed cleanly.
+
+### Reward-signal result
+- This was a materially better validation than the earlier 2B exploratory runs for sparse browser tasks.
+- Strong non-zero variance batches observed:
+  - `reward≈2.13`, `reward_std≈2.758`
+  - `reward≈2.525`, `reward_std≈2.313`
+- Additional medium-signal batches observed:
+  - `reward≈3.7`, `reward_std≈0.2828`
+  - `reward≈0.322`, `reward_std≈0.3119`
+  - `reward≈0.9`, `reward_std≈0.1414`
+  - `reward≈0.8167`, `reward_std≈0.1179`
+- There are still tied batches, but unlike many of the earlier broad experiments, the run now contains several clearly informative GRPO batches rather than only isolated weak blips.
+
+### Interpretation
+- This is the strongest evidence so far that the new task-specific shaping direction is correct.
+- The 0.8B weak-task setup gives cleaner and more repeatable reward variance than the more saturated 2B experiments.
+- Current read: Qwen3.5-0.8B is the better vehicle for demonstrating targeted improvement through weak-task shaping first.
+
+### Recommended next step
+- Keep this 0.8B weak-task subset.
+- If continuing immediately, the next step should be a small GRPO continuation + post-eval on this same shaped task family, rather than returning to broad untargeted curricula.
+

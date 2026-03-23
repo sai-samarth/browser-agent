@@ -132,3 +132,8 @@ Last updated: 2026-03-22T04:05:30Z
 - `find-word` and `enter-text-2` mostly need content-level shaping rather than action-format shaping.
 - Recommended next step is targeted SFT/data improvement plus task-specific reward shaping on those tasks before broader GRPO.
 
+## Qwen3.5-0.8B shaped weak-task update
+- Last updated: 2026-03-23T10:24:13Z
+- The shaped 0.8B weak-task validation produced multiple strong non-zero variance batches, including `reward_std≈2.758` and `≈2.313`.
+- Current read: this is the cleanest reward-signal path we have so far for demonstrating targeted improvement.
+
