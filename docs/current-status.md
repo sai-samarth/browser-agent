@@ -137,3 +137,8 @@ Last updated: 2026-03-22T04:05:30Z
 - The shaped 0.8B weak-task validation produced multiple strong non-zero variance batches, including `reward_std≈2.758` and `≈2.313`.
 - Current read: this is the cleanest reward-signal path we have so far for demonstrating targeted improvement.
 
+## Qwen3.5-0.8B GRPO + eval update
+- Last updated: 2026-03-23T10:39:22Z
+- The first weak-task shaped GRPO continuation finished cleanly and improved full-val exact-match from 80.83% to 81.67%.
+- Current read: the path is viable but the gain is still modest, so the next big improvements likely require stronger shaping and/or more targeted SFT/data work on the same weak tasks.
+

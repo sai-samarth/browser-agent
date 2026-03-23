@@ -662,3 +662,41 @@ We corrected the exporter to:
 - Keep this 0.8B weak-task subset.
 - If continuing immediately, the next step should be a small GRPO continuation + post-eval on this same shaped task family, rather than returning to broad untargeted curricula.
 
+## 2026-03-23 Qwen3.5-0.8B weak-task shaped GRPO continuation + post-eval
+
+- Launched a real GRPO continuation on the validated 0.8B weak-task shaped setup using `configs/grpo_multiturn_qwen35_08b_action_weak3_shaped_grpo.yaml`.
+- Model / warm start:
+  - base: `Qwen/Qwen3.5-0.8B`
+  - adapter init: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Task subset:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Runtime: ~319.7s for 36 steps.
+- The GRPO run completed cleanly.
+
+### Reward-signal during GRPO
+- Useful non-zero variance remained present during training, though not on every batch.
+- Example late batch still had `reward≈0.7467`, `reward_std≈0.0283`.
+- Earlier stronger batches were observed during the preceding validation phase, which is why this continuation was judged safe to run.
+
+### Post-GRPO evaluation
+- Post-eval file: `outputs/qwen35-0.8b-browser-action-grpo-multiturn-weak3-shaped-phase1/eval_after_grpo_256.json`
+- Eval loader: conditional-generation path
+- Post-GRPO result on full action-only validation split:
+  - parseable: 100.00%
+  - exact-match: 81.67%
+
+### Comparison
+- Pre-GRPO warm start (post-SFT): 80.83%
+- Post-GRPO: 81.67%
+- Net gain from this first weak-task shaped GRPO pass: about +0.84 points exact-match.
+
+### Interpretation
+- This is a real positive move, but modest.
+- The result is consistent with the earlier observation that reward shaping improved signal quality enough to justify GRPO, but the first continuation pass still produces only incremental gains rather than a dramatic jump.
+- Current read: the weak-task shaped path is viable and better grounded than the earlier broad RL attempts, but further gains will likely require either:
+  - stronger / more task-specific shaping,
+  - improved task-specific SFT/data first,
+  - or a longer continuation once reward separation is made denser.
+
