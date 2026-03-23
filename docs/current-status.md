@@ -69,3 +69,9 @@ Last updated: 2026-03-22T04:05:30Z
 - Some later batches still collapsed back toward tied rewards, so the signal is intermittent rather than fully stable.
 - Current read: this harder subset is the first action-only Qwen3.5-2B RL setup that looks experimentally worth continuing.
 
+## Qwen3.5-2B reasoning-vs-action RL comparison update
+- Last updated: 2026-03-23T06:06:19Z
+- The matched reinforced-reasoning hard-subset RL run finished cleanly and did produce non-zero reward variance, with peaks around `2.305` and `2.15`.
+- But compared with the matched action-only run, it was slower, produced much longer completions, hit clipping more often, and showed multiple negative-reward batches.
+- Current read: action-only remains the better RL warm start for the next continuation step on this stack.
+

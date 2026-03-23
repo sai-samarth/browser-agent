@@ -366,3 +366,24 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Current read: the fixed Qwen3.5-2B RL path is now both infrastructurally stable and experimentally promising on the harder action-only subset, though reward variance is still intermittent rather than consistently strong across the entire run.
 - Recommended next move: either scale this same harder action-only curriculum modestly, or run the matched reinforced-reasoning warm start on the same task subset for a clean comparison.
 
+## 2026-03-23 Qwen3.5-2B reinforced-reasoning hard-task multi-turn RL run
+
+- Ran the matched reinforced-reasoning multi-turn RL comparison with `configs/grpo_multiturn_qwen35_2b_reasoning_phase_hard.yaml`.
+- Startpoint: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
+- Task subset matched the action-only comparison exactly: `click-checkboxes-large`, `click-checkboxes-transfer`, `find-word`
+- Sampling settings matched the action-only run: `rollout_temperature=0.9`, `rollout_top_p=0.95`
+- Runtime: ~199.5s for 12 steps, noticeably slower than the matched action-only run (~124.7s).
+- The run completed cleanly with no Qwen3.5 rope-delta / rotary crash.
+- This run did produce non-zero GRPO signal on multiple batches, with strong peaks:
+  - `reward≈1.45`, `reward_std≈2.305`
+  - `reward≈1.38`, `reward_std≈2.15`
+- However, the run also showed substantially less stable behavior than the matched action-only warm start:
+  - completion lengths were much longer, often 100+ tokens
+  - several batches hit near-max-length generations and clipped completions
+  - multiple batches had negative mean reward, including about `-0.16`, `-0.18`, and `-0.14`
+  - one late batch still collapsed to `reward_std=0`
+- Comparison read:
+  - action-only hard run: slightly weaker peak variance, but cleaner / faster / more stable reward profile
+  - reinforced-reasoning hard run: can produce strong variance, but pays for it with much longer completions, clipping, slower runtime, and more negative-reward instability
+- Current recommendation: for RL continuation, prefer the Qwen3.5-2B action-only warm start over the reinforced-reasoning warm start on this stack.
+
