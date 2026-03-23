@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import math
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -11,9 +12,14 @@ from typing import Any
 
 import torch
 import yaml
+import transformers.utils.hub as transformers_hub
 from datasets import Dataset
-from peft import LoraConfig
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import LoraConfig, PeftModel
+from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
+
+if not hasattr(transformers_hub, 'TRANSFORMERS_CACHE'):
+    transformers_hub.TRANSFORMERS_CACHE = getattr(transformers_hub, 'default_cache_path', None) or ''
+
 from trl import GRPOConfig, GRPOTrainer
 from websockets.asyncio.client import connect as ws_connect
 
@@ -40,9 +46,13 @@ from scripts.export_sft_dataset import (  # noqa: E402
 class GRPOBrowserConfig:
     model_name: str
     browsergym_base_url: str
-    task_name: str
-    output_dir: str
+    task_name: str | None = None
+    task_names: list[str] | None = None
+    task_names_file: str | None = None
+    output_dir: str = ''
+    adapter_dir: str | None = None
     dataset_size: int = 8
+    samples_per_task: int | None = None
     seed_offset: int = 910000
     system_prompt: str | None = None
     max_prompt_length: int = 1536
@@ -118,6 +128,42 @@ class BrowserGymWSClient:
             return _normalize_ws_observation(step_msg)
 
 
+def _load_task_names(config: GRPOBrowserConfig) -> list[str]:
+    names: list[str] = []
+    if config.task_name:
+        names.append(config.task_name)
+    if config.task_names:
+        names.extend(str(x) for x in config.task_names)
+    if config.task_names_file:
+        path = Path(config.task_names_file)
+        for raw in path.read_text().splitlines():
+            task = raw.strip()
+            if not task or task.startswith('#'):
+                continue
+            names.append(task)
+    names = [n for i,n in enumerate(names) if n and n not in names[:i]]
+    if not names:
+        raise ValueError('Provide task_name, task_names, or task_names_file')
+    return names
+
+
+def _build_task_seed_pairs(config: GRPOBrowserConfig) -> list[tuple[str, int]]:
+    tasks = _load_task_names(config)
+    pairs: list[tuple[str, int]] = []
+    seed = config.seed_offset
+    if config.samples_per_task is not None:
+        for task in tasks:
+            for _ in range(config.samples_per_task):
+                pairs.append((task, seed))
+                seed += 1
+        return pairs
+    for idx in range(config.dataset_size):
+        task = tasks[idx % len(tasks)]
+        pairs.append((task, seed))
+        seed += 1
+    return pairs
+
+
 def _build_prompt_row(system_prompt: str, task_name: str, seed: int, obs: dict[str, Any]) -> dict[str, Any]:
     pre_observation = {
         "goal": obs.get("goal", ""),
@@ -148,10 +194,9 @@ def build_prompt_dataset(config: GRPOBrowserConfig) -> list[dict[str, Any]]:
     client = BrowserGymWSClient(config.browsergym_base_url)
     system_prompt = config.system_prompt or _action_only_system_prompt(FALLBACK_SYSTEM_PROMPT)
     rows: list[dict[str, Any]] = []
-    for idx in range(config.dataset_size):
-        seed = config.seed_offset + idx
-        obs = asyncio.run(client.reset(task_name=config.task_name, seed=seed))
-        rows.append(_build_prompt_row(system_prompt, config.task_name, seed, obs))
+    for task_name, seed in _build_task_seed_pairs(config):
+        obs = asyncio.run(client.reset(task_name=task_name, seed=seed))
+        rows.append(_build_prompt_row(system_prompt, task_name, seed, obs))
     return rows
 
 
@@ -179,6 +224,128 @@ def parse_action(response_text: str) -> str | None:
         return None
     return _normalize_browsergym_action(extracted)
 
+
+
+def _looks_conditional(model_ref: str | None) -> bool:
+    if not model_ref:
+        return False
+    try:
+        cfg = AutoConfig.from_pretrained(model_ref, trust_remote_code=True)
+        archs = cfg.architectures or []
+        model_type = (getattr(cfg, 'model_type', '') or '').lower()
+        if any('Qwen3_5ForConditionalGeneration' in a for a in archs):
+            return True
+        if 'qwen3_5' in model_type:
+            return True
+    except Exception:
+        pass
+    s = model_ref.lower()
+    return 'qwen3.5' in s or 'qwen3_5' in s
+
+
+def _should_use_conditional_loader(model_name: str, adapter_dir: str | None) -> bool:
+    return _looks_conditional(model_name) or _looks_conditional(adapter_dir)
+
+
+def _apply_qwen35_rope_delta_guard() -> None:
+    try:
+        from transformers.models.qwen3_5 import modeling_qwen3_5
+    except Exception:
+        return
+
+    qwen_model_cls = getattr(modeling_qwen3_5, "Qwen3_5Model", None)
+    if qwen_model_cls is None or not hasattr(qwen_model_cls, "compute_3d_position_ids"):
+        return
+    if getattr(qwen_model_cls, "_rope_delta_guard_patched", False):
+        return
+
+    original_compute = qwen_model_cls.compute_3d_position_ids
+
+    def _patched_compute_3d_position_ids(
+        self,
+        input_ids,
+        inputs_embeds,
+        image_grid_thw=None,
+        video_grid_thw=None,
+        attention_mask=None,
+        past_key_values=None,
+        mm_token_type_ids=None,
+    ):
+        rope_deltas = getattr(self, "rope_deltas", None)
+        if rope_deltas is not None and inputs_embeds is not None:
+            batch_size = inputs_embeds.shape[0]
+            delta_rows = rope_deltas.shape[0] if getattr(rope_deltas, "ndim", 0) > 0 else 0
+
+            if delta_rows == 0:
+                self.rope_deltas = None
+            elif delta_rows != batch_size:
+                if delta_rows > batch_size:
+                    self.rope_deltas = rope_deltas[:batch_size]
+                else:
+                    repeats = math.ceil(batch_size / delta_rows)
+                    self.rope_deltas = rope_deltas.repeat_interleave(repeats, dim=0)[:batch_size]
+
+        return original_compute(
+            self,
+            input_ids=input_ids,
+            inputs_embeds=inputs_embeds,
+            image_grid_thw=image_grid_thw,
+            video_grid_thw=video_grid_thw,
+            attention_mask=attention_mask,
+            past_key_values=past_key_values,
+            mm_token_type_ids=mm_token_type_ids,
+        )
+
+    qwen_model_cls.compute_3d_position_ids = _patched_compute_3d_position_ids
+    qwen_model_cls._rope_delta_guard_patched = True
+
+
+def _load_model_and_processing(config: GRPOBrowserConfig):
+    use_conditional = _should_use_conditional_loader(config.model_name, config.adapter_dir)
+    model_ref = config.adapter_dir or config.model_name
+
+    if use_conditional:
+        _apply_qwen35_rope_delta_guard()
+        processor = AutoProcessor.from_pretrained(model_ref, trust_remote_code=True)
+        tokenizer = getattr(processor, 'tokenizer', processor)
+        if getattr(tokenizer, 'pad_token', None) is None:
+            tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
+        tokenizer.padding_side = 'left'
+        base_model = AutoModelForImageTextToText.from_pretrained(
+            config.model_name,
+            dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+            device_map='auto',
+            trust_remote_code=True,
+        )
+        base_model.warnings_issued = {}
+        if config.adapter_dir:
+            model = PeftModel.from_pretrained(base_model, config.adapter_dir, is_trainable=True)
+            model.warnings_issued = {}
+            peft_config = None
+        else:
+            model = base_model
+            peft_config = build_peft_config(config)
+        return model, tokenizer, peft_config, use_conditional
+
+    tokenizer = AutoTokenizer.from_pretrained(model_ref, trust_remote_code=True)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
+    tokenizer.padding_side = 'left'
+    base_model = AutoModelForCausalLM.from_pretrained(
+        config.model_name,
+        dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+        device_map='auto',
+        trust_remote_code=True,
+    )
+    base_model.warnings_issued = {}
+    if config.adapter_dir:
+        model = PeftModel.from_pretrained(base_model, config.adapter_dir, is_trainable=True)
+        model.warnings_issued = {}
+        peft_config = None
+    else:
+        model = base_model
+        peft_config = build_peft_config(config)
+    return model, tokenizer, peft_config, use_conditional
 
 def build_parse_reward(config: GRPOBrowserConfig):
     def reward(completions, **kwargs) -> list[float]:
@@ -274,17 +441,13 @@ def main() -> int:
         smoke_reward_preview(config, rows)
         return 0
 
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name, trust_remote_code=True)
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
-    tokenizer.padding_side = "left"
-
-    model = AutoModelForCausalLM.from_pretrained(
-        config.model_name,
-        dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto",
-        trust_remote_code=True,
-    )
+    model, tokenizer, peft_config, use_conditional = _load_model_and_processing(config)
+    print(json.dumps({
+        "model_name": config.model_name,
+        "adapter_dir": config.adapter_dir,
+        "loader": "conditional_generation" if use_conditional else "causal_lm",
+        "use_peft_init": peft_config is not None,
+    }, indent=2))
 
     training_args = GRPOConfig(
         output_dir=str(output_dir),
@@ -312,7 +475,7 @@ def main() -> int:
         reward_funcs=[build_parse_reward(config), build_env_reward(config)],
         args=training_args,
         train_dataset=dataset,
-        peft_config=build_peft_config(config),
+        peft_config=peft_config,
     )
     trainer.train()
     trainer.save_model(str(output_dir))

@@ -42,3 +42,16 @@ Last updated: 2026-03-22T04:05:30Z
 - Active script: `scripts/train_browsergym_grpo_multiturn.py`
 - Active config: `configs/grpo_multiturn_phase_b_qwen25_action_adapter.yaml`
 - Active run: background process `proc_0cec13e7c8f4`
+
+## Qwen3.5-2B RL status update
+- Last updated: 2026-03-23T05:04:18Z
+- The earlier Qwen3.5-2B GRPO blocker was a real stack bug, now reproduced and patched.
+- Root cause: stale `rope_deltas` in the Qwen3.5 multimodal wrapper caused zero-batch `position_ids` during GRPO logprob scoring after generation.
+- Patched scripts:
+  - `scripts/train_browsergym_grpo.py`
+  - `scripts/train_browsergym_grpo_multiturn.py`
+- Validated end-to-end smoke after patching:
+  - action adapter: `outputs/qwen35-2b-browser-action-unsloth`
+  - reasoning adapter: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
+- Current read: Qwen3.5-2B is no longer blocked by the rotary/tensor crash, but harder-task multi-turn runs are still needed before judging whether it beats the Qwen2.5 RL path.
+

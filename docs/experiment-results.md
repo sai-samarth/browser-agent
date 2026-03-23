@@ -317,3 +317,22 @@ After fine-tuning with strict parser scoring and corrected loader:
 - Relative to the 0.8B reinforced run, however, the 2B model is much stronger when inference uses the reinforced contract, reaching 84.17% exact-match instead of 66.67%.
 - The main conclusion is that scaling to 2B improved recoverable task knowledge, but did not solve prompt-conditional formatting collapse.
 - This remains a format-internalization problem, not a simple lack-of-capacity problem.
+
+## Qwen3.5-2B RL stack validation (2026-03-23)
+
+### Root-cause summary
+- Reproduced the Qwen3.5-2B GRPO failure inside `apply_rotary_pos_emb`.
+- The underlying cause was stale `rope_deltas` state in `Qwen3_5Model` during GRPO's generation-to-logprob transition, which produced zero-batch RoPE tensors.
+
+### Fix
+- Added a guard in both RL training scripts to clear or batch-align stale `rope_deltas` before `compute_3d_position_ids` reuses them.
+
+### Validation after fix
+- One-step GRPO smoke completed cleanly with action adapter `outputs/qwen35-2b-browser-action-unsloth`.
+- One-step GRPO smoke also completed cleanly with reasoning adapter `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`.
+- Multi-turn GRPO smokes completed cleanly for both the action and reinforced-reasoning adapters.
+
+### Interpretation
+- This removes the main infrastructure blocker for trying Qwen3.5-2B in RL.
+- The remaining open question is now experimental rather than infrastructural: whether Qwen3.5-2B action or reasoning warm starts produce better reward variance and downstream policy improvement on harder tasks.
+

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import math
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -14,7 +15,7 @@ import yaml
 import transformers.utils.hub as transformers_hub
 from datasets import Dataset
 from peft import PeftModel
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
 
 if not hasattr(transformers_hub, "TRANSFORMERS_CACHE"):
     transformers_hub.TRANSFORMERS_CACHE = getattr(transformers_hub, "default_cache_path", None) or ""
@@ -322,18 +323,107 @@ def parse_action(response_text: str) -> str | None:
     return _normalize_browsergym_action(extracted)
 
 
+def _looks_conditional(model_ref: str | None) -> bool:
+    if not model_ref:
+        return False
+    try:
+        cfg = AutoConfig.from_pretrained(model_ref, trust_remote_code=True)
+        archs = cfg.architectures or []
+        model_type = (getattr(cfg, "model_type", "") or "").lower()
+        if any("Qwen3_5ForConditionalGeneration" in a for a in archs):
+            return True
+        if "qwen3_5" in model_type:
+            return True
+    except Exception:
+        pass
+    s = model_ref.lower()
+    return "qwen3.5" in s or "qwen3_5" in s
+
+
+def _should_use_conditional_loader(model_name: str, adapter_dir: str | None) -> bool:
+    return _looks_conditional(model_name) or _looks_conditional(adapter_dir)
+
+
+def _apply_qwen35_rope_delta_guard() -> None:
+    try:
+        from transformers.models.qwen3_5 import modeling_qwen3_5
+    except Exception:
+        return
+
+    qwen_model_cls = getattr(modeling_qwen3_5, "Qwen3_5Model", None)
+    if qwen_model_cls is None or not hasattr(qwen_model_cls, "compute_3d_position_ids"):
+        return
+    if getattr(qwen_model_cls, "_rope_delta_guard_patched", False):
+        return
+
+    original_compute = qwen_model_cls.compute_3d_position_ids
+
+    def _patched_compute_3d_position_ids(
+        self,
+        input_ids,
+        inputs_embeds,
+        image_grid_thw=None,
+        video_grid_thw=None,
+        attention_mask=None,
+        past_key_values=None,
+        mm_token_type_ids=None,
+    ):
+        rope_deltas = getattr(self, "rope_deltas", None)
+        if rope_deltas is not None and inputs_embeds is not None:
+            batch_size = inputs_embeds.shape[0]
+            delta_rows = rope_deltas.shape[0] if getattr(rope_deltas, "ndim", 0) > 0 else 0
+            if delta_rows == 0:
+                self.rope_deltas = None
+            elif delta_rows != batch_size:
+                if delta_rows > batch_size:
+                    self.rope_deltas = rope_deltas[:batch_size]
+                else:
+                    repeats = math.ceil(batch_size / delta_rows)
+                    self.rope_deltas = rope_deltas.repeat_interleave(repeats, dim=0)[:batch_size]
+        return original_compute(
+            self,
+            input_ids=input_ids,
+            inputs_embeds=inputs_embeds,
+            image_grid_thw=image_grid_thw,
+            video_grid_thw=video_grid_thw,
+            attention_mask=attention_mask,
+            past_key_values=past_key_values,
+            mm_token_type_ids=mm_token_type_ids,
+        )
+
+    qwen_model_cls.compute_3d_position_ids = _patched_compute_3d_position_ids
+    qwen_model_cls._rope_delta_guard_patched = True
+
+
 def load_model_and_tokenizer(config: MultiTurnGRPOConfig):
     model_ref = config.adapter_dir or config.model_name
-    tokenizer = AutoTokenizer.from_pretrained(model_ref, trust_remote_code=True)
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
-    tokenizer.padding_side = "left"
-    base_model = AutoModelForCausalLM.from_pretrained(
-        config.model_name,
-        dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto",
-        trust_remote_code=True,
-    )
+    use_conditional = _should_use_conditional_loader(config.model_name, config.adapter_dir)
+
+    if use_conditional:
+        _apply_qwen35_rope_delta_guard()
+        processor = AutoProcessor.from_pretrained(model_ref, trust_remote_code=True)
+        tokenizer = getattr(processor, "tokenizer", processor)
+        if getattr(tokenizer, "pad_token", None) is None:
+            tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
+        tokenizer.padding_side = "left"
+        base_model = AutoModelForImageTextToText.from_pretrained(
+            config.model_name,
+            dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+            device_map="auto",
+            trust_remote_code=True,
+        )
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(model_ref, trust_remote_code=True)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
+        tokenizer.padding_side = "left"
+        base_model = AutoModelForCausalLM.from_pretrained(
+            config.model_name,
+            dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+            device_map="auto",
+            trust_remote_code=True,
+        )
+
     base_model.warnings_issued = {}
     if config.adapter_dir:
         model = PeftModel.from_pretrained(base_model, config.adapter_dir, is_trainable=True)

@@ -242,3 +242,23 @@ We corrected the exporter to:
 - Increased later-step rollout sampling slightly to `temperature=0.9` while keeping `top_p=0.95`.
 - Added config `configs/grpo_multiturn_phase_b_qwen25_action_adapter.yaml` and confirmed the dry-run prompt construction on 50 prompt rows succeeded under the multitask BrowserGym server.
 - Launched the Phase B multi-turn RL run in the background with process `proc_0cec13e7c8f4`.
+
+## 2026-03-23 Qwen3.5-2B RL rotary mismatch fix
+
+- Reproduced the Qwen3.5-2B GRPO crash directly on iom4090 with `configs/grpo_smoke_qwen35_2b_action_adapter_click_button.yaml`.
+- Exact failing stack ended inside `transformers/models/qwen3_5/modeling_qwen3_5.py` at `apply_rotary_pos_emb`, with `RuntimeError: Sizes of tensors must match except in dimension 3. Expected size 0 but got size 1 for tensor number 1 in the list.`
+- Instrumented the Qwen3.5 forward path and confirmed the real failure mode: during GRPO generation -> logprob scoring, stale `rope_deltas` state inside `Qwen3_5Model` produced malformed `position_ids` with batch dimension 0, which collapsed RoPE cos/sin tensors to shape `(0, seq_len, 64)`.
+- Added a guarded patch in `scripts/train_browsergym_grpo.py` that clears or batch-aligns stale `rope_deltas` before `compute_3d_position_ids` reuses them.
+- Verified the patched one-step GRPO smoke now runs end-to-end for the Qwen3.5-2B action adapter `outputs/qwen35-2b-browser-action-unsloth`.
+- Added the same Qwen3.5 guard and conditional-loader support to `scripts/train_browsergym_grpo_multiturn.py`.
+- Verified a multi-turn smoke now runs end-to-end for:
+  - `outputs/qwen35-2b-browser-action-unsloth`
+  - `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
+- Smoke configs used for validation:
+  - `configs/grpo_smoke_qwen35_2b_action_adapter_click_button.yaml`
+  - `configs/grpo_smoke_qwen35_2b_reasoning_reinforced_click_button.yaml`
+  - `configs/grpo_multiturn_smoke_qwen35_2b_action.yaml`
+  - `configs/grpo_multiturn_smoke_qwen35_2b_reasoning.yaml`
+- Important caveat: the `click-button` smoke is too easy, so both Qwen3.5-2B smoke runs still showed `reward_std = 0` despite completing cleanly. These runs validate stack correctness, not useful RL signal.
+- Recommendation from this point: use the fixed Qwen3.5-2B path on a harder narrow multi-turn curriculum rather than broad full-task RL immediately.
+
