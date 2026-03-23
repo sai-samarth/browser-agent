@@ -120,3 +120,8 @@ Last updated: 2026-03-22T04:05:30Z
 - Strong non-zero variance batches now appear (`reward_std≈2.31` and `≈1.994`), where the unshaped refined run was mostly tied.
 - Current read: reward shaping is working and should be retained for the next RL iteration.
 
+## Shaped hard-curriculum update
+- Last updated: 2026-03-23T09:41:14Z
+- The shaped hard action-only run produced a real strong non-zero variance batch (`reward_std≈2.044`) but still had many tied batches.
+- Current read: shaping helps, but the tied-reward problem is reduced rather than solved.
+

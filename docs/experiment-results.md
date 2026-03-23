@@ -621,3 +621,24 @@ After fine-tuning with strict parser scoring and corrected loader:
   - the better task mix from the harder curriculum
   - with the denser signal from task-specific progress shaping.
 
+## 2026-03-23 Reward-shaped hard-curriculum validation
+
+- Ran the stronger action-only hard curriculum under the new progress-shaped reward using `configs/grpo_multiturn_qwen35_2b_action_phase_hard_shaped.yaml`.
+- Task mix:
+  - `click-checkboxes-large`
+  - `click-checkboxes-transfer`
+  - `find-word`
+- Runtime: ~94.6s for 12 steps.
+- The run completed cleanly.
+- Result:
+  - shaping produced a strong non-zero variance batch with `reward≈2.401`, `reward_std≈2.044`
+  - but many other batches still collapsed to tied rewards with `reward_std=0`
+  - several tied high-reward shaped batches reached roughly `4.02`, `4.14`, and `4.18`
+- Interpretation:
+  - reward shaping does help on the harder curriculum too, not just on the refined text-entry curriculum.
+  - however, the gain is still intermittent rather than uniform.
+  - The current shaping layer improves the signal landscape, but does not yet fully solve the tied-reward problem across the harder action-only mix.
+- Current read:
+  - shaping is worth keeping,
+  - but the next refinement likely needs either stronger task-specific shaping for the checkbox and extraction tasks, or a better combination of shaping + generation diversity.
+
