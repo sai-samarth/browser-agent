@@ -103,3 +103,9 @@ Last updated: 2026-03-22T04:05:30Z
 - This means the strongest earlier batches were not just explained by prompt identity; broader rollout dynamics matter more.
 - Current read: curriculum narrowing alone is no longer the best next knob. Reward / sampling design is now the more likely bottleneck.
 
+## Qwen3.5-2B num_generations=4 update
+- Last updated: 2026-03-23T06:58:22Z
+- Increasing `num_generations` to 4 did help somewhat: the run produced a meaningful non-zero variance batch (`reward_std≈1.657`).
+- But many batches still collapsed to tied rewards.
+- Current read: generation diversity helps, but not enough on its own. Reward design is now the main bottleneck.
+

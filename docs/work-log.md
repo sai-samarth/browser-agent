@@ -402,3 +402,26 @@ We corrected the exporter to:
   - treat reward formulation / generation diversity / group sampling as the likely bottleneck,
   - if continuing RL next, change the signal mechanism rather than only swapping task slices.
 
+## 2026-03-23 Qwen3.5-2B action-only num_generations=4 RL run
+
+- Ran the recommended action-only hard-curriculum check with `num_generations=4` using `configs/grpo_multiturn_qwen35_2b_action_phase_hard_gen4.yaml`.
+- Curriculum remained the stronger hard subset:
+  - `click-checkboxes-large`
+  - `click-checkboxes-transfer`
+  - `find-word`
+- Key config change relative to the prior hard run:
+  - `num_generations: 4`
+  - `generation_batch_size: 4`
+- Runtime: ~98.3s for 12 steps.
+- The run completed cleanly with no Qwen3.5 rope-delta / rotary failure.
+- Results:
+  - there was a meaningful non-zero variance batch with `reward≈1.835`, `reward_std≈1.657`
+  - there was also an earlier small but real non-zero variance batch with `reward≈3.15`, `reward_std≈0.02`
+  - however, many batches still collapsed, including tied low-reward and tied high-reward phases.
+- Interpretation:
+  - raising `num_generations` helped somewhat by restoring at least one clearly useful GRPO batch without changing the curriculum.
+  - but it did not solve the main issue; reward variance is still intermittent rather than consistently dense.
+- Current recommendation after this test:
+  - treat this as partial evidence that generation diversity matters,
+  - but also treat it as the point where reward shaping should become the main next knob if we want stronger and more consistent RL signal.
+
