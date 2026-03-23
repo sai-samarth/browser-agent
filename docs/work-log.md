@@ -313,3 +313,23 @@ We corrected the exporter to:
   - reinforced-reasoning hard run: can produce strong variance, but pays for it with much longer completions, clipping, slower runtime, and more negative-reward instability
 - Current recommendation: for RL continuation, prefer the Qwen3.5-2B action-only warm start over the reinforced-reasoning warm start on this stack.
 
+## 2026-03-23 Qwen3.5-2B action-only hard-subset scaled RL run
+
+- Ran a scaled continuation with `configs/grpo_multiturn_qwen35_2b_action_phase_hard_scaled.yaml`.
+- Startpoint: `outputs/qwen35-2b-browser-action-unsloth`
+- Task subset stayed fixed: `click-checkboxes-large`, `click-checkboxes-transfer`, `find-word`
+- Scaling changes relative to the earlier hard run:
+  - `samples_per_task: 8` (up from 4)
+  - `max_steps: 24` (up from 12)
+  - same sampling: `rollout_temperature=0.9`, `rollout_top_p=0.95`
+- Runtime: ~183.3s for 24 steps.
+- The run completed cleanly with no Qwen3.5 rope-delta / rotary failure.
+- Signal quality remained mixed but real:
+  - strongest late batch reached `reward≈1.9`, `reward_std≈2.121`
+  - several other batches still collapsed to tied rewards with `reward_std=0`
+  - examples of collapsed high-reward batches: `reward≈3.08`, `3.16`, `3.04` with `reward_std=0`
+  - examples of collapsed weak batches: `reward≈0.08`, `0.12` with `reward_std=0`
+  - there were also a few low-but-nonzero-variance batches like `reward≈0.35`, `reward_std≈0.0707`
+- Interpretation: scaling the action-only hard subset did not destroy the useful RL signal; it preserved intermittent strong GRPO batches. But the reward landscape is still alternating between informative batches and fully tied batches.
+- Current read: the Qwen3.5-2B action-only hard subset remains the best RL continuation path so far, but it still needs curriculum or reward refinement if we want more consistently nonzero `reward_std` across the run.
+

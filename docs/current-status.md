@@ -75,3 +75,10 @@ Last updated: 2026-03-22T04:05:30Z
 - But compared with the matched action-only run, it was slower, produced much longer completions, hit clipping more often, and showed multiple negative-reward batches.
 - Current read: action-only remains the better RL warm start for the next continuation step on this stack.
 
+## Qwen3.5-2B action-only scaled-run update
+- Last updated: 2026-03-23T06:14:48Z
+- The scaled hard-subset action-only run finished cleanly.
+- Strong nonzero variance still appeared late in the run (`reward_std≈2.121`), so the useful signal survived scaling.
+- But many batches still collapsed to tied rewards, including both high-reward and low-reward collapsed phases.
+- Current read: action-only on the hard subset is still the best RL path, but the signal remains intermittent rather than consistently dense.
+
