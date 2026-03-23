@@ -91,3 +91,9 @@ Last updated: 2026-03-22T04:05:30Z
 - `find-word` has variance but low average reward, so it is not the best immediate curriculum choice.
 - Recommended next action-only curriculum: `enter-text-2`, `enter-password`, `click-checkboxes-large`.
 
+## Qwen3.5-2B refined-curriculum RL update
+- Last updated: 2026-03-23T06:37:52Z
+- The refined action-only curriculum (`enter-text-2`, `enter-password`, `click-checkboxes-large`) finished cleanly but mostly collapsed to tied rewards in live GRPO training.
+- This means the earlier task-signal replay analysis did not transfer cleanly to full training dynamics.
+- Current read: the best live RL signal still comes from the harder checkbox-heavy curriculum rather than the refined mostly-text-entry curriculum.
+

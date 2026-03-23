@@ -359,3 +359,24 @@ We corrected the exporter to:
   - `find-word` is worth revisiting later, but right now it looks more like low-reward difficulty than high-leverage signal.
 - Refined recommendation: next action-only RL curriculum should be `enter-text-2`, `enter-password`, and `click-checkboxes-large`.
 
+## 2026-03-23 Qwen3.5-2B action-only refined-curriculum RL run
+
+- Ran the refined action-only curriculum suggested by the task-signal replay analysis with `configs/grpo_multiturn_qwen35_2b_action_phase_refined.yaml`.
+- Startpoint: `outputs/qwen35-2b-browser-action-unsloth`
+- Refined task mix: `enter-text-2`, `enter-password`, `click-checkboxes-large`
+- Sampling settings matched the earlier action runs: `rollout_temperature=0.9`, `rollout_top_p=0.95`
+- Runtime: ~191.4s for 24 steps.
+- The run completed cleanly with no Qwen3.5 rope-delta / rotary failure.
+- Contrary to the replay-analysis expectation, the live RL run was mostly saturated / tied:
+  - most logged batches had `reward_std = 0`
+  - many high-reward tied batches around `reward≈3.08`, `3.12`, `3.36`
+  - several low-reward tied batches around `reward≈0.4`
+- There was only a small non-zero variance blip early in the run, e.g. `reward≈3.32`, `reward_std≈0.0566`, which is much weaker than the best signal seen in the hard checkbox/find-word curriculum.
+- Interpretation:
+  - the replay analysis was directionally useful for identifying candidate tasks, but it overestimated how much dense GRPO signal the refined enter-text / enter-password curriculum would produce under full training dynamics.
+  - In actual multi-step GRPO training, this refined mix collapsed more than the harder checkbox/find-word curriculum.
+- Revised recommendation after the live test:
+  - keep `enter-text-2` and `enter-password` as potentially useful tasks,
+  - but do not replace the harder signal-bearing tasks entirely.
+  - The best observed live-training signal still came from the harder action-only curriculum centered on `click-checkboxes-large`, with additional support from harder tasks rather than a mostly-text-entry curriculum.
+
