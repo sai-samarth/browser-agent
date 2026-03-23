@@ -125,3 +125,10 @@ Last updated: 2026-03-22T04:05:30Z
 - The shaped hard action-only run produced a real strong non-zero variance batch (`reward_std≈2.044`) but still had many tied batches.
 - Current read: shaping helps, but the tied-reward problem is reduced rather than solved.
 
+## Qwen3.5-0.8B weak-task focus update
+- Last updated: 2026-03-23T10:04:39Z
+- Current 0.8B weak-task focus is `click-checkboxes-large`, `find-word`, and `enter-text-2`.
+- `click-checkboxes-large` is the highest-leverage weak task and appears to be a real state-tracking/set-progress failure rather than a formatting problem.
+- `find-word` and `enter-text-2` mostly need content-level shaping rather than action-format shaping.
+- Recommended next step is targeted SFT/data improvement plus task-specific reward shaping on those tasks before broader GRPO.
+

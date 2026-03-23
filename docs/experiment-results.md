@@ -642,3 +642,62 @@ After fine-tuning with strict parser scoring and corrected loader:
   - shaping is worth keeping,
   - but the next refinement likely needs either stronger task-specific shaping for the checkbox and extraction tasks, or a better combination of shaping + generation diversity.
 
+## 2026-03-23 Qwen3.5-0.8B action-only weak-task failure analysis
+
+- Pivoted back to Qwen3.5-0.8B action-only because it has a much larger improvement margin to demonstrate than Qwen3.5-2B.
+- Verified the correct post-SFT file for 0.8B action-only is `outputs/qwen35-0.8b-browser-action-unsloth/eval_after_conditional_256.json`.
+- Real summary for 0.8B action-only:
+  - baseline exact-match: 17.92%
+  - post-SFT exact-match: 80.83%
+
+### Weakest post-SFT tasks
+- `click-checkboxes-large`: after 0.386, before 0.088, delta +0.298, n=57
+- `find-word`: after 0.750, before 0.000, delta +0.750, n=8
+- `enter-text-2`: after 0.786, before 0.000, delta +0.786, n=14
+- `click-checkboxes-transfer`: after 0.870, before 0.304, delta +0.565, n=23
+- `enter-password`: after 0.917, before 0.167, delta +0.750, n=24
+
+### Failure-mode read
+1. `click-checkboxes-large`
+- This is the highest-leverage weak task.
+- The target is a sequence of checkbox clicks ending with Submit.
+- Failure pattern: the model often locks onto a single visible checkbox and repeats a positional shortcut rather than selecting the correct target subset in sequence.
+- Example failures show systematic wrong-click bias such as repeatedly predicting `click('27')` when the correct next action is a different target checkbox.
+- Interpretation: this is not just formatting failure; it is a state-tracking / set-progress failure.
+
+2. `find-word`
+- Failure pattern is usually semantic extraction error rather than formatting.
+- The model fills the textbox with the wrong word from the paragraph, e.g. `non` instead of `interdum`, or `sem` instead of `nec`.
+- The action form itself is correct; the content is wrong.
+- Interpretation: reward should focus on textbox content closeness to the target extracted word.
+
+3. `enter-text-2`
+- Failure pattern is mostly near-miss transformation error.
+- Example: `fill('14', 'kase')` instead of `fill('14', 'kasie')`.
+- Another miss is only a quoting/canonicalization difference, and another is equivalent submit formatting (`click('15')` vs `click('15', button='left')`).
+- Interpretation: most remaining real headroom is in exact transformed text fidelity, not basic action formatting.
+
+### Reward-design implications
+- `click-checkboxes-large` should get the strongest task-specific shaping first.
+  - Reward overlap between selected checkbox set and target set.
+  - Reward positive delta when a newly selected checkbox belongs to the target set.
+  - Penalize selecting non-target boxes.
+  - Penalize premature submit unless the selected set matches the target set.
+- `find-word` should use textbox-content shaping.
+  - Reward textbox string similarity / exact match to the target word.
+  - Reward improvement in textbox content after fill.
+  - Penalize submit before the textbox matches the target.
+- `enter-text-2` should use transformed-text shaping.
+  - Reward textbox similarity to the target transformed string.
+  - Reward exact fill strongly.
+  - Treat submit before exact match as premature.
+
+### Recommended next focus subset for 0.8B
+- Primary 3-task subset:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Optional 4th later:
+  - `click-checkboxes-transfer`
+- Recommendation: improve task-specific SFT/data for these tasks first, then test shaped rewards on them before broader GRPO.
+
