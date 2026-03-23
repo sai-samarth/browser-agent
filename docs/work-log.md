@@ -380,3 +380,25 @@ We corrected the exporter to:
   - but do not replace the harder signal-bearing tasks entirely.
   - The best observed live-training signal still came from the harder action-only curriculum centered on `click-checkboxes-large`, with additional support from harder tasks rather than a mostly-text-entry curriculum.
 
+## 2026-03-23 Qwen3.5-2B exact live-signal slice run
+
+- Added explicit `task_seed_pairs_file` support to `scripts/train_browsergym_grpo_multiturn.py` so multi-turn RL runs can be built from exact task+seed slices rather than only broad task families.
+- Built a focused action-only run from the exact strongest previously observed live-signal slices:
+  - `click-checkboxes-large` @ seed `935000`
+  - `click-checkboxes-transfer` @ seed `935004`
+  - `find-word` @ seed `937020`
+- Repeated those exact slices as a small targeted curriculum using `configs/grpo_multiturn_qwen35_2b_action_signal_slices.yaml` and `configs/qwen35_action_signal_slices.tsv`.
+- The run finished cleanly in ~97.8s with no Qwen3.5 rope-delta / rotary failure.
+- Result: the exact-slice curriculum did **not** preserve the earlier strong live-signal behavior.
+  - almost all batches still collapsed to `reward_std = 0`
+  - most rewards were tied high (`~3.08`) or tied low (`~0.4`, `~0.08`)
+  - only one small non-zero variance blip appeared (`reward≈0.05`, `reward_std≈0.0424`)
+- Interpretation:
+  - the earlier strong-signal batches were not explained solely by exact prompt identity.
+  - They appear to depend on broader rollout/training dynamics rather than a small set of individually magical prompts.
+  - This rules out a simple “just replay the best seeds” strategy as the next scaling path.
+- Updated recommendation after this test:
+  - stop curriculum-only narrowing as the primary knob,
+  - treat reward formulation / generation diversity / group sampling as the likely bottleneck,
+  - if continuing RL next, change the signal mechanism rather than only swapping task slices.
+

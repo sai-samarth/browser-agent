@@ -97,3 +97,9 @@ Last updated: 2026-03-22T04:05:30Z
 - This means the earlier task-signal replay analysis did not transfer cleanly to full training dynamics.
 - Current read: the best live RL signal still comes from the harder checkbox-heavy curriculum rather than the refined mostly-text-entry curriculum.
 
+## Qwen3.5-2B exact-slice RL update
+- Last updated: 2026-03-23T06:47:34Z
+- The exact live-signal slice run did not reproduce the earlier strong variance batches.
+- This means the strongest earlier batches were not just explained by prompt identity; broader rollout dynamics matter more.
+- Current read: curriculum narrowing alone is no longer the best next knob. Reward / sampling design is now the more likely bottleneck.
+

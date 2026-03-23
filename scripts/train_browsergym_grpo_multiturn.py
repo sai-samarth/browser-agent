@@ -51,6 +51,7 @@ class MultiTurnGRPOConfig:
     task_name: str | None = None
     task_names: list[str] | None = None
     task_names_file: str | None = None
+    task_seed_pairs_file: str | None = None
     dataset_size: int = 12
     samples_per_task: int | None = None
     seed_offset: int = 980000
@@ -236,6 +237,23 @@ def _load_task_names(config: MultiTurnGRPOConfig) -> list[str]:
 
 
 def _build_task_seed_pairs(config: MultiTurnGRPOConfig) -> list[tuple[str, int]]:
+    if config.task_seed_pairs_file:
+        pairs: list[tuple[str, int]] = []
+        for raw in Path(config.task_seed_pairs_file).read_text().splitlines():
+            line = raw.strip()
+            if not line or line.startswith('#'):
+                continue
+            if '\t' in line:
+                task, seed_text = line.split('\t', 1)
+            elif ',' in line:
+                task, seed_text = line.split(',', 1)
+            else:
+                raise ValueError(f"Invalid task-seed pair line: {raw!r}")
+            pairs.append((task.strip(), int(seed_text.strip())))
+        if not pairs:
+            raise ValueError('task_seed_pairs_file provided but no valid pairs found')
+        return pairs
+
     tasks = _load_task_names(config)
     pairs: list[tuple[str, int]] = []
     seed = config.seed_offset
@@ -526,7 +544,7 @@ def main() -> int:
         "adapter_dir": config.adapter_dir,
         "loader": "causal_lm",
         "rollout_max_steps": config.rollout_max_steps,
-        "task_count": len(_load_task_names(config)),
+        "task_count": len({task for task, _seed in _build_task_seed_pairs(config)}),
     }, indent=2))
 
     training_args = GRPOConfig(
