@@ -147,3 +147,9 @@ Last updated: 2026-03-22T04:05:30Z
 - The shaped weak-task gen4 run produced strong reward variance (`reward_std≈2.758` and `≈1.495`).
 - Current read: this parameter setting belongs in the short-list of better GRPO knob combinations for 0.8B.
 
+## 0.8B GRPO sweep summary update
+- Last updated: 2026-03-23T11:19:40Z
+- Best post-GRPO exact-match in the weak-task sweep is 81.67% (vs 80.83% post-SFT baseline).
+- `num_generations=4` improved reward variance but not final eval.
+- Stronger shaping improved reward variance substantially, but its first post-eval tied the current best rather than beating it.
+

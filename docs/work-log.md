@@ -734,3 +734,36 @@ We corrected the exporter to:
 - For the 0.8B weak-task setup, `num_generations=4` is a sensible direction and appears compatible with the shaping layer.
 - This experiment should be included in the sweep table as one of the stronger signal-producing combinations.
 
+## 2026-03-23 Qwen3.5-0.8B GRPO weak-task sweep summary
+
+- Branch: `hermes-08b-grpo-sweep`
+- Sweep objective: determine how far GRPO can improve the 0.8B action-only weak-task setup by varying a few high-leverage knobs.
+- Common task subset for post-eval experiments:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Common warm start:
+  - `outputs/qwen35-0.8b-browser-action-unsloth`
+- Reference post-SFT exact-match before GRPO:
+  - 80.83%
+
+### Post-GRPO sweep table
+| Experiment | Key parameter combination | Reward-signal read | Post-GRPO exact-match |
+|---|---|---:|---:|
+| weak3-shaped-phase1 | shaping enabled, `num_generations=2`, `progress_shaping_scale=1.0`, `premature_submit_penalty=0.1` | strong non-zero variance batches observed during validation; viable continuation | 81.67% |
+| weak3-shaped-gen4 | same shaping, but `num_generations=4`, `generation_batch_size=4` | stronger reward variance than many earlier runs, but eval did not improve | 81.25% |
+| weak3-shaped-stronger | stronger shaping only: `progress_shaping_scale=1.5`, `premature_submit_penalty=0.2`, `num_generations=2` | very strong reward variance (`reward_std≈3.111` peak), but post-eval matched the base shaped run | 81.67% |
+
+### Sweep read
+- GRPO does help this weak-task 0.8B path, but only modestly so far.
+- The best exact-match observed in this sweep is 81.67%, which is about +0.84 points over the 80.83% post-SFT baseline.
+- Increasing `num_generations` to 4 improved reward variance but did not improve post-eval accuracy in this short continuation.
+- Strengthening the shaping weights improved reward variance a lot, but still did not exceed 81.67% in post-eval.
+- Current best post-eval is therefore tied between:
+  - base shaped weak-task GRPO
+  - stronger-shaping weak-task GRPO
+
+### Current best recommendation
+- If the goal is best current post-eval, keep the simpler shaped setup as the default winner because it matches the best score with fewer moving parts.
+- If the goal is next-iteration leverage, the stronger-shaping run is the more interesting starting point, because it materially improved reward separation even though the first post-eval gain was not larger yet.
+
