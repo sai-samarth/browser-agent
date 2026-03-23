@@ -5,7 +5,9 @@ import argparse
 import asyncio
 import json
 import math
+import re
 import sys
+from difflib import SequenceMatcher
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -82,6 +84,8 @@ class MultiTurnGRPOConfig:
     action_error_penalty: float = 0.1
     per_step_penalty: float = 0.01
     max_consecutive_invalid_actions: int = 3
+    progress_shaping_scale: float = 1.0
+    premature_submit_penalty: float = 0.1
 
     @classmethod
     def from_yaml(cls, path: Path) -> "MultiTurnGRPOConfig":
@@ -134,6 +138,12 @@ class BrowserGymWSClient:
             current_obs = _normalize_ws_observation(reset_msg)
 
             for step_idx in range(config.rollout_max_steps):
+                prev_progress = _task_progress(
+                    task_name,
+                    str(current_obs.get("goal") or ""),
+                    str(current_obs.get("text") or ""),
+                    history_rows,
+                )
                 total_reward -= config.per_step_penalty
                 if step_idx == 0:
                     completion_text = first_completion_text
@@ -162,6 +172,7 @@ class BrowserGymWSClient:
                     total_reward += config.parse_valid_reward
                     consecutive_invalid = 0
                     parseable_action_count += 1
+                    total_reward -= _submit_penalty(parsed_action, str(current_obs.get("text") or ""), prev_progress, config)
 
                 step_msg = await _ws_send_recv(
                     ws,
@@ -195,6 +206,14 @@ class BrowserGymWSClient:
                         "post_observation": {"text": str(next_obs.get("text") or "")},
                     }
                 )
+                next_progress = _task_progress(
+                    task_name,
+                    str(next_obs.get("goal") or ""),
+                    str(next_obs.get("text") or ""),
+                    history_rows,
+                )
+                if prev_progress is not None and next_progress is not None:
+                    total_reward += config.progress_shaping_scale * (next_progress - prev_progress)
                 current_obs = next_obs
                 done = step_done
                 if done and step_env_reward > 0:
@@ -339,6 +358,132 @@ def parse_action(response_text: str) -> str | None:
     if extracted is None:
         return None
     return _normalize_browsergym_action(extracted)
+
+def _extract_goal_quoted_text(goal: str) -> str | None:
+    m = re.search(r'"([^"]+)"', goal or '')
+    return m.group(1) if m else None
+
+
+def _target_text_from_goal(goal: str) -> str | None:
+    target = _extract_goal_quoted_text(goal or '')
+    if not target:
+        return None
+    goal_l = (goal or '').lower()
+    if 'all upper case' in goal_l:
+        return target.upper()
+    if 'all lower case' in goal_l:
+        return target.lower()
+    return target
+
+
+def _extract_textbox_values(obs_text: str) -> list[tuple[str, str]]:
+    return re.findall(r"\[(\d+)\] textbox '([^']*)'", obs_text or '')
+
+
+def _extract_button_labels(obs_text: str) -> dict[str, str]:
+    return {bid: label for bid, label in re.findall(r"\[(\d+)\] button '([^']*)'", obs_text or '')}
+
+
+def _extract_checkbox_states(obs_text: str) -> dict[str, bool]:
+    states = {}
+    pattern = re.compile(r"\[(\d+)\] checkbox '([^']*)', checked='(true|false)'")
+    for _bid, label, checked in pattern.findall(obs_text or ''):
+        states[label] = checked == 'true'
+    return states
+
+
+def _parse_fill_action(action: str) -> tuple[str, str] | None:
+    m = re.match(r"fill\('([^']+)',\s*'([^']*)'\)", action or '')
+    if not m:
+        return None
+    return m.group(1), m.group(2)
+
+
+def _parse_click_bid(action: str) -> str | None:
+    m = re.match(r"click\('([^']+)'(?:,.*)?\)", action or '')
+    if not m:
+        return None
+    return m.group(1)
+
+
+def _latest_fill_values(history_rows: list[dict[str, Any]]) -> dict[str, str]:
+    values: dict[str, str] = {}
+    for row in history_rows:
+        parsed = _parse_fill_action(str(row.get('action_str') or ''))
+        if parsed is not None:
+            bid, value = parsed
+            values[bid] = value
+    return values
+
+
+def _checkbox_target_set(goal: str) -> set[str] | None:
+    g = (goal or '').strip()
+    if not g.lower().startswith('select '):
+        return None
+    body = g[len('Select '):]
+    body = re.sub(r' and click submit\.?$', '', body, flags=re.I).strip()
+    if body.lower() == 'nothing':
+        return set()
+    return {p.strip() for p in body.split(',') if p.strip()}
+
+
+def _enter_text_progress(goal: str, obs_text: str, history_rows: list[dict[str, Any]]) -> float | None:
+    target = _target_text_from_goal(goal)
+    if not target:
+        return None
+    textbox_values = _extract_textbox_values(obs_text)
+    current = textbox_values[0][1] if textbox_values else ''
+    if not current and textbox_values:
+        fills = _latest_fill_values(history_rows)
+        current = fills.get(textbox_values[0][0], '')
+    return 1.0 if target == '' else SequenceMatcher(None, current, target).ratio()
+
+
+def _enter_password_progress(goal: str, obs_text: str, history_rows: list[dict[str, Any]]) -> float | None:
+    target = _extract_goal_quoted_text(goal or '')
+    if not target:
+        return None
+    textbox_bids = [bid for bid, _value in _extract_textbox_values(obs_text)]
+    if len(textbox_bids) < 2:
+        return None
+    fills = _latest_fill_values(history_rows)
+    correct = sum(1 for bid in textbox_bids[:2] if fills.get(bid) == target)
+    return correct / 2.0
+
+
+def _checkbox_progress(goal: str, obs_text: str) -> float | None:
+    target = _checkbox_target_set(goal)
+    if target is None:
+        return None
+    states = _extract_checkbox_states(obs_text)
+    checked = {label for label, is_checked in states.items() if is_checked}
+    if not target:
+        return 1.0 if not checked else max(-1.0, -0.25 * len(checked))
+    correct = len(checked & target)
+    incorrect = len(checked - target)
+    score = (correct - incorrect) / max(1, len(target))
+    return max(-1.0, min(1.0, score))
+
+
+def _task_progress(task_name: str, goal: str, obs_text: str, history_rows: list[dict[str, Any]]) -> float | None:
+    if task_name == 'enter-text-2':
+        return _enter_text_progress(goal, obs_text, history_rows)
+    if task_name == 'enter-password':
+        return _enter_password_progress(goal, obs_text, history_rows)
+    if task_name.startswith('click-checkboxes'):
+        return _checkbox_progress(goal, obs_text)
+    return None
+
+
+def _submit_penalty(action: str, obs_text: str, progress: float | None, config: MultiTurnGRPOConfig) -> float:
+    if progress is None or progress >= 0.999:
+        return 0.0
+    bid = _parse_click_bid(action)
+    if bid is None:
+        return 0.0
+    label = (_extract_button_labels(obs_text).get(bid) or '').strip().lower()
+    return config.premature_submit_penalty if label == 'submit' else 0.0
+
 
 
 def _looks_conditional(model_ref: str | None) -> bool:

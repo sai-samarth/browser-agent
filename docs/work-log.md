@@ -505,3 +505,45 @@ We corrected the exporter to:
 - Keep the existing base reward components, then add a bounded task-specific progress delta term.
 - Validate with a short action-only run before any broader scaling.
 
+## 2026-03-23 Reward-shaping implementation and validation
+
+- Implemented the first task-specific progress-shaping layer in `scripts/train_browsergym_grpo_multiturn.py`.
+- Added a shared shaping scaffold on top of the existing base reward:
+  - `progress_shaping_scale`
+  - `premature_submit_penalty`
+- Added task-family-specific progress estimators for:
+  - `enter-text-2`
+  - `enter-password`
+  - `click-checkboxes-*`
+- Progress is computed as a bounded state score and applied via delta shaping:
+  - `reward += progress(next_state) - progress(prev_state)`
+- Also added a small premature-submit penalty when the agent clicks Submit before the task-specific progress is near complete.
+
+### Validation run
+- Validation config: `configs/grpo_multiturn_qwen35_2b_action_phase_refined_shaped.yaml`
+- Task mix:
+  - `enter-text-2`
+  - `enter-password`
+  - `click-checkboxes-large`
+- Runtime: ~184.1s for 24 steps.
+- The run completed cleanly.
+
+### Result versus the previous unshaped refined run
+- Unshaped refined run was mostly tied, with only a tiny non-zero variance blip (`reward_std≈0.0566`).
+- The shaped run produced multiple clearly non-zero variance batches:
+  - early strong batch: `reward≈2.447`, `reward_std≈2.31`
+  - later strong batch: `reward≈2.685`, `reward_std≈1.994`
+  - additional medium-signal batches around `reward_std≈0.226`, `0.129`, and `0.064`
+- Some tied batches still remain, especially in high-reward solved phases, but the signal is now substantially denser than before.
+
+### Interpretation
+- This is the first clean validation that reward redesign materially improves within-group separation for the Qwen3.5-2B action-only RL path.
+- The shaping does not eliminate tied batches, but it turns the previously almost-dead refined curriculum into a run with multiple useful GRPO batches.
+- Current read: reward shaping was the right next knob, and it helps more than additional curriculum-only tuning did.
+
+### Recommended next step
+- Keep the shaping layer and extend it carefully.
+- Re-run the stronger action-only curriculum under the shaped reward to see whether we can combine:
+  - the better task mix from the harder curriculum
+  - with the denser signal from task-specific progress shaping.
+

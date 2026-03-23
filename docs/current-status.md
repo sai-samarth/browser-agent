@@ -114,3 +114,9 @@ Last updated: 2026-03-22T04:05:30Z
 - Current read: reward shaping is now the main bottleneck, not curriculum-only tuning.
 - Recommended next implementation is task-specific progress shaping for `enter-text-2`, `enter-password`, and `click-checkboxes-large` layered on top of the existing base reward.
 
+## Reward-shaping validation update
+- Last updated: 2026-03-23T08:32:38Z
+- The first task-specific shaping layer materially improved reward variance on the refined action-only curriculum.
+- Strong non-zero variance batches now appear (`reward_std≈2.31` and `≈1.994`), where the unshaped refined run was mostly tied.
+- Current read: reward shaping is working and should be retained for the next RL iteration.
+
