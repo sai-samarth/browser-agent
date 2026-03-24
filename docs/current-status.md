@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-03-24T11:45:23Z
+Last updated: 2026-03-24T12:59:13Z
 
 ## Latest completed result
 ### Qwen3.5-0.8B mixed weak-task continuation SFT
@@ -465,4 +465,28 @@ Last updated: 2026-03-24T11:45:23Z
 - The main negative movement was regression on `click-checkboxes-large`, which was the most important weak checkbox task we were trying to improve.
 - Current read: for this checkpoint/subset/reward configuration, GRPO did not add value on top of the mixed SFT warm start.
 - The mixed 50/50 continuation SFT checkpoint (`83.33%`) remains the best current action-only result to carry forward.
+
+## 2026-03-24 Qwen3.5-9B 4-bit teacher baseline on action-only validation
+
+- Last updated: 2026-03-24T12:59:13Z
+- Ran the standard action-only validation eval with bare `Qwen/Qwen3.5-9B` loaded locally in 4-bit through the shared eval path.
+- Eval file: `outputs/qwen35-9b-4bit-action-baseline/eval_action_only_240_256.json`
+- Eval loader: `conditional_generation`
+- `max_new_tokens=256`
+- No adapter was applied; this is the raw 9B teacher-style baseline under the same strict parser/exact-match protocol used for the smaller models.
+
+### Result
+- Parseable rate: `72.08%`
+- Exact-match: `58.33%`
+
+### Comparison
+- This is far below the best current 0.8B mixed continuation SFT checkpoint:
+  - `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+  - parseable `100.00%`, exact-match `83.33%`
+- It is also below the original 0.8B action-only post-SFT checkpoint (`80.83%`).
+
+### Interpretation
+- Under the default strict action-only eval prompt, raw Qwen3.5-9B 4-bit is much less reliable at emitting valid canonical BrowserGym action lines than the tuned 0.8B action-only checkpoints.
+- This does not mean the 9B model lacks task knowledge; it means that under this exact one-step strict-action protocol, the smaller tuned action-only models are substantially better calibrated to the output contract.
+- Current consolidation read: the strongest validated action-only result in this project remains the mixed-data 0.8B continuation SFT checkpoint at `83.33%` exact-match.
 
