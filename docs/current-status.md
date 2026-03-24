@@ -3,6 +3,14 @@
 Last updated: 2026-03-24T07:38:57Z
 
 ## Latest completed result
+### Qwen3.5-0.8B mixed weak-task continuation SFT
+- Warm start: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Output dir: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+- Full-val eval at 256 tokens with corrected conditional-generation loader: parseable 100.00%, exact 83.33% on 240 validation rows.
+- This is currently the best continuation-SFT variant on the 0.8B action-only line.
+- Carry-forward recommendation: use this checkpoint for the next continuation-stage comparison or downstream post-SFT follow-up work.
+
+## Prior completed result
 ### Qwen3.5-2B reinforced reasoning-action
 - Training dataset: `data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset`
 - Output dir: `outputs/qwen35-2b-browser-reasoning-reinforced-unsloth`
