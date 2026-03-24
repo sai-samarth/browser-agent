@@ -837,3 +837,140 @@ After fine-tuning with strict parser scoring and corrected loader:
 - If the goal is best current post-eval, keep the simpler shaped setup as the default winner because it matches the best score with fewer moving parts.
 - If the goal is next-iteration leverage, the stronger-shaping run is the more interesting starting point, because it materially improved reward separation even though the first post-eval gain was not larger yet.
 
+## 2026-03-24 Qwen3.5-0.8B weak-task 1000-row continuation SFT launch
+
+- Last updated: 2026-03-24T04:41:26Z
+- Launched a continuation SFT run from the existing 0.8B action-only adapter.
+- Warm start adapter: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Base model: `Qwen/Qwen3.5-0.8B`
+- Training dataset: `data/exports/phase1_sft_v2_action_weak3_exact1000/hf_dataset`
+- Output dir: `outputs/qwen35-0.8b-browser-action-weak3-exact1000-cont-sft`
+- Log file: `logs/qwen35_08b_weak3_exact1000_cont_sft.log`
+- Weak-task train subset is restricted to:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Exact train-size construction:
+  - 930 unique weak-task rows available in the source train split
+  - added 70 duplicated rows to reach exactly 1000 train rows
+  - resulting train counts:
+    - `click-checkboxes-large`: 667
+    - `enter-text-2`: 191
+    - `find-word`: 142
+- Validation split was kept as the full action-only validation set to preserve end-of-training full-val evaluation compatibility.
+- Continuation SFT hyperparameters:
+  - `max_length=2048`
+  - `num_train_epochs=2.0`
+  - `per_device_train_batch_size=4`
+  - `gradient_accumulation_steps=4`
+  - `learning_rate=1e-4`
+  - `seed=3407`
+- Initial launch check passed: model load, adapter attach, dataset map/tokenization, and trainer step-loop start all completed cleanly.
+- Expected training length at launch: about 126 optimizer steps.
+
+## 2026-03-24 Qwen3.5-0.8B weak-task 1000-row continuation SFT completion
+
+- Last updated: 2026-03-24T05:42:57Z
+- The weak-task 1000-row continuation SFT finished cleanly.
+- Warm start adapter: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Output dir: `outputs/qwen35-0.8b-browser-action-weak3-exact1000-cont-sft`
+- Log file: `logs/qwen35_08b_weak3_exact1000_cont_sft.log`
+- Final adapter artifacts are present, including `adapter_model.safetensors`, tokenizer files, processor config, and `run_summary.json`.
+- Final training stats from the trainer log:
+  - `train_runtime`: 3626s
+  - `train_samples_per_second`: 0.552
+  - `train_steps_per_second`: 0.035
+  - `train_loss`: 0.04394
+  - `epoch`: 2.0
+- Logged loss trend over the run improved from about `0.08149` early to about `0.02019` late.
+- No end-of-training evaluation has been run yet.
+- Next required step is a full end-of-training evaluation on the standard action-only validation split, then compare against the prior post-SFT baseline of 80.83% exact-match.
+
+## 2026-03-24 Qwen3.5-0.8B weak-task continuation SFT post-train eval
+
+- Last updated: 2026-03-24T05:50:30Z
+- Ran the required end-of-training evaluation on the full standard action-only validation split using the corrected conditional-generation eval path.
+- Evaluated adapter: `outputs/qwen35-0.8b-browser-action-weak3-exact1000-cont-sft`
+- Eval file: `outputs/qwen35-0.8b-browser-action-weak3-exact1000-cont-sft/eval_after_conditional_256.json`
+- Eval loader: `conditional_generation`
+- `max_new_tokens=256`
+
+### Full validation result
+- Parseable rate: `100.00%`
+- Exact-match: `81.25%`
+- Prior 0.8B post-SFT baseline on the same eval path: `80.83%`
+- Net full-val gain from this continuation SFT: about `+0.42` exact-match points.
+
+### Targeted weak-task result
+- `click-checkboxes-large`: `38.60% -> 45.61%` (`+7.02` points)
+- `find-word`: `75.00% -> 87.50%` (`+12.50` points)
+- `enter-text-2`: `78.57% -> 85.71%` (`+7.14` points)
+- All three targeted tasks improved.
+
+### Weak-task generation read
+- `find-word` improved in the intended content-selection way.
+  - Example improvement: `fill('14', 'non') -> fill('14', 'interdum')` on a row whose target was `fill('14', 'interdum')`.
+- `enter-text-2` improved in the intended transformation-fidelity way.
+  - Example improvement: `fill('14', 'kase') -> fill('14', 'kasie')` on a row whose target was `fill('14', 'kasie')`.
+- `click-checkboxes-large` improved materially but remains unstable.
+  - Several rows that previously guessed the wrong checkbox ID now emit the exact target ID.
+  - But some previously correct rows regressed to nearby plausible checkbox IDs, so the continuation improved target-ID selection overall without fully solving state-tracking / set-progress errors.
+
+### Collateral regressions
+- Non-target tasks as a group dropped from `96.27%` to `93.17%` exact-match.
+- Largest observed regressions:
+  - `click-checkboxes-transfer`: `86.96% -> 73.91%` (`-13.04` points)
+  - `read-table`: `92.86% -> 85.71%` (`-7.14` points)
+  - `click-option`: `100.00% -> 95.00%` (`-5.00` points)
+- This means the continuation achieved the intended weak-task improvement, but it over-specialized enough to hurt a few neighboring/general tasks, especially `click-checkboxes-transfer`.
+
+### Current read
+- The 1000-row weak-task continuation SFT is a real but modest win if judged only by full-val exact-match (`81.25% > 80.83%`).
+- More importantly, it validates that targeted SFT can move the intended weak tasks in the right direction.
+- However, the collateral damage means this exact continuation recipe should not be treated as the final best path.
+- Best next SFT direction is likely a mixed dataset that still boosts the weak tasks, but preserves more broad-task coverage than this weak-task-only 1000-row continuation.
+
+## 2026-03-24 Qwen3.5-0.8B mixed weak-task continuation SFT launch
+
+- Last updated: 2026-03-24T06:02:11Z
+- Launched a fresh continuation SFT run from the original 0.8B action-only adapter (`80.83%` baseline), not from the prior weak-task-only continuation.
+- Warm start adapter: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Base model: `Qwen/Qwen3.5-0.8B`
+- Training dataset: `data/exports/phase1_sft_v2_action_weak3_mixed50_1000/hf_dataset`
+- Output dir: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+- Log file: `logs/qwen35_08b_weak3_mixed50_1000_cont_sft.log`
+
+### Dataset construction
+- Total train size: `1000`
+- Weak-task rows: `500`
+- Non-weak rows: `500`
+- No duplication was required on either side.
+- Weak-task set:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+- Sampled weak-task counts in the final train split:
+  - `click-checkboxes-large`: `333`
+  - `enter-text-2`: `91`
+  - `find-word`: `76`
+- Validation split was kept as the full standard action-only validation set for end-of-training comparison against the same 240-row benchmark.
+
+### Training hyperparameters
+- `max_length=2048`
+- `num_train_epochs=2.0`
+- `per_device_train_batch_size=4`
+- `gradient_accumulation_steps=4`
+- `learning_rate=1e-4`
+- `seed=3407`
+
+### Initial launch check
+- Model load passed.
+- Adapter attach passed.
+- Dataset rendering and tokenization passed.
+- Trainer entered the step loop cleanly.
+- Expected training length at launch: about `126` optimizer steps.
+
+### Why this run exists
+- The earlier weak-task-only 1000-row continuation improved the intended weak tasks but caused collateral regressions on other tasks, especially `click-checkboxes-transfer`.
+- This mixed 50/50 continuation tests whether we can keep most of the targeted weak-task gains while preserving broader action-only behavior.
+
