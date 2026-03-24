@@ -75,3 +75,25 @@ Good production runs should have:
 
 This repo tracks code, configs, docs, and small derived reports.
 Raw generated corpora remain local and should stay out of git.
+
+
+## Local GRPO smoke workflow
+
+A local GRPO smoke path now exists for one-step BrowserGym action models.
+
+See `docs/grpo-local.md` for the full setup.
+
+Minimal flow:
+
+```bash
+# 1. Start a local BrowserGym server pinned to one task
+ docker rm -f browsergym-click-test 2>/dev/null || true
+ docker run -d    --name browsergym-click-test    -p 8000:8000    -e BROWSERGYM_BENCHMARK=miniwob    -e BROWSERGYM_TASK_NAME=click-test    browsergym-env:latest
+
+# 2. Dry-run the reward path
+ source /home/saisamarth/venvs/browser-agent-rl/bin/activate
+ python scripts/train_browsergym_grpo.py    --config configs/grpo_smoke_qwen25_1p5b_click-test.yaml    --dry-run-reward
+
+# 3. Run the tiny GRPO smoke train
+ python scripts/train_browsergym_grpo.py    --config configs/grpo_smoke_qwen25_1p5b_click-test.yaml
+```

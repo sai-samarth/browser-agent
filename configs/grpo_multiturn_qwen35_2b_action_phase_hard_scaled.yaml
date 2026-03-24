@@ -1,0 +1,36 @@
+model_name: Qwen/Qwen3.5-2B
+adapter_dir: outputs/qwen35-2b-browser-action-unsloth
+browsergym_base_url: http://127.0.0.1:8000
+task_names:
+  - click-checkboxes-large
+  - click-checkboxes-transfer
+  - find-word
+output_dir: outputs/qwen35-2b-browser-action-grpo-multiturn-phase-hard-scaled
+samples_per_task: 8
+seed_offset: 937000
+max_prompt_length: 1536
+max_completion_length: 64
+learning_rate: 5.0e-6
+warmup_steps: 4
+logging_steps: 1
+save_steps: 8
+max_steps: 24
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 1
+num_generations: 2
+generation_batch_size: 2
+bf16: true
+report_to: none
+use_vllm: false
+rollout_max_steps: 10
+rollout_generation_max_new_tokens: 48
+rollout_do_sample: true
+rollout_temperature: 0.9
+rollout_top_p: 0.95
+final_success_reward: 2.0
+env_reward_scale: 1.0
+parse_valid_reward: 0.05
+parse_invalid_penalty: 0.05
+action_error_penalty: 0.1
+per_step_penalty: 0.01
+max_consecutive_invalid_actions: 3

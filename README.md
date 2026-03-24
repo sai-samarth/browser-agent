@@ -1,109 +1,98 @@
-# Browser Agent
+# browser-agent
 
-BrowserGym + OpenEnv trace-generation workspace for collecting browser-use trajectories, analyzing rollout quality, and preparing datasets for small-model fine-tuning.
+A reproducible BrowserGym + MiniWoB research repo for collecting browser-use traces, exporting SFT datasets, fine-tuning small multimodal models, and stress-testing GRPO on browser tasks.
 
-Current focus:
-- generate high-quality MiniWoB traces
-- convert traces into SFT-ready formats
-- later extend the same stack toward RL methods such as GRPO
+This repo is the final consolidated snapshot of the project.
 
-## Current capabilities
+## What this project showed
 
-The repo already contains working collection and analysis primitives:
+### Headline results
 
-- `scripts/collect_rollouts.py`
-  - connects to OpenEnv over WebSocket
-  - supports scripted and teacher-driven action generation
-  - writes `trajectory_steps.jsonl` and `episode_summaries.jsonl`
-- `scripts/run_parallel_miniwob.py`
-  - shards MiniWoB tasks across workers
-  - launches per-worker BrowserGym containers and collectors
-- `scripts/summarize_parallel_run.py`
-  - aggregates worker outputs for one parallel run
+| Model | Training setup | Validation exact-match |
+|---|---|---:|
+| Qwen2.5-1.5B-Instruct | action-only SFT | 79.58% |
+| Qwen2.5-1.5B-Instruct | reasoning+action SFT | 81.67% strict / 83.75% canonicalized |
+| Qwen3.5-0.8B | action-only SFT | 80.83% |
+| Qwen3.5-0.8B | mixed weak-task continuation SFT | 83.33% |
+| Qwen3.5-2B | action-only SFT | 87.50% |
+| Qwen3.5-2B | reinforced reasoning+action SFT | 84.17% with reinforced prompt, 29.17% on default prompt |
 
-## Repository layout
+### Final takeaways
 
-- `configs/` — rollout and teacher configs
-- `scripts/` — collection, orchestration, summarization, and analysis scripts
-- `docs/` — runbooks, schema notes, and project documentation
-- `data/` — local generated artifacts and task lists
-- `reports/` — committed analysis snapshots and derived summaries
+- Action-only SFT was the most reliable format for one-step BrowserGym execution.
+- Reasoning+action often preserved task knowledge but made executable formatting brittle under default prompts.
+- A Qwen3.5-specific evaluation bug initially hid real gains. Correct conditional-generation loading was required for valid Qwen3.5 evaluation.
+- Targeted weak-task continuation helped, but a pure weak-task continuation over-specialized.
+- The best 0.8B checkpoint came from a mixed continuation: 500 weak-task rows + 500 broad rows, reaching 83.33% exact-match.
+- GRPO infrastructure was validated and reward shaping improved signal, but no GRPO run beat the best SFT checkpoint.
 
-## Data model
+## Which checkpoint to use
 
-Raw collection outputs land in timestamped run directories under `data/rollouts/`:
+Two answers are true at once:
 
-- `trajectory_steps.jsonl` — one JSON object per environment step
-- `episode_summaries.jsonl` — one JSON object per episode
-- `resolved_config.yaml` — exact config used for the run
+- Best absolute score in this repo: `outputs/qwen35-2b-browser-action-unsloth` at 87.50% exact-match.
+- Best small-model / final release checkpoint: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft` at 83.33% exact-match.
 
-Parallel runs write orchestration metadata under `data/parallel_runs/`:
+If you want the smallest strong checkpoint to build on, start with the 0.8B mixed continuation.
 
-- per-worker configs
-- per-worker logs
-- references to the rollout directories created by each worker
+## Repository contents
 
-See `docs/data-schema.md` for the current schema and intended downstream exports.
+- `scripts/collect_rollouts.py` — OpenEnv / BrowserGym rollout collection
+- `scripts/export_sft_dataset.py` — export rollout traces into action-only and reasoning+action chat datasets
+- `scripts/train_unsloth_sft_generic.py` — baseline Unsloth SFT
+- `scripts/train_qwen35_continuation_sft.py` — continuation SFT from an existing Qwen3.5 adapter
+- `scripts/eval_action_model.py` — strict exact-match evaluation with the corrected Qwen3.5 loader path
+- `scripts/train_browsergym_grpo.py` and `scripts/train_browsergym_grpo_multiturn.py` — local RL / GRPO experiments
+- `configs/` — tracked configs used for the main experiments
+- `docs/` — consolidated notes, methodology, reproducibility, and final writeups
 
-## Quick start
+## Reproducibility paths
 
-### 1. Sync dependencies
+### Fastest path: reproduce the final 0.8B result
 
-```bash
-uv sync
-```
+1. Prepare the exported base dataset locally, either by:
+   - downloading the released dataset from Hugging Face, or
+   - rebuilding it from local rollout traces.
+2. Train the Qwen3.5-0.8B action-only baseline adapter.
+3. Build the mixed weak-task continuation subset.
+4. Run continuation SFT.
+5. Evaluate with the corrected conditional-generation path.
 
-### 2. Run a single collector
+See:
+- `docs/reproducibility.md`
+- `scripts/download_hf_dataset.py`
+- `scripts/train_qwen35_08b_action_baseline.sh`
+- `scripts/reproduce_qwen35_08b_mixed_best.sh`
 
-```bash
-uv run python scripts/collect_rollouts.py --config configs/rollout_config.yaml
-```
+## Important docs
 
-### 3. Run a parallel MiniWoB collection job
+- `docs/final-summary.md` — concise project conclusions
+- `docs/reproducibility.md` — exact commands and environment notes
+- `docs/current-status.md` — final consolidated status snapshot
+- `docs/experiment-results.md` — detailed experiment log with metrics
+- `docs/work-log.md` — chronological project notes
 
-```bash
-uv run python scripts/run_parallel_miniwob.py   --config-template configs/rollout_config.yaml   --workers 4   --run-name-prefix miniwob_train
-```
+## Environment notes
 
-### 4. Summarize one parallel run
+This repo has two practical dependency tiers:
 
-```bash
-uv run python scripts/summarize_parallel_run.py   --parallel-run-root data/parallel_runs/<run_name>
-```
+- Lightweight analysis / export: `uv sync`
+- GPU fine-tuning / RL: a dedicated CUDA environment with `torch`, `transformers`, `peft`, `datasets`, and `unsloth`
 
-### 5. Build a corpus baseline report across existing runs
+Important RL note for Qwen3.5:
 
-```bash
-uv run python scripts/analyze_rollout_corpus.py
-```
+- the old RL env with `transformers==4.57.3` was not sufficient for the later Qwen3.5 work
+- the fixed path used `transformers==5.3.0` and `weave==0.52.35`
 
-Generated reports are written under `reports/baselines/` by default.
+## What is intentionally not committed
 
-## Phase 1 plan
+To keep the repo reproducible without becoming enormous, raw rollout corpora and full adapter weights are not the main source of truth in git.
 
-Phase 1 is about producing enough high-quality traces to fine-tune a small browser-use model.
+The repo commits:
+- manifests
+- configs
+- scripts
+- compact evaluation artifacts
+- experiment notes
 
-Execution order:
-1. make the repo proper and reproducible
-2. baseline the existing runs
-3. diagnose accuracy bottlenecks by task family and failure mode
-4. stabilize one teacher backend
-5. improve trace quality on a fixed evaluation slice
-6. define SFT eligibility rules
-7. export training-ready datasets
-8. scale generation
-
-A detailed plan is kept in `.hermes/plans/` for local project planning.
-
-## Current status
-
-- collection infrastructure works
-- multiple real rollout corpora already exist locally under `data/`
-- best historical runs were produced on 2026-02-21
-- later 2026-02-24 attempts appear to have failed mostly from teacher backend auth/connectivity issues
-
-## Notes
-
-- This repo intentionally does not track raw rollout corpora in git.
-- Large generated artifacts under `data/rollouts/` and `data/parallel_runs/` stay local.
-- Committed reports should be small, derived summaries rather than raw traces.
+The repo does not rely on chat memory for project state. The final record lives in `docs/`.

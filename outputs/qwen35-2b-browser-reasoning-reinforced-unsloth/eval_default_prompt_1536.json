@@ -1,0 +1,1694 @@
+{
+  "summary": {
+    "split": "val",
+    "num_examples": 240,
+    "parseable_rate": 0.4166666666666667,
+    "exact_match": 0.2916666666666667,
+    "adapter_dir": "outputs/qwen35-2b-browser-reasoning-reinforced-unsloth",
+    "model_name": "Qwen/Qwen3.5-2B",
+    "max_new_tokens": 1536,
+    "loader": "conditional_generation"
+  },
+  "rows": [
+    {
+      "task_name": "click-button",
+      "target": "click('18')",
+      "prediction": "click(bid='18')",
+      "raw_generation": "click(bid='18')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('16')",
+      "prediction": "click(bid='16')",
+      "raw_generation": "click(bid='16')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('14')",
+      "prediction": null,
+      "raw_generation": "Click the \"Okay\" button with bid '14'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('12')",
+      "prediction": "click(bid='12')",
+      "raw_generation": "click(bid='12')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('19')",
+      "prediction": null,
+      "raw_generation": "Click the button with bid '19' which has the text 'yes'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('20')",
+      "prediction": "click(bid='20')",
+      "raw_generation": "click(bid='20')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('21')",
+      "prediction": "click(bid='21')",
+      "raw_generation": "click(bid='21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('12')",
+      "prediction": null,
+      "raw_generation": "Click the \"ok\" button with bid 12.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "Click the button with bid '15' which has the text 'No'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('20')",
+      "prediction": "click(bid='20')",
+      "raw_generation": "click(bid='20')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "Select the checkbox with bid '21' which has the text 'cN'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The checkbox 'cN' (bid 21) is now selected (checked='true'). The next step is to click the 'Submit' button (bid 27) to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('33', button='left')",
+      "prediction": "click('33')",
+      "raw_generation": "The goal is to select nothing and click Submit. Currently, all checkboxes are unchecked (checked='false'), so the condition \"select nothing\" is already satisfied. The next step is to click the Submit button.\n\nAction: click('33')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "The goal is to select nothing and click Submit. Currently, all checkboxes are unchecked (checked='false'), so the condition \"select nothing\" is already satisfied. The next step is to click the Submit button.\n\nAction: click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "I need to select the checkboxes for ZLR, kb, and oh0, then click Submit. Let me start by clicking the first checkbox 'kb' which has bid '18'.\n\nAction: click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('24')",
+      "prediction": null,
+      "raw_generation": "The checkbox 'kb' is now selected (checked='true'). The next target is 'oh0' which has bid '30'. I will click on it.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": null,
+      "raw_generation": "The goal is to select ZLR, kb, and oh0, then click Submit. Currently, kb and ZLR are selected (checked='true'), but oh0 is not. I need to click on the checkbox with bid '30' to select oh0.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('36')",
+      "prediction": null,
+      "raw_generation": "The goal is to select ZLR, kb, and oh0, then click Submit. Looking at the observation:\n- ZLR (bid 24) is already checked\n- kb (bid 18) is already checked\n- oh0 (bid 30) is already checked\n\nAll required checkboxes are now selected. The next step is to click the Submit button.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "The goal is to select nothing and click Submit. Currently, all checkboxes are unchecked (checked='false'), so the condition \"select nothing\" is already satisfied. The next step is to click the Submit button.\n\nAction: click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "I need to select the checkboxes 'tjOM' and 'pKi9s0b', then click Submit. I'll start by clicking the 'tjOM' checkbox first.\n\nAction: click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The checkbox 'tjOM' (bid 30) is now selected (checked='true'). The next step is to select the checkbox 'pKi9s0b' (bid 27) and then click the 'Submit' button. I will now click on the checkbox 'pKi9s0b'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('36')",
+      "prediction": null,
+      "raw_generation": "The goal is to select tjOM, pKi9s0b and click Submit. Looking at the observation:\n- tjOM (bid 30) is already checked='true'\n- pKi9s0b (bid 27) is already checked='true'\n- Submit button (bid 36) is available\n\nBoth required checkboxes are now selected. The next step is to click the Submit button.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('24')",
+      "prediction": "click(bid='24')",
+      "raw_generation": "I need to select checkboxes '3OY' and 'sW' (bid 24 and 27) and then click Submit. Let me start by clicking the first checkbox '3OY'.\n\nAction: click(bid='24')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The checkbox '3OY' (bid 24) is now selected (checked='true'). The next step is to select the checkbox 'sW' (bid 27) and then click Submit. I will now click on the checkbox 'sW'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "The goal is to select 3OY and sW, then click Submit. Both checkboxes 24 (3OY) and 27 (sW) are already checked. The next step is to click the Submit button with bid 30.\n\nAction: click('30')\n</think>\n\nclick('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "I need to select the checkboxes with IDs sJnuLd, Rp, and DTW, then click Submit. Let me start by clicking the first checkbox, sJnuLd (bid 18).\n\nAction: click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "The checkbox 'sJnuLd' is now selected (checked='true'). The next target is 'Rp' which has bid '27'. I will click on it.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The goal is to select sJnuLd, Rp, and DTW, then click Submit. So far, sJnuLd and DTW are selected. The next one to select is Rp, which has bid '27'. I will click on the checkbox with bid '27'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": null,
+      "raw_generation": "The goal is to select sJnuLd, Rp, and DTW, then click Submit. Looking at the observation:\n- sJnuLd (bid 18) is already checked\n- DTW (bid 21) is already checked\n- Rp (bid 27) is already checked\n\nAll required checkboxes are already selected. The next step is to click the Submit button (bid 30).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": null,
+      "raw_generation": "Select the checkbox with bid '18' which has the text 'v5Jf2'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The goal is to select v5Jf2 and click Submit. The checkbox 'v5Jf2' (bid 18) is already selected (checked='true'). The next step is to click the 'Submit' button (bid 27).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "Select the checkbox with bid '18' which has the text 'ztU'.\n</think>\n\nclick('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('33')",
+      "prediction": null,
+      "raw_generation": "The goal is to select the checkbox 'ztU' and then click 'Submit'. The checkbox 'ztU' (bid 18) is already selected (checked='true'), so the next step is to click the 'Submit' button (bid 33).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('21')",
+      "prediction": "click(bid='21')",
+      "raw_generation": "I need to select the radio button with text 'uD' (bid 21) and then click the 'Submit' button (bid 30). Let me start by selecting the 'uD' radio button.\n\nAction: click(bid='21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": null,
+      "raw_generation": "The goal is to select \"uD\" and click Submit. The \"uD\" radio button (bid 21) is already selected (checked='true'), so the next step is to click the \"Submit\" button (bid 30).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('18')",
+      "prediction": null,
+      "raw_generation": "Select the radio button with bid '18' which has the text '6ERh6O'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "The goal is to select 6ERh6O and click Submit. The radio button '6ERh6O' (bid 18) is already selected (checked='true'), and the 'Submit' button (bid 24) is visible. Since the selection is complete, the next step is to click the Submit button.\n\nAction: click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "Select the radio button with bid '21' which has the text '3A'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "The goal is to select 3A and click Submit. The radio button for '3A' (bid 21) is already selected (checked='true') and focused. The next step is to click the 'Submit' button (bid 24) to complete the task.\n\nAction: click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click(bid='24')",
+      "raw_generation": "I need to select the radio button with text 'Rl8zns' (bid 24) and then click the Submit button (bid 36). Let me start by selecting the radio button.\n\nAction: click(bid='24')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('36')",
+      "prediction": "click('36')",
+      "raw_generation": "The goal is to select Rl8zns and click Submit. The observation shows that Rl8zns (bid 24) is already selected (checked='true') and focused. The next step is to click the Submit button (bid 36) to complete the task.\n\nAction: click('36')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "Select the radio button with bid '21' which has the text '5jsg'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "The goal is to select 5jsg and click Submit. The radio button '5jsg' (bid 21) is already selected (checked='true') and focused. The next step is to click the 'Submit' button (bid 24) to complete the task.\n\nAction: click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": null,
+      "raw_generation": "Select the radio button with bid '30' which has the text 'Ki'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('33')",
+      "prediction": null,
+      "raw_generation": "The goal is to select \"Ki\" and click Submit. The \"Ki\" radio button (bid 30) is already selected (checked='true'), so the next step is to click the \"Submit\" button (bid 33).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "I need to select the radio button for 'ZjiL' and then click the Submit button. The first step is to click on the radio button with bid '18' which has the text 'ZjiL'.\n\nAction: click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": null,
+      "raw_generation": "The goal is to select ZjiL and click Submit. The ZjiL radio button (bid 18) is already selected (checked='true'), so the next step is to click the Submit button (bid 30).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "I need to select the radio button for 'DTW' and then click the 'Submit' button. Looking at the observation, the 'DTW' radio button has bid '24'. I'll first click on that radio button to select it.\n\nAction: click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('33')",
+      "prediction": null,
+      "raw_generation": "The goal is to select DTW and click Submit. DTW (bid 24) is already selected (checked='true'). The next step is to click the Submit button (bid 33).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "I need to select the radio button with bid '24' (DiW1g6) and then click the Submit button. Let me start by selecting the radio button.\n\nAction: click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "The goal is to select DiW1g6 and click Submit. DiW1g6 (bid 24) is already selected (checked='true') and focused. The next step is to click the Submit button (bid 27).\n\nAction: click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('27')",
+      "prediction": "click(bid='27')",
+      "raw_generation": "I need to select the radio button with text 'aeUT' (bid 27) and then click the Submit button (bid 30). Let me start by selecting the radio button.\n\nAction: click(bid='27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "The goal is to select \"aeUT\" and click Submit. The observation shows that \"aeUT\" (bid 27) is already selected (checked='true') and focused. The next step is to click the \"Submit\" button (bid 30) to complete the task.\n\nAction: click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": null,
+      "raw_generation": "Click button 'ONE' with bid 13.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'kanesha')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"kanesha\" (lowercase) and then click Submit. First, I will fill the textbox.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The text \"kanesha\" has been successfully entered into the textbox. Now I need to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'kasie')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"kasie\" and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "The text \"kasie\" has been successfully entered into the textbox (bid 14). The next step is to click the Submit button (bid 15) to complete the task.\n</think>\n\nclick('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'keli')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"keli\" and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The text \"keli\" has been successfully entered into the textbox. Now I need to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', \"kenda\")",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"kenda\" and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15', button='left')",
+      "prediction": null,
+      "raw_generation": "The text \"kenda\" has been successfully entered into the textbox. The next step is to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'keli')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"keli\" and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The text \"keli\" has been successfully entered into the textbox. Now I need to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'NATHALIE')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"NATHALIE\" and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The text \"NATHALIE\" has been successfully entered into the textbox. Now I need to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'marcella')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with \"marcella\" (lowercase) and then click Submit. First, I will fill the textbox.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The text \"marcella\" has been successfully entered into the textbox. Now I need to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('13')",
+      "prediction": null,
+      "raw_generation": "Focus the 2nd textbox, which has bid '13'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('14')",
+      "prediction": null,
+      "raw_generation": "Focus the 3rd textbox, which has bid '13'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('13')",
+      "prediction": null,
+      "raw_generation": "Focus the 2nd textbox, which has bid '13'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": null,
+      "raw_generation": "Focus the 1st textbox, which has bid '12'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('13')",
+      "prediction": null,
+      "raw_generation": "Focus the 2nd textbox, which has bid '13'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": null,
+      "raw_generation": "Focus the 1st textbox, which has bid '12'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": null,
+      "raw_generation": "Focus the 1st textbox, which has bid '12'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": null,
+      "raw_generation": "Focus the 1st textbox, which has bid '12'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": null,
+      "raw_generation": "Focus the 1st textbox, which has bid '12'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('14')",
+      "prediction": null,
+      "raw_generation": "Focus the 3rd textbox, which has bid '13'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Wall')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the Last name value \"Wall\" and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": null,
+      "raw_generation": "The text field [31] now contains 'Wall' as required. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Female')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the value 'Female' from the Gender cell.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": null,
+      "raw_generation": "The text field [31] has been filled with 'Female' and is now focused. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Arabic')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the value 'Arabic' and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32', button='left')",
+      "prediction": null,
+      "raw_generation": "The text field [31] has been filled with 'Arabic' and is now focused. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Male')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the value 'Male' and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": null,
+      "raw_generation": "The text field [31] has been filled with 'Male' and is now focused. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Vincent')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the value 'Vincent' (the Last name from the table).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": null,
+      "raw_generation": "The text field [31] now contains 'Vincent' as required. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Javanese')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the value 'Javanese' and then submit.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": null,
+      "raw_generation": "The text field [31] has been filled with 'Javanese' as required. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Male')",
+      "prediction": null,
+      "raw_generation": "Fill the textbox with the value \"Male\" from the table.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": null,
+      "raw_generation": "The text field [31] has been filled with 'Male' and is now focused. The next step is to click the 'Submit' button [32] to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Click the button with text '\u00e5\\x8f\u2013\u00e6\u00b6\u02c6' which has bid '16'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('14')",
+      "prediction": null,
+      "raw_generation": "Click the button with text '\u00c3\u2013K' which has bid '14'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('12')",
+      "prediction": "click('12')",
+      "raw_generation": "click('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('19')",
+      "prediction": null,
+      "raw_generation": "Click the button with text \"\u00e2\u2122\u00a5\u00e2\u2122\u00a5\u00e2\u2122\u00a5\" which has bid '19'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "Click the button with bid '20' which has the text '\u00c3\u2013K'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "Click the button with text 'Canc\u00c3\u00a9l' which has bid '21'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('12')",
+      "prediction": null,
+      "raw_generation": "Click the button with text \"\u00e2\u2122\u00a5\u00e2\u2122\u00a5\u00e2\u2122\u00a5\" which has bid '12'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "Click the button with bid '15' which has the text '\u00c7\u00a1\u00ae\u00e5\u00ae\u0161'. This is the target element specified in the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "Click the button with bid '20' which has the text '\u00c7\u00a1\u00ae\u00e5\u00ae\u0161'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click(bid='18')",
+      "raw_generation": "I need to select the checkboxes: ndP, TtJOq, vi9, fMh, kcrZ, and 99bX, then click Submit.\n\nLooking at the observation:\n- [18] checkbox 'vi9' - needs to be selected\n- [27] checkbox '99bX' - needs to be selected\n- [33] checkbox 'TtJOq' - needs to be selected\n- [37] checkbox 'fMh' - needs to be selected\n- [43] checkbox 'kcrZ' - needs to be selected\n- [52] checkbox 'ndP' - needs to be selected\n\nI'll start by clicking the first checkbox: vi9 (bid 18)\n</think>\n\nclick(bid='18')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('52')",
+      "prediction": null,
+      "raw_generation": "The checkbox 'vi9' (bid 18) is now checked. The next target checkbox to select is 'ndP' (bid 52). I will click on it.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('33')",
+      "prediction": "click('33')",
+      "raw_generation": "The goal is to select ndP, TtJOq, vi9, fMh, kcrZ, 99bX and click Submit.\nCurrent state:\n- vi9: checked='true' (done)\n- ndP: checked='true' (done)\n- TtJOq: checked='false' (needs click)\n- fMh: checked='false' (needs click)\n- kcrZ: checked='false' (needs click)\n- 99bX: checked='false' (needs click)\n\nNext, I will click on TtJOq (bid 33).\nAction: click('33')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('27')",
+      "raw_generation": "The goal is to select ndP, TtJOq, vi9, fMh, kcrZ, 99bX and click Submit.\nCurrent state:\n- vi9: checked='true' (done)\n- TtJOq: checked='true' (done)\n- ndP: checked='true' (done)\n- 99bX: checked='false' (needs click)\n- fMh: checked='false' (needs click)\n- kcrZ: checked='false' (needs click)\n\nNext, I will click on checkbox '99bX' (bid 27).\nAction: click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('27')",
+      "raw_generation": "The goal is to select ndP, TtJOq, vi9, fMh, kcrZ, 99bX and click Submit.\nCurrent state:\n- vi9: checked='true' \u2713\n- TtJOq: checked='true' \u2713\n- fMh: checked='true' \u2713\n- ndP: checked='true' \u2713\n- 99bX: checked='false' \u2717\n- kcrZ: checked='false' \u2717\n\nI need to click checkbox '99bX' (bid 27) next.\nAction: click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The goal is to select ndP, TtJOq, vi9, fMh, kcrZ, 99bX and click Submit. Looking at the current state:\n- vi9: checked='true' \u2713\n- TtJOq: checked='true' \u2713\n- fMh: checked='true' \u2713\n- kcrZ: checked='true' \u2713\n- 99bX: checked='false' \u2717 (needs to be selected)\n- ndP: checked='true' \u2713\n\nThe only remaining unchecked checkbox is 99bX (bid 27). I need to click on it to select it.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('55')",
+      "prediction": null,
+      "raw_generation": "All required checkboxes (ndP, TtJOq, vi9, fMh, kcrZ, 99bX) are now checked. The next step is to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('31')",
+      "prediction": "click(bid='31')",
+      "raw_generation": "I need to select 7 checkboxes: 7xnM, J6GCD, cy, ZV, W9GqI, NJ7, and LpXoL. I'll start by clicking the first checkbox: 7xnM (bid 31).\n\nAction: click(bid='31')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('34')",
+      "prediction": null,
+      "raw_generation": "The checkbox '7xnM' (bid 31) is now selected. I need to continue selecting the remaining checkboxes: J6GCD, cy, ZV, W9GqI, NJ7, and LpXoL. Next, I will click on the checkbox 'J6GCD' (bid 27).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('24')",
+      "raw_generation": "I need to select the remaining checkboxes: ZV, J6GCD, cy, and NJ7. I've already selected 7xnM and LpXoL. Next, I'll click on ZV (bid 24).\n\nAction: click('24')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('21')",
+      "raw_generation": "The goal is to select 7xnM, J6GCD, cy, ZV, W9GqI, NJ7, LpXoL and click Submit.\n\nFrom the observation:\n- 7xnM (bid 31) is already checked \u2713\n- LpXoL (bid 34) is already checked \u2713\n- NJ7 (bid 37) is already checked \u2713\n- cy (bid 21) is NOT checked\n- ZV (bid 24) is NOT checked\n- W9GqI (bid 18) is NOT checked\n- J6GCD (bid 27) is NOT checked\n\nSo I need to click on cy (bid 21), ZV (bid 24), W9GqI (bid 18), and J6GCD (bid 27).\n\nLet me start with cy (bid 21).\n</think>\n\nclick('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "The goal is to select 7xnM, J6GCD, cy, ZV, W9GqI, NJ7, LpXoL and click Submit.\n\nCurrent state:\n- 7xnM: checked='true' \u2713\n- J6GCD: checked='true' \u2713\n- cy: checked='false' \u2717 (needs to be selected)\n- ZV: checked='false' \u2717 (needs to be selected)\n- W9GqI: checked='false' \u2717 (needs to be selected)\n- NJ7: checked='true' \u2713\n- LpXoL: checked='true' \u2713\n\nThe next checkbox to select is 'cy' (bid 21). After that, I'll need to select ZV (bid 24), W9GqI (bid 18), and then click Submit.\n\nAction: click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "The goal is to select 7xnM, J6GCD, cy, ZV, W9GqI, NJ7, LpXoL and click Submit.\n\nCurrent status:\n- 7xnM: checked='true' \u2713\n- J6GCD: checked='true' \u2713\n- cy: checked='true' \u2713\n- ZV: checked='false' \u2717\n- W9GqI: checked='false' \u2717\n- NJ7: checked='true' \u2713\n- LpXoL: checked='true' \u2713\n\nRemaining unchecked: ZV and W9GqI.\n\nNext action: click checkbox 'ZV' (bid 24) to select it.\n</think>\n\nclick('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": null,
+      "raw_generation": "The goal is to select 7xnM, J6GCD, cy, ZV, W9GqI, NJ7, LpXoL and click Submit. Looking at the current state:\n- 7xnM (bid 31): checked='true' \u2713\n- J6GCD (bid 27): checked='true' \u2713\n- cy (bid 21): checked='true' \u2713\n- ZV (bid 24): checked='true' \u2713\n- W9GqI (bid 18): checked='false' \u2717\n- NJ7 (bid 37): checked='true' \u2713\n- LpXoL (bid 34): checked='true' \u2713\n\nOnly W9GqI (bid 18) is not selected. I need to click this checkbox to complete the selection.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('40')",
+      "raw_generation": "The goal is to select 7xnM, J6GCD, cy, ZV, W9GqI, NJ7, LpXoL and click Submit. Looking at the current state:\n- W9GqI: checked='true' \u2713\n- cy: checked='true' \u2713\n- ZV: checked='true' \u2713\n- J6GCD: checked='true' \u2713\n- 7xnM: checked='true' \u2713\n- LpXoL: checked='true' \u2713\n- NJ7: checked='true' \u2713\n\nAll required checkboxes are already selected. The next step is to click the Submit button. The Submit button has bid '40'.\n\nAction: click('40')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "I need to select the checkboxes: q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi.\n\nLet me start by clicking the first checkbox: q07D (bid 18)\n\nAction: click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "The checkbox 'q07D' is now selected. The next target is 'j8' with bid 27. I will click on it.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "The goal is to select specific checkboxes: q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi. So far, q07D and BGfi are selected. The next one to select is j8, which has bid '27'. I will click on checkbox 'j8'.\n</think>\n\nclick('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('43')",
+      "raw_generation": "The goal is to select q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi and click Submit.\n\nCurrent state:\n- q07D: checked='true' \u2713\n- BGfi: checked='true' \u2713\n- j8: checked='true' \u2713\n\nRemaining to select: oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr\n\nNext, I'll click on oQ32 (bid 43).\n</think>\n\nclick('43')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('46')",
+      "prediction": "click('46')",
+      "raw_generation": "The goal is to select q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi and click Submit.\n\nCurrent status:\n- q07D: checked='true' \u2713\n- j8: checked='true' \u2713\n- oQ32: checked='true' \u2713\n- EgdR: checked='false' \u2717\n- aDDP1q0: checked='false' \u2717\n- Wk7g: checked='false' \u2717\n- wGU21zr: checked='false' \u2717\n- BGfi: checked='true' \u2713\n\nRemaining unchecked checkboxes: EgdR (46), aDDP1q0 (33), Wk7g (52), wGU21zr (40)\n\nNext, I will click on EgdR (bid 46).\n</think>\n\nclick('46')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('33')",
+      "prediction": "click('33')",
+      "raw_generation": "The goal is to select q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi and click Submit.\n\nCurrent status:\n- q07D: checked='true' \u2713\n- j8: checked='true' \u2713\n- oQ32: checked='true' \u2713\n- EgdR: checked='true' \u2713\n- aDDP1q0: checked='false' \u2717\n- Wk7g: checked='false' \u2717\n- wGU21zr: checked='false' \u2717\n- BGfi: checked='true' \u2713\n\nRemaining unchecked: aDDP1q0, Wk7g, wGU21zr\n\nNext, I will click on aDDP1q0 (bid 33).\n</think>\n\nclick('33')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('52')",
+      "raw_generation": "The goal is to select q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi and click Submit.\n\nCurrent status:\n- q07D: checked='true' \u2713\n- j8: checked='true' \u2713\n- oQ32: checked='true' \u2713\n- EgdR: checked='true' \u2713\n- aDDP1q0: checked='true' \u2713\n- Wk7g: checked='false' \u2717\n- wGU21zr: checked='false' \u2717\n- BGfi: checked='true' \u2713\n\nRemaining unchecked: Wk7g (bid 52) and wGU21zr (bid 40).\n\nNext action: click checkbox Wk7g (bid 52).\n</think>\n\nclick('52')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('52')",
+      "prediction": null,
+      "raw_generation": "The goal is to select q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi and click Submit.\n\nCurrent status:\n- q07D: checked='true' \u2713\n- j8: checked='true' \u2713\n- oQ32: checked='true' \u2713\n- EgdR: checked='true' \u2713\n- aDDP1q0: checked='true' \u2713\n- Wk7g: checked='false' \u2717\n- wGU21zr: checked='true' \u2713\n- BGfi: checked='true' \u2713\n\nOnly Wk7g (bid 52) is not selected. I need to click it to complete the selection.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('55')",
+      "prediction": "click('55')",
+      "raw_generation": "The goal is to select q07D, j8, oQ32, EgdR, aDDP1q0, Wk7g, wGU21zr, BGfi and click Submit.\n\nCurrent status:\n- q07D: checked='true' \u2713\n- j8: checked='true' \u2713\n- oQ32: checked='true' \u2713\n- EgdR: checked='true' \u2713\n- aDDP1q0: checked='true' \u2713\n- Wk7g: checked='true' \u2713\n- wGU21zr: checked='true' \u2713\n- BGfi: checked='true' \u2713\n\nAll required checkboxes are now selected. The next step is to click the Submit button.\n\nAction: click('55')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click(bid='49')",
+      "raw_generation": "I need to select the checkboxes: hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, and YbRrgU, then click Submit.\n\nLooking at the observation, I can see the checkboxes with their bids:\n- hahPx: bid 49\n- FWYekc: bid 46\n- GjRKLXx: bid 21\n- 6oEM: bid 18\n- eOObP: bid 43\n- YbRrgU: bid 24\n\nI'll start by clicking the first checkbox: hahPx (bid 49)\n</think>\n\nclick(bid='49')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "The checkbox '6oEM' (bid 18) is now selected. The next target is 'eOObP' (bid 43). I will click on it.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": null,
+      "raw_generation": "The goal is to select hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU and click Submit. So far, 6oEM and GjRKLXx are selected. The next one to select is YbRrgU (bid 24). I will click on YbRrgU.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('49')",
+      "prediction": "click('49')",
+      "raw_generation": "The goal is to select hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU and click Submit.\n\nCurrent status:\n- 6oEM: checked \u2713\n- GjRKLXx: checked \u2713\n- YbRrgU: checked \u2713\n- hahPx: not checked\n- FWYekc: not checked\n- eOObP: not checked\n\nNext, I need to click on hahPx (bid 49) to select it.\n</think>\n\nclick('49')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('46')",
+      "prediction": "click('46')",
+      "raw_generation": "The goal is to select hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU and click Submit.\n\nCurrent status:\n- hahPx (bid 49): checked='true' \u2713\n- FWYekc (bid 46): checked='false' \u2717\n- GjRKLXx (bid 21): checked='true' \u2713\n- 6oEM (bid 18): checked='true' \u2713\n- eOObP (bid 43): checked='false' \u2717\n- YbRrgU (bid 24): checked='true' \u2713\n\nRemaining unchecked checkboxes: FWYekc, eOObP\n\nNext action: click on FWYekc (bid 46) to select it.\n</think>\n\nclick('46')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('43')",
+      "raw_generation": "The goal is to select hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU and click Submit.\n\nCurrent status:\n- hahPx (49): checked='true' \u2713\n- FWYekc (46): checked='true' \u2713\n- GjRKLXx (21): checked='true' \u2713\n- 6oEM (18): checked='true' \u2713\n- YbRrgU (24): checked='true' \u2713\n- eOObP (43): checked='false' \u2717\n- Submit button: not yet clicked\n\nThe next checkbox to select is eOObP (bid 43). I will click it.\nAction: click('43')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('52')",
+      "prediction": "click('52')",
+      "raw_generation": "The goal is to select hahPx, FWYekc, GjRKLXx, 6oEM, eOObP, YbRrgU and click Submit. Looking at the current observation, I can see that:\n- 6oEM (bid 18) - checked='true' \u2713\n- GjRKLXx (bid 21) - checked='true' \u2713\n- YbRrgU (bid 24) - checked='true' \u2713\n- eOObP (bid 43) - checked='true' \u2713\n- FWYekc (bid 46) - checked='true' \u2713\n- hahPx (bid 49) - checked='true' \u2713\n\nAll required checkboxes are already selected. The next step is to click the Submit button (bid 52) to complete the task.\n\nAction: click('52')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('31')",
+      "raw_generation": "I need to select the checkboxes: iq, PwUc, O8l, Z1kO9e, 6fld, RC, and ZZCCRg, then click Submit.\n\nLet me start by clicking the first checkbox: iq (bid 31).\n</think>\n\nclick('31')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('31')",
+      "prediction": null,
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit. Currently, O8l is selected. The next checkbox to select is Z1kO9e (bid 24). I will click on Z1kO9e.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": null,
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit. So far, O8l and iq are selected. Next, I will click on the checkbox for 6fld (bid 21).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('21')",
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit.\nCurrent state:\n- O8l: checked='true' (done)\n- 6fld: checked='false' (need to click)\n- Z1kO9e: checked='false' (need to click)\n- RC: checked='false' (need to click)\n- ZZCCRg: checked='false' (need to click)\n- iq: checked='true' (done)\n- PwUc: checked='true' (done)\n\nNext, I will click on checkbox '6fld' (bid 21).\n</think>\n\nclick('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit. Currently, iq, PwUc, O8l, and Z1kO9e are selected. The remaining unchecked checkboxes are 6fld, RC, and ZZCCRg. I will click on 6fld next.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit. Currently, O8l, Z1kO9e, RC, iq, and PwUc are selected. The remaining unchecked checkbox is 6fld (bid 21). I need to click on 6fld next.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('34')",
+      "prediction": "click('34')",
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit.\nCurrent status:\n- O8l: checked (done)\n- 6fld: checked (done)\n- Z1kO9e: checked (done)\n- RC: checked (done)\n- iq: checked (done)\n- PwUc: checked (done)\n- ZZCCRg: NOT checked (needs to be clicked)\n\nThe next checkbox to select is ZZCCRg (bid 34). After that, I will click the Submit button (bid 40).\n\nAction: click('34')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('40')",
+      "raw_generation": "The goal is to select iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg and click Submit. Looking at the current observation, all required checkboxes (iq, PwUc, O8l, Z1kO9e, 6fld, RC, ZZCCRg) are already checked. The next step is to click the Submit button. The Submit button has bid '40'.\n\nAction: click('40')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click(bid='18')",
+      "raw_generation": "I need to select all the specified checkboxes: 0cWGapz, TOP4T, SbDv0, M23, uXxmPT, CZ, HrB6b, 40I9.\n\nLooking at the observation, I can see the checkboxes with their bids:\n- 0cWGapz: bid 18\n- TOP4T: bid 43\n- SbDv0: bid 37\n- M23: bid 27\n- uXxmPT: bid 21\n- CZ: bid 30\n- HrB6b: bid 24\n- 40I9: bid 40\n\nI'll start by clicking the first checkbox: 0cWGapz (bid 18)\n</think>\n\nclick(bid='18')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('21')",
+      "raw_generation": "The first checkbox '0cWGapz' is now selected. I need to continue selecting the remaining checkboxes: TOP4T, SbDv0, M23, uXxmPT, CZ, HrB6b, and 40I9. The next one to select is 'uXxmPT' with bid '21'.\n\nAction: click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": null,
+      "raw_generation": "I need to select the remaining checkboxes: SbDv0, M23, uXxmPT, CZ, and 40I9. The next one to select is uXxmPT (bid 21).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": null,
+      "raw_generation": "I need to select the remaining checkboxes: M23, uXxmPT, CZ, and 40I9. The next one to select is M23 (bid 27).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "I need to select the remaining checkboxes: uXxmPT, CZ, and 40I9. The next one to select is uXxmPT with bid 21.\n\nAction: click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('30')",
+      "prediction": "click('24')",
+      "raw_generation": "I need to select the remaining checkboxes: HrB6b, 40I9, and CZ. The next one to select is HrB6b with bid 24.\n\nAction: click('24')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "The goal is to select 0cWGapz, TOP4T, SbDv0, M23, uXxmPT, CZ, HrB6b, 40I9 and click Submit.\n\nCurrent status:\n- 0cWGapz: checked \u2713\n- TOP4T: checked \u2713\n- SbDv0: checked \u2713\n- M23: checked \u2713\n- uXxmPT: checked \u2713\n- CZ: checked \u2713\n- HrB6b: not checked (need to click)\n- 40I9: not checked (need to click)\n\nNext, I will click on checkbox 'HrB6b' (bid 24) to select it.\n</think>\n\nclick('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('40')",
+      "raw_generation": "The goal is to select 0cWGapz, TOP4T, SbDv0, M23, uXxmPT, CZ, HrB6b, 40I9 and click Submit.\n\nCurrent status:\n- 0cWGapz: checked \u2713\n- uXxmPT: checked \u2713\n- HrB6b: checked \u2713\n- M23: checked \u2713\n- CZ: checked \u2713\n- SbDv0: checked \u2713\n- TOP4T: checked \u2713\n- 40I9: not checked (needs to be selected)\n\nThe next checkbox to select is 40I9 (bid 40). After that, I will click the Submit button.\n\nAction: click('40')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('46')",
+      "prediction": "click('46')",
+      "raw_generation": "The goal is to select 0cWGapz, TOP4T, SbDv0, M23, uXxmPT, CZ, HrB6b, 40I9 and click Submit. Looking at the current observation, I can see that all the required checkboxes (0cWGapz, uXxmPT, HrB6b, M23, CZ, SbDv0, 40I9, TOP4T) are already checked. The next step is to click the Submit button to complete the task. The Submit button has bid '46'.\n\nAction: click('46')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('34')",
+      "prediction": "click('18')",
+      "raw_generation": "I need to select all the specified checkboxes: oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, and 7DV.\n\nLooking at the observation, I can see all the checkboxes with their bids:\n- t6: bid 18\n- 7DV: bid 21\n- IW: bid 24\n- lcgYC: bid 27\n- WWwYnIB: bid 31\n- oaMKc1l: bid 34\n- Tv: bid 37\n- GrIQHy7: bid 40\n\nI'll start by clicking the first checkbox in the list: t6 (bid 18)\n\nAction: click('18')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit. Currently, oaMKc1l is selected (checked='true'). I need to select the remaining checkboxes: IW (24), GrIQHy7 (40), Tv (37), WWwYnIB (31), lcgYC (27), t6 (18), and 7DV (21). I'll start by clicking IW (bid 24).\n</think>\n\nclick('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": null,
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit. Currently, oaMKc1l, IW, and t6 are selected. The next target is GrIQHy7 (bid 40). I will click on GrIQHy7.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('37')",
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit.\n\nCurrent state:\n- oaMKc1l: checked='true' \u2713\n- IW: checked='true' \u2713\n- GrIQHy7: checked='true' \u2713\n- Tv: checked='false' \u2717\n- WWwYnIB: checked='false' \u2717\n- lcgYC: checked='false' \u2717\n- t6: checked='false' \u2717\n- 7DV: checked='false' \u2717\n\nRemaining unchecked checkboxes: Tv (37), WWwYnIB (31), lcgYC (27), t6 (18), 7DV (21)\n\nI will click on Tv next (bid 37).\n</think>\n\nclick('37')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('31')",
+      "prediction": "click('31')",
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit.\n\nCurrent state:\n- oaMKc1l: checked='true' \u2713\n- IW: checked='true' \u2713\n- GrIQHy7: checked='true' \u2713\n- Tv: checked='true' \u2713\n- WWwYnIB: checked='false' \u2717\n- lcgYC: checked='false' \u2717\n- t6: checked='false' \u2717\n- 7DV: checked='false' \u2717\n\nRemaining unchecked checkboxes: WWwYnIB, lcgYC, t6, 7DV\n\nI will click on WWwYnIB next (bid 31).\n</think>\n\nclick('31')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit.\n\nCurrent status:\n- oaMKc1l: checked='true' \u2713\n- IW: checked='true' \u2713\n- GrIQHy7: checked='true' \u2713\n- Tv: checked='true' \u2713\n- WWwYnIB: checked='true' \u2713\n- lcgYC: checked='false' \u2717\n- t6: checked='false' \u2717\n- 7DV: checked='false' \u2717\n\nStill need to select: lcgYC, t6, 7DV\n\nNext action: click checkbox 'lcgYC' (bid 27)\n</think>\n\nclick('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": null,
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit.\n\nCurrent state:\n- oaMKc1l: checked='true' \u2713\n- IW: checked='true' \u2713\n- GrIQHy7: checked='true' \u2713\n- Tv: checked='true' \u2713\n- WWwYnIB: checked='true' \u2713\n- lcgYC: checked='true' \u2713\n- t6: checked='false' \u2717\n- 7DV: checked='false' \u2717\n\nStill need to select t6 and 7DV. The next one to select is t6 (bid 18).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "The goal is to select oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV and click Submit.\n\nCurrent state:\n- oaMKc1l: checked='true' \u2713\n- IW: checked='true' \u2713\n- GrIQHy7: checked='true' \u2713\n- Tv: checked='true' \u2713\n- WWwYnIB: checked='true' \u2713\n- lcgYC: checked='true' \u2713\n- t6: checked='true' \u2713\n- 7DV: checked='false' \u2717\n\nThe only remaining unchecked checkbox is 7DV (bid 21). I need to click it to complete the selection.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": null,
+      "raw_generation": "All required checkboxes (oaMKc1l, IW, GrIQHy7, Tv, WWwYnIB, lcgYC, t6, 7DV) are now checked. The next step is to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the \"Section #11\" tab.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #11\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the tab with bid '16'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #14\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the tab with bid '16'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #24\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the \"Section #39\" tab.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #39\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the \"Section #10\" tab.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #10\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the tab with bid '16'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #48\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the tab with bid '16'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #18\" is now expanded (expanded=True, selected=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking the tab with bid 16.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #25\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking the tab with bid 16.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #20\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": null,
+      "raw_generation": "Expand the section below by clicking on the \"Section #40\" tab.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "The section \"Section #40\" is now expanded (expanded=True). The next step is to click the \"Submit\" button to complete the task. The Submit button has bid '22'.\n\nAction: click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": null,
+      "raw_generation": "Click tab with bid '22' to switch to Tab #3.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '22' which corresponds to 'Tab #3'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '22' which corresponds to 'Tab #3'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "Click tab with bid '20' to switch to Tab #2.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '20' which corresponds to 'Tab #2'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "Click tab with bid '20' to switch to Tab #2.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '22' which corresponds to 'Tab #3'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '20' which corresponds to 'Tab #2'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('18')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '18' which corresponds to 'Tab #1'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": null,
+      "raw_generation": "Click the tab with bid '22' which corresponds to 'Tab #3'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', '6j')",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"6j\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', '6j')",
+      "prediction": "fill('19', '6j')",
+      "raw_generation": "The first password field (bid 16) has been filled with \"6j\" as indicated by the \"\u2022\u2022\" placeholder. Now I need to fill the second password field (bid 19) with \"6j\" and then submit. The next action is to fill the verify password field.\n\nAction: fill('19', '6j')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "fill('19', '6j')",
+      "raw_generation": "The first password field (bid 16) has been filled with \"6j\" as indicated by the \"\u2022\u2022\" placeholder. The second password field (bid 19) is now focused and empty, ready for input. I need to fill the second text field with \"6j\".\n</think>\n\nfill('19', '6j')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', '9cq')",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"9cq\"<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', '9cq')",
+      "prediction": "fill('19', '9cq')",
+      "raw_generation": "The first password field has been filled with \"9cq\" (shown as \u2022\u2022\u2022). Now I need to fill the second password field (Verify password) with \"9cq\" as well. The second textbox has bid '19'.\n</think>\n\nfill('19', '9cq')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "The first password field (bid 16) has been filled with \"9cq\" as indicated by the \"\u2022\u2022\u2022\" placeholder. The next step is to fill the second password field (bid 19) with \"9cq\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', '1EApa')",
+      "prediction": "fill('16', '1EApa')",
+      "raw_generation": "Fill the first password field with \"1EApa\"\nAction: fill('16', '1EApa')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', '1EApa')",
+      "prediction": "fill('19', '1EApa')",
+      "raw_generation": "The first password field has been filled with \"1EApa\" (shown as masked characters). The next step is to fill the second password field (Verify password) with the same password \"1EApa\". The second textbox has bid '19'. I will now fill it.\n</think>\n\nfill('19', '1EApa')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "fill('19', '1EApa')",
+      "raw_generation": "The first password \"1EApa\" has been entered into the first text field (bid 16). The next step is to enter the second password \"1EApa\" into the second text field (bid 19). The field is already focused, so I can proceed to fill it.\n\nAction: fill('19', '1EApa')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', \"yZNAx\")",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"yZNAx\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', \"yZNAx\")",
+      "prediction": "fill('19', \"yZNAx\")",
+      "raw_generation": "The first password field has been filled with \"yZNAx\" (shown as \u2022\u2022\u2022\u2022\u2022). Now I need to fill the second password field (Verify password) with the same password \"yZNAx\". The second textbox has bid '19'.\n</think>\n\nfill('19', \"yZNAx\")<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "fill('19', \"yZNAx\")",
+      "raw_generation": "The first password \"yZNAx\" has been entered into the first text field (bid 16). The next step is to enter the second password \"yZNAx\" into the second text field (bid 19). The field is already focused, so I can proceed to fill it.\n\nAction: fill('19', \"yZNAx\")<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', \"uzO\")",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"uzO\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', \"uzO\")",
+      "prediction": "fill('19', \"uzO\")",
+      "raw_generation": "The first password field has been filled with \"uzO\" (shown as \u2022\u2022\u2022). Now I need to fill the second password field (Verify password) with \"uzO\" as well. The second textbox has bid '19'.\n</think>\n\nfill('19', \"uzO\")<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "The first password \"uzO\" has been entered into the first text field (bid 16). Now I need to enter the second password \"uzO\" into the second text field (bid 19).<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', 'h90')",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"h90\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', 'h90')",
+      "prediction": "fill('19', 'h90')",
+      "raw_generation": "The first password field has been filled with \"h90\" (shown as masked characters). Now I need to fill the second password field (Verify password) with \"h90\" as well. The second textbox has bid '19'.\n</think>\n\nfill('19', 'h90')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "The first password field (bid 16) has been filled with \"h90\" as indicated by the \"\u2022\u2022\u2022\" placeholder. The next step is to fill the second password field (bid 19) with \"h90\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', 'ryt')",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"ryt\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', 'ryt')",
+      "prediction": "fill('19', 'ryt')",
+      "raw_generation": "The first password field has been filled with \"ryt\" (shown as \u2022\u2022\u2022). Now I need to fill the second password field (Verify password) with \"ryt\" as well. The second textbox has bid '19'.\n</think>\n\nfill('19', 'ryt')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "The first password field (bid 16) has been filled with \"ryt\" as indicated by the \"\u2022\u2022\u2022\" placeholder. The next step is to fill the second password field (bid 19) with \"ryt\" as well.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', 'Q0RcV')",
+      "prediction": null,
+      "raw_generation": "Fill the first password field with \"Q0RcV\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', 'Q0RcV')",
+      "prediction": "fill('19', 'Q0RcV')",
+      "raw_generation": "The first password field has been filled with \"Q0RcV\" (shown as masked characters). Now I need to fill the second password field (Verify password) with the same password \"Q0RcV\". The second textbox has bid '19'.\n</think>\n\nfill('19', 'Q0RcV')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": null,
+      "raw_generation": "The first password \"Q0RcV\" has been entered into the first text field (bid 16). The second password \"Q0RcV\" is now being entered into the second text field (bid 19). The next step is to fill the second text field.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'interdum')",
+      "prediction": "fill('14', 'interdum')",
+      "raw_generation": "First, I need to identify the 2nd word in the paragraph. The paragraph text is: \"Non interdum enim, netus eleifend id ac nulla. Blandit facilisis. Feugiat adipiscing ullamcorper dictumst\".\n\nLet me count the words:\n1. Non\n2. interdum\n3. enim\n4. netus\n5. eleifend\n6. id\n7. ac\n8. nulla\n9. Blandit\n10. facilisis\n11. Feugiat\n12. adipiscing\n13. ullamcorper\n14. dictumst\n\nThe 2nd word is \"interdum\".\n\nNow I need to fill the textbox (bid 14) with \"interdum\" and then click the Submit button (bid 15).\n\nFirst action: fill the textbox with \"interdum\"\n</think>\n\nfill('14', 'interdum')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": "click('15', button='left')",
+      "raw_generation": "The textbox now contains 'interdum', which is the 2nd word in the paragraph. The next step is to click the 'Submit' button to complete the task.\n</think>\n\nclick('15', button='left')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'Tempor')",
+      "prediction": "fill('14', 'Tempor')",
+      "raw_generation": "Find the first word in the paragraph. The paragraph text is \"Tempor urna, velit habitasse ac arcu id tristique. Justo\". The first word is \"Tempor\". I need to fill the textbox (bid 14) with \"Tempor\" and then click the Submit button (bid 15).\n\nFirst action: fill the textbox with the first word.\n</think>\n\nfill('14', 'Tempor')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The first word \"Tempor\" has been successfully typed into the textbox. The next step is to click the \"Submit\" button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'Vitae')",
+      "prediction": "fill('14', 'Vitae')",
+      "raw_generation": "First, I need to identify the 1st word in the paragraph. Looking at the paragraph text: 'Vitae. Amet. Vel neque. Dui, ultricies feugiat massa et'. The first word is 'Vitae'.\n\nNow I need to fill the textbox (bid 14) with this word.\n</think>\n\nfill('14', 'Vitae')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": null,
+      "raw_generation": "The first word \"Vitae\" has been successfully typed into the textbox. The next step is to click the \"Submit\" button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'nec')",
+      "prediction": "fill('14', 'nec')",
+      "raw_generation": "First, I need to identify the 6th word in the paragraph. The paragraph text is: \"A vivamus sapien sodales at nec et. Eu, sagittis quis tincidunt sem amet.\"\n\nLet me count the words:\n1. A\n2. vivamus\n3. sapien\n4. sodales\n5. at\n6. nec\n\nThe 6th word is \"nec\".\n\nNow I need to type \"nec\" into the textbox (bid 14) and then press the Submit button (bid 15).\n\nFirst action: fill the textbox with \"nec\"\n</think>\n\nfill('14', 'nec')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": "click('15', button='left')",
+      "raw_generation": "The textbox now contains 'nec' (the 6th word in the paragraph). The next step is to click the 'Submit' button to complete the task.\n</think>\n\nclick('15', button='left')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "fill('14', 'mystery')",
+      "prediction": null,
+      "raw_generation": "Start with filling the Genre textbox with \"mystery\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "fill('17', 'Williams')",
+      "prediction": null,
+      "raw_generation": "Fill the Year textbox with \"1986\".<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "fill('20', '1986')",
+      "prediction": null,
+      "raw_generation": "Fill the Year textbox with '1986'.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "click('21')",
+      "prediction": null,
+      "raw_generation": "The search fields have been filled with the required values: genre 'mystery', director 'Williams', and year '1986'. The next step is to submit the search by clicking the 'Submit' button.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "fill('16', '95')",
+      "prediction": "fill('16', '95')",
+      "raw_generation": "Fill the textbox with the solution to x - 2 = 93. Solving for x: x = 93 + 2 = 95.\n\nAction: fill('16', '95')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "click('17')",
+      "prediction": null,
+      "raw_generation": "The answer 95 has been entered into the textbox. The next step is to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "fill('16', '-70')",
+      "prediction": "fill('16', '-70')",
+      "raw_generation": "Fill the textbox with the solution to x. Since 1 - x = 71, then x = 1 - 71 = -70.\n\nAction: fill('16', '-70')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "click('17')",
+      "prediction": "click('17')",
+      "raw_generation": "The answer -70 has been entered into the textbox. Now I need to click the Submit button to complete the task.\n</think>\n\nclick('17')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "fill('16', '35')",
+      "prediction": "fill('16', '35')",
+      "raw_generation": "Solve the equation x + 7 = 42 for x. Subtract 7 from both sides: x = 42 - 7 = 35. Type 35 into the textbox.\n\nAction: fill('16', '35')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "click('17')",
+      "prediction": null,
+      "raw_generation": "The answer 35 has been entered into the textbox. The next step is to click the Submit button to complete the task.<|im_end|>",
+      "match": false
+    }
+  ]
+}

@@ -20,6 +20,7 @@ dist/
 
 # Local planning / notebooks
 .ipynb_checkpoints/
+/.hermes/
 
 # Generated data corpora
 /data/rollouts/
@@ -27,24 +28,51 @@ dist/
 /data/raw_rollouts/
 /data/processed/
 
-# Keep task lists and small tracked helpers under data/
+# Generated dataset payloads
+/data/exports/**/hf_dataset/
+/data/exports/**/train.jsonl
+/data/exports/**/val.jsonl
+/data/exports/**/dataset_dict.json
+
+# Keep tracked task lists and manifests under data/
 !/data/
 !/data/task_lists/
 !/data/task_lists/**
+!/data/exports/
+!/data/exports/**/
+!/data/exports/**/manifest.json
+!/data/exports/**/push_to_hub.py
 
-# Generated reports
+# Generated reports and logs
 /reports/generated/
-
-# Misc runtime files
+/logs/
 *.log
 
-# Local planning metadata
-/.hermes/
-
-# Local planning metadata
-/.hermes/
-.tmp_*.py
+# Model outputs and local artifacts
+/outputs/**
 unsloth_compiled_cache/
 tmp_sync_placeholder/
 .hf_upload/
-outputs/*/checkpoint-*/
+
+# Scratch scripts / probes
+/.tmp_*.py
+/.tmp_*.sh
+/check_*.sh
+/debug_*.sh
+/extract_*.sh
+
+# Local alternate launchers
+/run_local_qwen35_vllm_new.sh
+/run_local_qwen35_vllm_safe.sh
+
+# Local experiment-only configs and scratch helpers
+/configs/grpo_full_qwen25_1p5b_action_adapter_phase1.yaml
+/configs/grpo_smoke_qwen25_1p5b_action_adapter_*.yaml
+/configs/grpo_smoke_qwen35_2b_action_adapter_click_button.yaml
+/configs/rollout_config_phase1_openrouter.live.yaml
+/scripts/update_*.py
+/scripts/eval_qwen35_api_judge.py
+/data/exports/**/action_only/
+/data/exports/**/reasoning_action/
+/data/exports/phase1_sft_v2_action_weakboost_08b/
+/data/exports/**/hf_dataset/**

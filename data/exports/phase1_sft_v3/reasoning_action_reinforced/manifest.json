@@ -1,0 +1,14 @@
+{
+  "variant_name": "reasoning_action_reinforced",
+  "source_dataset_dir": "data/exports/phase1_sft_v2/reasoning_action/hf_dataset",
+  "output_hf_dataset_dir": "data/exports/phase1_sft_v3/reasoning_action_reinforced/hf_dataset",
+  "counts": {
+    "train": 6508,
+    "val": 240
+  },
+  "format_changes": {
+    "strict_suffix_added": true,
+    "one_shot_example_added": true,
+    "user_reminder_added": true
+  }
+}

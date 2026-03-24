@@ -9,8 +9,8 @@ from typing import Optional
 
 import torch
 from datasets import load_from_disk
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
+from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForImageTextToText, AutoProcessor, AutoTokenizer, BitsAndBytesConfig
 
 
 def _normalize_browsergym_action(action: str) -> str:
@@ -110,24 +110,46 @@ def _extract_action_from_text(text: str) -> Optional[str]:
     return _normalize_browsergym_action(scored[-1][2])
 
 
+def _looks_conditional(model_ref: str) -> bool:
+    try:
+        cfg = AutoConfig.from_pretrained(model_ref, trust_remote_code=True)
+        archs = cfg.architectures or []
+        model_type = (getattr(cfg, 'model_type', '') or '').lower()
+        if any('Qwen3_5ForConditionalGeneration' in a for a in archs):
+            return True
+        if 'qwen3_5' in model_type:
+            return True
+    except Exception:
+        pass
+    s = model_ref.lower()
+    return 'qwen3.5' in s or 'qwen3_5' in s
+
+
+def _should_use_conditional_loader(model_name: str, adapter_dir: Optional[str]) -> bool:
+    if _looks_conditional(model_name):
+        return True
+    if adapter_dir and _looks_conditional(adapter_dir):
+        return True
+    return False
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset-dir', default='data/exports/phase1_sft_v2/action_only/hf_dataset')
-    parser.add_argument('--model-name', default='Qwen/Qwen2.5-1.5B-Instruct')
+    parser.add_argument('--dataset-dir', required=True)
+    parser.add_argument('--model-name', required=True)
     parser.add_argument('--adapter-dir', default=None)
     parser.add_argument('--split', default='val')
     parser.add_argument('--limit', type=int, default=240)
-    parser.add_argument('--output-json', default=None)
+    parser.add_argument('--output-json', required=True)
+    parser.add_argument('--max-new-tokens', type=int, default=512)
     args = parser.parse_args()
 
     ds = load_from_disk(args.dataset_dir)[args.split]
     if args.limit:
         ds = ds.select(range(min(args.limit, len(ds))))
 
-    tokenizer = AutoTokenizer.from_pretrained(args.adapter_dir or args.model_name, trust_remote_code=True)
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = 'left'
+    use_conditional = _should_use_conditional_loader(args.model_name, args.adapter_dir)
+    model_ref = args.adapter_dir or args.model_name
 
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
@@ -135,28 +157,50 @@ def main() -> int:
         bnb_4bit_use_double_quant=True,
         bnb_4bit_compute_dtype=torch.bfloat16,
     )
-    base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name,
-        quantization_config=bnb_config,
-        torch_dtype=torch.bfloat16,
-        device_map='auto',
-        trust_remote_code=True,
-    )
-    if args.adapter_dir:
-        model = PeftModel.from_pretrained(base_model, args.adapter_dir)
+
+    if use_conditional:
+        processor = AutoProcessor.from_pretrained(model_ref, trust_remote_code=True)
+        tokenizer = getattr(processor, 'tokenizer', processor)
+        if getattr(tokenizer, 'pad_token', None) is None:
+            tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
+        tokenizer.padding_side = 'left'
+        base_model = AutoModelForImageTextToText.from_pretrained(
+            args.model_name,
+            quantization_config=bnb_config,
+            torch_dtype=torch.bfloat16,
+            device_map='auto',
+            trust_remote_code=True,
+        )
+        model = PeftModel.from_pretrained(base_model, args.adapter_dir) if args.adapter_dir else base_model
     else:
-        model = base_model
+        processor = None
+        tokenizer = AutoTokenizer.from_pretrained(model_ref, trust_remote_code=True)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token or tokenizer.unk_token
+        tokenizer.padding_side = 'left'
+        base_model = AutoModelForCausalLM.from_pretrained(
+            args.model_name,
+            quantization_config=bnb_config,
+            torch_dtype=torch.bfloat16,
+            device_map='auto',
+            trust_remote_code=True,
+        )
+        model = PeftModel.from_pretrained(base_model, args.adapter_dir) if args.adapter_dir else base_model
+
     model.eval()
 
     exact=0; parseable=0; rows=[]
-    for ex in ds:
+    for i, ex in enumerate(ds, start=1):
         messages = ex['messages']
         prompt_messages = messages[:-1]
         target = messages[-1]['content'].strip()
-        prompt = tokenizer.apply_chat_template(prompt_messages, tokenize=False, add_generation_prompt=True)
+        if processor is not None:
+            prompt = processor.apply_chat_template(prompt_messages, tokenize=False, add_generation_prompt=True)
+        else:
+            prompt = tokenizer.apply_chat_template(prompt_messages, tokenize=False, add_generation_prompt=True)
         inputs = tokenizer(prompt, return_tensors='pt').to(model.device)
         with torch.no_grad():
-            out = model.generate(**inputs, max_new_tokens=96, do_sample=False, eos_token_id=tokenizer.eos_token_id)
+            out = model.generate(**inputs, max_new_tokens=args.max_new_tokens, do_sample=False, eos_token_id=tokenizer.eos_token_id)
         gen = tokenizer.decode(out[0][inputs['input_ids'].shape[1]:], skip_special_tokens=False)
         pred = _extract_action_from_text(gen)
         target_action = _extract_action_from_text(target) or target
@@ -164,13 +208,10 @@ def main() -> int:
             parseable += 1
         if pred == target_action:
             exact += 1
-        rows.append({
-            'task_name': ex['metadata']['task_name'],
-            'target': target_action,
-            'prediction': pred,
-            'raw_generation': gen,
-            'match': pred == target_action,
-        })
+        rows.append({'task_name': ex['metadata']['task_name'], 'target': target_action, 'prediction': pred, 'raw_generation': gen, 'match': pred == target_action})
+        if i % 20 == 0:
+            print(f'processed {i}/{len(ds)}')
+
     result = {
         'split': args.split,
         'num_examples': len(rows),
@@ -178,16 +219,14 @@ def main() -> int:
         'exact_match': exact / len(rows) if rows else 0.0,
         'adapter_dir': args.adapter_dir,
         'model_name': args.model_name,
+        'max_new_tokens': args.max_new_tokens,
+        'loader': 'conditional_generation' if use_conditional else 'causal_lm',
     }
-    if args.output_json:
-        Path(args.output_json).write_text(json.dumps({'summary': result, 'rows': rows}, indent=2))
+    out = {'summary': result, 'rows': rows}
+    Path(args.output_json).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.output_json).write_text(json.dumps(out, indent=2))
     print(json.dumps(result, indent=2))
-    # print a few misses
-    misses = [r for r in rows if not r['match']][:5]
-    for m in misses:
-        print(json.dumps(m, ensure_ascii=False)[:2500])
     return 0
-
 
 if __name__ == '__main__':
     raise SystemExit(main())

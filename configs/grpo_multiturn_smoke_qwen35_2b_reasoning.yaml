@@ -1,0 +1,63 @@
+model_name: Qwen/Qwen3.5-2B
+adapter_dir: outputs/qwen35-2b-browser-reasoning-reinforced-unsloth
+browsergym_base_url: http://127.0.0.1:8000
+task_names:
+  - click-button
+output_dir: outputs/qwen35-2b-browser-reasoning-grpo-multiturn-smoke
+samples_per_task: 2
+seed_offset: 933000
+max_prompt_length: 1536
+max_completion_length: 160
+learning_rate: 5.0e-6
+warmup_steps: 0
+logging_steps: 1
+save_steps: 2
+max_steps: 2
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 1
+num_generations: 2
+generation_batch_size: 2
+bf16: true
+report_to: none
+use_vllm: false
+rollout_max_steps: 5
+rollout_generation_max_new_tokens: 64
+final_success_reward: 2.0
+env_reward_scale: 1.0
+parse_valid_reward: 0.05
+parse_invalid_penalty: 0.05
+action_error_penalty: 0.1
+per_step_penalty: 0.01
+max_consecutive_invalid_actions: 3
+system_prompt: |
+  You control a web browser through BrowserGym actions.
+  You must complete the given web task by interacting with the page.
+
+  Available actions (this server accepts these forms):
+  - noop() - Do nothing
+  - click(bid, button='left', modifiers=None) - Click by BrowserGym ID. Example modifier click: click('18', modifiers=['Control'])
+  - dblclick(bid) - Double-click an element
+  - hover(bid) - Move mouse over an element
+  - focus(bid) - Focus an element
+  - fill(bid, text) - Fill a text field
+  - clear(bid) - Clear a text field
+  - select_option(bid, option_text_or_list) - Select option(s) by visible text (not by bid)
+  - drag_and_drop(source_bid, target_bid) - Drag source element to target element
+  - scroll(delta_x, delta_y) - Scroll by pixel delta. Example: scroll(0, 300) for down, scroll(0, -300) for up
+  - goto(url) - Navigate to a URL
+
+  The page structure shows elements as: [bid] element_type 'element_text'
+  For example: [13] button 'Click Me!' means bid='13'
+
+  Think step by step before outputting the single next BrowserGym action. Put reasoning inside exactly one <think>...</think> block, then output only the action on the next line.
+
+  Strict output rule:
+  1. Always produce exactly one <think>...</think> block.
+  2. After </think>, the final non-empty line must be exactly one valid BrowserGym action.
+  3. Never end with prose only.
+  4. Do not omit the final action line.
+  5. Follow this exact shape:
+  <think>
+  brief reasoning
+  </think>
+  action_here

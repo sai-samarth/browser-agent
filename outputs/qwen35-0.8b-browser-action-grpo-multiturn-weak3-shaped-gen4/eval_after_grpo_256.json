@@ -1,0 +1,1694 @@
+{
+  "summary": {
+    "split": "val",
+    "num_examples": 240,
+    "parseable_rate": 1.0,
+    "exact_match": 0.8125,
+    "adapter_dir": "outputs/qwen35-0.8b-browser-action-grpo-multiturn-weak3-shaped-gen4",
+    "model_name": "Qwen/Qwen3.5-0.8B",
+    "max_new_tokens": 256,
+    "loader": "conditional_generation"
+  },
+  "rows": [
+    {
+      "task_name": "click-button",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('14')",
+      "prediction": "click('14')",
+      "raw_generation": "click('14')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('12')",
+      "prediction": "click('12')",
+      "raw_generation": "click('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('19')",
+      "prediction": "click('19')",
+      "raw_generation": "click('19')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('12')",
+      "prediction": "click('12')",
+      "raw_generation": "click('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-button",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('33', button='left')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('36')",
+      "prediction": "click('36')",
+      "raw_generation": "click('36')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('36')",
+      "prediction": "click('36')",
+      "raw_generation": "click('36')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-transfer",
+      "target": "click('33')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('36')",
+      "prediction": "click('36')",
+      "raw_generation": "click('36')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('33')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('33')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-option",
+      "target": "click('30')",
+      "prediction": "click('30')",
+      "raw_generation": "click('30')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-test-2",
+      "target": "click('13')",
+      "prediction": "click('13')",
+      "raw_generation": "click('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'kanesha')",
+      "prediction": "fill('14', 'kanesha')",
+      "raw_generation": "fill('14', 'kanesha')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'kasie')",
+      "prediction": "fill('14', 'kase')",
+      "raw_generation": "fill('14', 'kase')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'keli')",
+      "prediction": "fill('14', 'keli')",
+      "raw_generation": "fill('14', 'keli')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', \"kenda\")",
+      "prediction": "fill('14', 'kenda')",
+      "raw_generation": "fill('14', 'kenda')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15', button='left')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'keli')",
+      "prediction": "fill('14', 'keli')",
+      "raw_generation": "fill('14', 'keli')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'NATHALIE')",
+      "prediction": "fill('14', 'NATHALIE')",
+      "raw_generation": "fill('14', 'NATHALIE')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "fill('14', 'marcella')",
+      "prediction": "fill('14', 'marcella')",
+      "raw_generation": "fill('14', 'marcella')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-text-2",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('13')",
+      "prediction": "focus('13')",
+      "raw_generation": "focus('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('14')",
+      "prediction": "focus('14')",
+      "raw_generation": "focus('14')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('13')",
+      "prediction": "focus('13')",
+      "raw_generation": "focus('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": "focus('12')",
+      "raw_generation": "focus('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('13')",
+      "prediction": "focus('13')",
+      "raw_generation": "focus('13')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": "focus('12')",
+      "raw_generation": "focus('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": "focus('12')",
+      "raw_generation": "focus('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": "focus('12')",
+      "raw_generation": "focus('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('12')",
+      "prediction": "focus('12')",
+      "raw_generation": "focus('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "focus-text-2",
+      "target": "focus('14')",
+      "prediction": "focus('14')",
+      "raw_generation": "focus('14')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Wall')",
+      "prediction": "fill('31', 'Wall')",
+      "raw_generation": "fill('31', 'Wall')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Female')",
+      "prediction": "fill('31', 'Female')",
+      "raw_generation": "fill('31', 'Female')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Arabic')",
+      "prediction": "fill('31', 'Arabic')",
+      "raw_generation": "fill('31', 'Arabic')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32', button='left')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Male')",
+      "prediction": "fill('31', 'Male')",
+      "raw_generation": "fill('31', 'Male')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Vincent')",
+      "prediction": "fill('31', 'Vincent')",
+      "raw_generation": "fill('31', 'Vincent')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Javanese')",
+      "prediction": "fill('31', 'Javanese')",
+      "raw_generation": "fill('31', 'Javanese')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "fill('31', 'Male')",
+      "prediction": "fill('31', 'Male')",
+      "raw_generation": "fill('31', 'Male')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "read-table",
+      "target": "click('32')",
+      "prediction": "click('32')",
+      "raw_generation": "click('32')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('14')",
+      "prediction": "click('14')",
+      "raw_generation": "click('14')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('12')",
+      "prediction": "click('12')",
+      "raw_generation": "click('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('19')",
+      "prediction": "click('19')",
+      "raw_generation": "click('19')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('12')",
+      "prediction": "click('12')",
+      "raw_generation": "click('12')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "unicode-test",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('52')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('33')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('55')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('31')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('34')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('37')",
+      "raw_generation": "click('37')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('27')",
+      "raw_generation": "click('27')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('46')",
+      "prediction": "click('33')",
+      "raw_generation": "click('33')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('33')",
+      "prediction": "click('52')",
+      "raw_generation": "click('52')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('52')",
+      "raw_generation": "click('52')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('52')",
+      "prediction": "click('52')",
+      "raw_generation": "click('52')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('55')",
+      "prediction": "click('55')",
+      "raw_generation": "click('55')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('49')",
+      "prediction": "click('43')",
+      "raw_generation": "click('43')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('46')",
+      "prediction": "click('43')",
+      "raw_generation": "click('43')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('43')",
+      "raw_generation": "click('43')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('52')",
+      "prediction": "click('52')",
+      "raw_generation": "click('52')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('31')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('34')",
+      "raw_generation": "click('34')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('34')",
+      "prediction": "click('34')",
+      "raw_generation": "click('34')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('40')",
+      "raw_generation": "click('40')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('30')",
+      "prediction": "click('24')",
+      "raw_generation": "click('24')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('40')",
+      "raw_generation": "click('40')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('40')",
+      "raw_generation": "click('40')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('46')",
+      "prediction": "click('37')",
+      "raw_generation": "click('37')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('34')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('24')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('40')",
+      "prediction": "click('37')",
+      "raw_generation": "click('37')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('37')",
+      "prediction": "click('37')",
+      "raw_generation": "click('37')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('31')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('27')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('18')",
+      "prediction": "click('40')",
+      "raw_generation": "click('40')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-checkboxes-large",
+      "target": "click('43')",
+      "prediction": "click('39')",
+      "raw_generation": "click('39')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('16')",
+      "prediction": "click('16')",
+      "raw_generation": "click('16')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-collapsible-nodelay",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('18')",
+      "prediction": "click('18')",
+      "raw_generation": "click('18')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "click-tab",
+      "target": "click('22')",
+      "prediction": "click('22')",
+      "raw_generation": "click('22')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', '6j')",
+      "prediction": "fill('16', '6j')",
+      "raw_generation": "fill('16', '6j')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', '6j')",
+      "prediction": "fill('19', '6j')",
+      "raw_generation": "fill('19', '6j')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', '9cq')",
+      "prediction": "fill('16', '9cq')",
+      "raw_generation": "fill('16', '9cq')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', '9cq')",
+      "prediction": "fill('19', '9cq')",
+      "raw_generation": "fill('19', '9cq')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', '1EApa')",
+      "prediction": "fill('16', '1EApa')",
+      "raw_generation": "fill('16', '1EApa')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', '1EApa')",
+      "prediction": "fill('19', '1EApa')",
+      "raw_generation": "fill('19', '1EApa')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', \"yZNAx\")",
+      "prediction": "fill('16', 'yZNAx')",
+      "raw_generation": "fill('16', 'yZNAx')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', \"yZNAx\")",
+      "prediction": "fill('19', \"yZNAx\")",
+      "raw_generation": "fill('19', \"yZNAx\")<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', \"uzO\")",
+      "prediction": "fill('16', 'uzO')",
+      "raw_generation": "fill('16', 'uzO')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', \"uzO\")",
+      "prediction": "fill('19', \"uzO\")",
+      "raw_generation": "fill('19', \"uzO\")<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', 'h90')",
+      "prediction": "fill('16', 'h90')",
+      "raw_generation": "fill('16', 'h90')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', 'h90')",
+      "prediction": "fill('19', 'h90')",
+      "raw_generation": "fill('19', 'h90')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', 'ryt')",
+      "prediction": "fill('16', 'ryt')",
+      "raw_generation": "fill('16', 'ryt')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', 'ryt')",
+      "prediction": "fill('19', 'ryt')",
+      "raw_generation": "fill('19', 'ryt')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('16', 'Q0RcV')",
+      "prediction": "fill('16', 'Q0RcV')",
+      "raw_generation": "fill('16', 'Q0RcV')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "fill('19', 'Q0RcV')",
+      "prediction": "fill('19', 'Q0RcV')",
+      "raw_generation": "fill('19', 'Q0RcV')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "enter-password",
+      "target": "click('20')",
+      "prediction": "click('20')",
+      "raw_generation": "click('20')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'interdum')",
+      "prediction": "fill('14', 'non')",
+      "raw_generation": "fill('14', 'non')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'Tempor')",
+      "prediction": "fill('14', 'Tempor')",
+      "raw_generation": "fill('14', 'Tempor')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'Vitae')",
+      "prediction": "fill('14', 'Vitae')",
+      "raw_generation": "fill('14', 'Vitae')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "find-word",
+      "target": "fill('14', 'nec')",
+      "prediction": "fill('14', 'Sagittis')",
+      "raw_generation": "fill('14', 'Sagittis')<|im_end|>",
+      "match": false
+    },
+    {
+      "task_name": "find-word",
+      "target": "click('15')",
+      "prediction": "click('15')",
+      "raw_generation": "click('15')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "fill('14', 'mystery')",
+      "prediction": "fill('14', 'mystery')",
+      "raw_generation": "fill('14', 'mystery')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "fill('17', 'Williams')",
+      "prediction": "fill('17', 'Williams')",
+      "raw_generation": "fill('17', 'Williams')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "fill('20', '1986')",
+      "prediction": "fill('20', '1986')",
+      "raw_generation": "fill('20', '1986')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "multi-layouts",
+      "target": "click('21')",
+      "prediction": "click('21')",
+      "raw_generation": "click('21')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "fill('16', '95')",
+      "prediction": "fill('16', '95')",
+      "raw_generation": "fill('16', '95')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "click('17')",
+      "prediction": "click('17')",
+      "raw_generation": "click('17')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "fill('16', '-70')",
+      "prediction": "fill('16', '-70')",
+      "raw_generation": "fill('16', '-70')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "click('17')",
+      "prediction": "click('17')",
+      "raw_generation": "click('17')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "fill('16', '35')",
+      "prediction": "fill('16', '35')",
+      "raw_generation": "fill('16', '35')<|im_end|>",
+      "match": true
+    },
+    {
+      "task_name": "simple-algebra",
+      "target": "click('17')",
+      "prediction": "click('17')",
+      "raw_generation": "click('17')<|im_end|>",
+      "match": true
+    }
+  ]
+}
