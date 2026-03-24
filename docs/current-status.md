@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-03-24T06:02:11Z
+Last updated: 2026-03-24T07:38:57Z
 
 ## Latest completed result
 ### Qwen3.5-2B reinforced reasoning-action
@@ -289,4 +289,56 @@ Last updated: 2026-03-24T06:02:11Z
 ### Why this run exists
 - The earlier weak-task-only 1000-row continuation improved the intended weak tasks but caused collateral regressions on other tasks, especially `click-checkboxes-transfer`.
 - This mixed 50/50 continuation tests whether we can keep most of the targeted weak-task gains while preserving broader action-only behavior.
+
+## 2026-03-24 Qwen3.5-0.8B mixed weak-task continuation SFT completion
+
+- Last updated: 2026-03-24T07:38:57Z
+- The mixed 50/50 weak-task continuation SFT finished cleanly.
+- Warm start adapter: `outputs/qwen35-0.8b-browser-action-unsloth`
+- Output dir: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+- Log file: `logs/qwen35_08b_weak3_mixed50_1000_cont_sft.log`
+- Final adapter artifacts are present, including `adapter_model.safetensors`, tokenizer files, processor config, and `run_summary.json`.
+- Final training stats from the trainer log:
+  - `train_runtime`: 4214s
+  - `train_samples_per_second`: 0.475
+  - `train_steps_per_second`: 0.03
+  - `train_loss`: 0.0499
+  - `epoch`: 2.0
+- Logged loss trend improved from about `0.0652` early to about `0.04005` late.
+
+## 2026-03-24 Qwen3.5-0.8B mixed weak-task continuation SFT post-train eval
+
+- Last updated: 2026-03-24T07:38:57Z
+- Ran the required end-of-training evaluation on the full standard action-only validation split using the corrected conditional-generation eval path.
+- Evaluated adapter: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+- Eval file: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft/eval_after_conditional_256.json`
+- Eval loader: `conditional_generation`
+- `max_new_tokens=256`
+
+### Full validation result
+- Parseable rate: `100.00%`
+- Exact-match: `83.33%`
+- Prior 0.8B post-SFT baseline on the same eval path: `80.83%`
+- Prior weak-task-only continuation result: `81.25%`
+- Net gain vs baseline: about `+2.50` exact-match points.
+- Net gain vs weak-task-only continuation: about `+2.08` exact-match points.
+
+### Targeted weak-task result vs baseline
+- `click-checkboxes-large`: `38.60% -> 49.12%` (`+10.53` points)
+- `find-word`: `75.00% -> 75.00%` (`0.00` points)
+- `enter-text-2`: `78.57% -> 85.71%` (`+7.14` points)
+
+### Tradeoff read vs baseline
+- The biggest targeted gain came from `click-checkboxes-large`, which improved more than either prior continuation variant.
+- `enter-text-2` retained its earlier improvement.
+- `find-word` gave back the weak-task-only gain and returned to baseline level.
+- The key win of the mixed run is that it preserved broader behavior much better than the weak-task-only continuation.
+  - `click-checkboxes-transfer` recovered from `73.91%` back to `86.96%`.
+  - `click-option` recovered from `95.00%` back to `100.00%`.
+  - `read-table` stayed at `85.71%`, still below the original `92.86%` baseline.
+
+### Current read
+- This mixed 50/50 continuation is currently the best continuation-SFT variant tested on the 0.8B action-only line.
+- It dominates the weak-task-only continuation on full-val exact-match because it keeps most of the intended weak-task gains while avoiding the major collateral regressions on neighboring tasks.
+- If choosing a continuation-SFT checkpoint to carry forward, `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft` is now the strongest candidate.
 
