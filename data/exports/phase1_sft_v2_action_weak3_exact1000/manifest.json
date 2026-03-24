@@ -1,0 +1,41 @@
+{
+  "source_dataset_dir": "data/exports/phase1_sft_v2/action_only/hf_dataset",
+  "output_dataset_dir": "data/exports/phase1_sft_v2_action_weak3_exact1000/hf_dataset",
+  "tasks": [
+    "click-checkboxes-large",
+    "enter-text-2",
+    "find-word"
+  ],
+  "seed": 3407,
+  "target_train_size": 1000,
+  "unique_weak_train_rows": 930,
+  "duplicated_rows_added": 70,
+  "val_mode": "full",
+  "source_weak_train_counts": {
+    "enter-text-2": 175,
+    "click-checkboxes-large": 619,
+    "find-word": 136
+  },
+  "train_counts": {
+    "click-checkboxes-large": 667,
+    "enter-text-2": 191,
+    "find-word": 142
+  },
+  "val_counts": {
+    "click-button": 10,
+    "click-checkboxes-transfer": 23,
+    "click-option": 20,
+    "click-test-2": 10,
+    "enter-text-2": 14,
+    "focus-text-2": 10,
+    "read-table": 14,
+    "unicode-test": 10,
+    "click-checkboxes-large": 57,
+    "click-collapsible-nodelay": 20,
+    "click-tab": 10,
+    "enter-password": 24,
+    "find-word": 8,
+    "multi-layouts": 4,
+    "simple-algebra": 6
+  }
+}

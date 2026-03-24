@@ -2,6 +2,11 @@
 
 Last updated: 2026-03-24T12:59:13Z
 
+## Project phase
+- Consolidated final snapshot for reproducibility and writeup.
+- Best small-model release checkpoint: outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft at 83.33% exact-match.
+- Best absolute checkpoint: outputs/qwen35-2b-browser-action-unsloth at 87.50% exact-match.
+
 ## Latest completed result
 ### Qwen3.5-0.8B mixed weak-task continuation SFT
 - Warm start: `outputs/qwen35-0.8b-browser-action-unsloth`
