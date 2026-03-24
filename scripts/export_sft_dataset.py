@@ -74,12 +74,27 @@ def _load_generation_system_prompt(rollout_dir: Path) -> str:
     return FALLBACK_SYSTEM_PROMPT
 
 
+def _strip_generation_format_instructions(base_prompt: str) -> str:
+    markers = [
+        "\nReply using EXACTLY this format:",
+        "\nReply with exactly ONE action on a single line",
+        "\nExample:",
+        "\nFinal constraints:",
+    ]
+    cut_points = [base_prompt.find(marker) for marker in markers if base_prompt.find(marker) != -1]
+    if cut_points:
+        return base_prompt[: min(cut_points)].rstrip()
+    return base_prompt.rstrip()
+
+
 def _action_only_system_prompt(base_prompt: str) -> str:
-    return base_prompt.rstrip() + "\n\nFinal instruction for training target: output only the single next BrowserGym action on one line."
+    base = _strip_generation_format_instructions(base_prompt)
+    return base + "\n\nOutput only the single next BrowserGym action on one line."
 
 
 def _reasoning_action_system_prompt(base_prompt: str) -> str:
-    return base_prompt.rstrip() + "\n\nReason step by step before outputting the single next BrowserGym action. Put reasoning inside exactly one <think>...</think> block, then output only the action on the next line."
+    base = _strip_generation_format_instructions(base_prompt)
+    return base + "\n\nThink step by step before outputting the single next BrowserGym action. Put reasoning inside exactly one <think>...</think> block, then output only the action on the next line."
 
 
 def _render_history(history_rows: list[dict[str, Any]], max_chars: int = 1200) -> str:
@@ -297,7 +312,7 @@ def main() -> int:
 
     push_script = args.output_dir / "push_to_hub.py"
     push_script.write_text(
-        "from datasets import load_from_disk\nfrom pathlib import Path\nimport argparse\n\nparser = argparse.ArgumentParser()\nparser.add_argument('--dataset-dir', required=True)\nparser.add_argument('--repo-id', required=True)\nparser.add_argument('--private', action='store_true')\nargs = parser.parse_args()\n\nds = load_from_disk(args.dataset_dir)\nds.push_to_hub(args.repo_id, private=args.private)\nprint(f'pushed {args.dataset_dir} -> {args.repo_id}')\n",
+        "from datasets import load_from_disk\nimport argparse\n\nparser = argparse.ArgumentParser()\nparser.add_argument('--dataset-dir', required=True)\nparser.add_argument('--repo-id', required=True)\nparser.add_argument('--private', action='store_true')\nargs = parser.parse_args()\n\nds = load_from_disk(args.dataset_dir)\nds.push_to_hub(args.repo_id, private=args.private)\nprint(f'pushed {args.dataset_dir} -> {args.repo_id}')\n",
         encoding="utf-8",
     )
 
