@@ -1026,3 +1026,87 @@ After fine-tuning with strict parser scoring and corrected loader:
 - It dominates the weak-task-only continuation on full-val exact-match because it keeps most of the intended weak-task gains while avoiding the major collateral regressions on neighboring tasks.
 - If choosing a continuation-SFT checkpoint to carry forward, `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft` is now the strongest candidate.
 
+## 2026-03-24 Qwen3.5-0.8B mixed-best checkpoint weak-task analysis and GRPO launch
+
+- Last updated: 2026-03-24T08:15:41Z
+- Started from the new best continuation-SFT checkpoint:
+  - `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+- Fresh weak-task read on the full 240-row validation split gave:
+  - `click-checkboxes-large`: `49.12%`
+  - `find-word`: `75.00%`
+  - `enter-text-2`: `85.71%`
+  - `read-table`: `85.71%`
+  - `click-checkboxes-transfer`: `86.96%`
+- Chosen GRPO task subset:
+  - `click-checkboxes-large`
+  - `find-word`
+  - `enter-text-2`
+  - `click-checkboxes-transfer`
+- `read-table` was left out for now even though it is similarly weak, because the current GRPO shaping already supports:
+  - checkbox tasks (`click-checkboxes-large`, `click-checkboxes-transfer`)
+  - `find-word`
+  - `enter-text-2`
+  and therefore provides the best immediate high-signal continuation without first adding new reward logic for `read-table`.
+
+### GRPO config
+- Config file: `configs/grpo_multiturn_qwen35_08b_action_mixedbest_weak4_shaped.yaml`
+- Warm start adapter: `outputs/qwen35-0.8b-browser-action-weak3-mixed50-1000-cont-sft`
+- Output dir: `outputs/qwen35-0.8b-browser-action-grpo-multiturn-mixedbest-weak4-shaped`
+- Log file: `logs/qwen35_08b_mixedbest_weak4_grpo.log`
+- Key settings:
+  - `samples_per_task=8`
+  - `max_steps=36`
+  - `num_generations=2`
+  - `generation_batch_size=2`
+  - `rollout_temperature=0.9`
+  - `rollout_top_p=0.95`
+  - `progress_shaping_scale=1.5`
+  - `premature_submit_penalty=0.2`
+
+### Launch status
+- The GRPO run launched cleanly.
+- Process is live and output scaffolding was created successfully.
+- Initial artifacts present:
+  - `grpo_run_config.json`
+  - `prompt_dataset_preview.jsonl`
+- Hermes tracking session: `proc_d838336513bd`
+
+### Current read
+- This is the first GRPO continuation launched from the new best 83.33% mixed continuation-SFT checkpoint.
+- The selected 4-task subset preserves the strongest currently-supported weak-task families while avoiding unsupported reward-shaping work before launch.
+
+## 2026-03-24 Qwen3.5 RL environment repair and GRPO relaunch
+
+- Last updated: 2026-03-24T10:13:38Z
+- The first GRPO launch from the mixed-best 0.8B checkpoint failed before training during environment import/model-load, not because of reward logic or task config.
+
+### Root cause
+- The dedicated RL env at `/home/saisamarth/venvs/browser-agent-rl` had `transformers==4.57.3`, but that install did **not** include the `qwen3_5` module.
+- Direct verification in the RL env showed both of these failed before repair:
+  - `AutoConfig.from_pretrained("Qwen/Qwen3.5-0.8B", trust_remote_code=True)`
+  - `AutoConfig.from_pretrained("Qwen/Qwen3.5-2B", trust_remote_code=True)`
+- Cross-check against the working SFT env showed the key mismatch:
+  - working env `/home/saisamarth/venvs/ft-qwen25`: `transformers==5.3.0`, `qwen3_5` present
+  - broken env `/home/saisamarth/venvs/browser-agent-rl`: `transformers==4.57.3`, `qwen3_5` absent
+- After upgrading the RL env to `transformers==5.3.0`, the next import failure surfaced:
+  - `No module named 'weave'`
+- Installing `weave==0.52.35` resolved the TRL import path required by `GRPOTrainer` in this env.
+
+### Verified repair
+- In the repaired RL env:
+  - `transformers==5.3.0`
+  - `trl==0.25.1`
+  - `qwen3_5` module present
+  - `AutoConfig.from_pretrained("Qwen/Qwen3.5-0.8B", trust_remote_code=True)` works
+  - `AutoConfig.from_pretrained("Qwen/Qwen3.5-2B", trust_remote_code=True)` works
+
+### Relaunch result
+- Relaunched the same GRPO config unchanged after the env repair:
+  - `configs/grpo_multiturn_qwen35_08b_action_mixedbest_weak4_shaped.yaml`
+- Current live run:
+  - output dir: `outputs/qwen35-0.8b-browser-action-grpo-multiturn-mixedbest-weak4-shaped`
+  - log file: `logs/qwen35_08b_mixedbest_weak4_grpo.log`
+  - Hermes tracking session: `proc_cce4120d3dc3`
+- The repaired launch passed the previous failure stages and entered the trainer step loop.
+- Current read: the Qwen3.5 GRPO blocker on this path was an RL-environment package mismatch, not a checkpoint problem.
+
