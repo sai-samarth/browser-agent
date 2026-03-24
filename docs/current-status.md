@@ -1,6 +1,6 @@
 # Current Status
 
-Last updated: 2026-03-24T10:13:38Z
+Last updated: 2026-03-24T11:45:23Z
 
 ## Latest completed result
 ### Qwen3.5-0.8B mixed weak-task continuation SFT
@@ -433,4 +433,36 @@ Last updated: 2026-03-24T10:13:38Z
   - Hermes tracking session: `proc_cce4120d3dc3`
 - The repaired launch passed the previous failure stages and entered the trainer step loop.
 - Current read: the Qwen3.5 GRPO blocker on this path was an RL-environment package mismatch, not a checkpoint problem.
+
+## 2026-03-24 Qwen3.5-0.8B mixed-best GRPO post-train eval
+
+- Last updated: 2026-03-24T11:45:23Z
+- Ran end-of-training evaluation on the completed GRPO continuation adapter:
+  - `outputs/qwen35-0.8b-browser-action-grpo-multiturn-mixedbest-weak4-shaped`
+- Eval file:
+  - `outputs/qwen35-0.8b-browser-action-grpo-multiturn-mixedbest-weak4-shaped/eval_after_grpo_256.json`
+- Eval loader: `conditional_generation`
+- `max_new_tokens=256`
+
+### Full validation result
+- Parseable rate: `100.00%`
+- Exact-match: `82.92%`
+- Starting mixed-SFT checkpoint exact-match: `83.33%`
+- Net GRPO delta on top of the mixed SFT checkpoint: about `-0.42` exact-match points.
+- Relative to the older pre-continuation 0.8B post-SFT baseline (`80.83%`), the GRPO result is still `+2.08` points higher, but it does not improve over the best mixed continuation SFT checkpoint.
+
+### Task-level read vs mixed SFT checkpoint
+- `click-checkboxes-large`: `49.12% -> 45.61%` (`-3.51` points)
+- `find-word`: `75.00% -> 75.00%` (`0.00` points)
+- `enter-text-2`: `85.71% -> 85.71%` (`0.00` points)
+- `click-checkboxes-transfer`: `86.96% -> 86.96%` (`0.00` points)
+- `read-table`: `85.71% -> 92.86%` (`+7.14` points)
+- All other evaluated tasks were unchanged.
+
+### Interpretation
+- This GRPO continuation did not improve on the best mixed continuation-SFT checkpoint overall.
+- The only clear positive movement in the 240-row eval was `read-table`, even though that task was not in the shaped GRPO subset.
+- The main negative movement was regression on `click-checkboxes-large`, which was the most important weak checkbox task we were trying to improve.
+- Current read: for this checkpoint/subset/reward configuration, GRPO did not add value on top of the mixed SFT warm start.
+- The mixed 50/50 continuation SFT checkpoint (`83.33%`) remains the best current action-only result to carry forward.
 
